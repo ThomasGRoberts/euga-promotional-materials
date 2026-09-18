@@ -1,0 +1,28 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Munich Neues Rathaus in May 2024.jpg",
+    "commons_title": "File:Munich Neues Rathaus in May 2024.jpg",
+    "description": "Munich Neues Rathaus in May 2024",
+    "creator": "Srihari Thalla",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Munich_Neues_Rathaus_in_May_2024.jpg",
+    "source_width": 4032,
+    "source_height": 2268
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Munich skyline.jpg",
+    "commons_title": "File:Munich skyline.jpg",
+    "description": "Skyline Munich, Frauenkirche and steeple of New Town Hall",
+    "creator": "Stefan Kühn",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Munich_skyline.jpg",
+    "source_width": 3495,
+    "source_height": 2355
+  }
+]

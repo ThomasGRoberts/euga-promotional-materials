@@ -1,0 +1,41 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Berlin skyline Fernsehturm",
+    "commons_title": "File:Berlin Mitte June 2023 01.jpg",
+    "description": "Central Berlin (Berlin-Mitte) seen from Fischerinsel.",
+    "creator": "ArildV",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Berlin_Mitte_June_2023_01.jpg",
+    "source_width": 4692,
+    "source_height": 2933
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "Berlin skyline Fernsehturm",
+    "commons_title": "File:Berliner Fernsehturm and Rotes Rathaus June 2023 01.jpg",
+    "description": "Berliner Fernsehturm and Rotes Rathaus seen from Fischerinsel.",
+    "creator": "Arild Vågen",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Berliner_Fernsehturm_and_Rotes_Rathaus_June_2023_01.jpg",
+    "source_width": 3975,
+    "source_height": 3407
+  },
+  {
+    "file": "bundestag.jpg",
+    "role": "institution",
+    "search_query": "Reichstag Bundestag Berlin building",
+    "commons_title": "File:Reichstagsgebäude von Westen.jpg",
+    "description": "Reichstag building, seen from west",
+    "creator": "Jörg Braukmann",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Reichstagsgeb%C3%A4ude_von_Westen.jpg",
+    "source_width": 8483,
+    "source_height": 5000
+  }
+]

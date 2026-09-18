@@ -1,0 +1,80 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Eiffel Tower Seine Paris",
+    "commons_title": "File:Eiffel Tower and Pont Alexandre III at night.jpg",
+    "description": "Eiffel Tower and Pont Alexandre III at night.",
+    "creator": "Getfunky Paris",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Eiffel_Tower_and_Pont_Alexandre_III_at_night.jpg",
+    "source_width": 4288,
+    "source_height": 2748
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "Eiffel Tower Seine Paris",
+    "commons_title": "File:Champ de Mars from the Eiffel Tower - July 2006 edit.jpg",
+    "description": "A two segment panorama of Champ de Mars from the Eiffel Tower. In the distance is Tour Montparnasse and the dome on the left is Les Invalides. This photo taken with a Canon 5D and 24-105mm f/4L IS.",
+    "creator": "Diliff, edited by Fir0002",
+    "license": "CC BY 2.5",
+    "license_url": "https://creativecommons.org/licenses/by/2.5",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Champ_de_Mars_from_the_Eiffel_Tower_-_July_2006_edit.jpg",
+    "source_width": 1900,
+    "source_height": 1871
+  },
+  {
+    "file": "assemblee-nationale.jpg",
+    "role": "institution",
+    "search_query": "Palais Bourbon Assemblée Nationale Paris",
+    "commons_title": "File:Palais Bourbon, Paris 7e, NW View 140402 1.jpg",
+    "description": "The Palais Bourbon, currently used as the seat of the Assemblée Nationale, the French lower house",
+    "creator": "DXR",
+    "license": "Public domain",
+    "license_url": "",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Palais_Bourbon,_Paris_7e,_NW_View_140402_1.jpg",
+    "source_width": 5993,
+    "source_height": 3592
+  },
+  {
+    "file": "french-senate.jpg",
+    "role": "institution",
+    "search_query": "Luxembourg Palace French Senate Paris",
+    "commons_title": "File:Palais du Luxembourg, South View 140116 1.jpg",
+    "description": "The south facade of the Luxembourg Palace, seat of the French Senate, located in Paris. The palace was built from 1615 to 1631 following the designs of architect Salomon de Brosse. The garden wing shown here was added to the south side of the palace c. 1836 by Alphonse de Gisors. Although Gisors' addition mimics de Brosse's original facade, which it obscured, it differs in significant details. For instance, the decoration around the clock of the central pavilion was produced by the 19th-century Swiss-born French sculptor James Pradier.",
+    "creator": "DXR",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Palais_du_Luxembourg,_South_View_140116_1.jpg",
+    "source_width": 7294,
+    "source_height": 3201
+  },
+  {
+    "file": "quai-dorsay.jpg",
+    "role": "institution",
+    "search_query": "exact Commons file: File:Garden @ Quai d’Orsay @ Ministry of Foreign Affairs @ Paris (29140474554).jpg",
+    "commons_title": "File:Garden @ Quai d’Orsay @ Ministry of Foreign Affairs @ Paris (29140474554).jpg",
+    "description": "Garden @ Quai d’Orsay @ Ministry of Foreign Affairs @ Paris",
+    "creator": "Guilhem Vellut from Paris, France",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Garden_@_Quai_d%E2%80%99Orsay_@_Ministry_of_Foreign_Affairs_@_Paris_(29140474554).jpg",
+    "source_width": 5472,
+    "source_height": 3648
+  },
+  {
+    "file": "european-space-agency.jpg",
+    "role": "institution",
+    "search_query": "exact Commons file: File:ESA Headquarters in Paris.jpg",
+    "commons_title": "File:ESA Headquarters in Paris.jpg",
+    "description": "ESA Headquarters in Paris, France, European Union, is located in the 15th Arrondissement",
+    "creator": "ESA/P. Sebirot, CC BY-SA 3.0 IGO",
+    "license": "CC BY-SA 3.0 igo",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/igo/deed.en",
+    "source_page": "https://commons.wikimedia.org/wiki/File:ESA_Headquarters_in_Paris.jpg",
+    "source_width": 5000,
+    "source_height": 3712
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "The Hague Netherlands skyline Binnenhof",
+    "commons_title": "File:Den Haag Binnenhof & Skyline 2.jpg",
+    "description": "Binnenhof and behind the Skyline of The Hague, Province of South Holland, Netherlands",
+    "creator": "Zairon",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Den_Haag_Binnenhof_%26_Skyline_2.jpg",
+    "source_width": 4592,
+    "source_height": 2989
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "The Hague Netherlands skyline Binnenhof",
+    "commons_title": "File:Den Haag Binnenhof & Skyline 3.jpg",
+    "description": "Binnenhof and behind the Skyline of The Hague, Province of South Holland, Netherlands",
+    "creator": "Zairon",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Den_Haag_Binnenhof_%26_Skyline_3.jpg",
+    "source_width": 4582,
+    "source_height": 2951
+  },
+  {
+    "file": "peace-palace.jpg",
+    "role": "institution",
+    "search_query": "Peace Palace The Hague building",
+    "commons_title": "File:La haye palais paix jardin face.JPG",
+    "description": "Peace Palace (1907), The Hague - seat of the International Court of Justice",
+    "creator": "Velvet",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:La_haye_palais_paix_jardin_face.JPG",
+    "source_width": 2500,
+    "source_height": 1988
+  },
+  {
+    "file": "international-criminal-court.jpg",
+    "role": "institution",
+    "search_query": "International Criminal Court The Hague building",
+    "commons_title": "File:The Hague International Criminal Court building seen from Maurits Kiekpad.jpg",
+    "description": "International Criminal Court building seen from Maurits Kiekpad, The Hague, South Holland, the Netherlands",
+    "creator": "Ymblanter",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:The_Hague_International_Criminal_Court_building_seen_from_Maurits_Kiekpad.jpg",
+    "source_width": 8256,
+    "source_height": 5504
+  }
+]

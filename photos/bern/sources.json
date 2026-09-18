@@ -1,0 +1,28 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Bern Switzerland old town",
+    "commons_title": "File:Bern Panorama von Rosengarten 20211007.jpg",
+    "description": "Panoramic view of the old town of Bern from Rosengarten.  This view includes the main landmarks like the Bern Minster, the Bundeshaus (Federal Palace of Switzerland) and the Aare river.  This is a panorama in cylindrical projection fused from two exposure layers and 31 images each.",
+    "creator": "Daniel Kraft",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Bern_Panorama_von_Rosengarten_20211007.jpg",
+    "source_width": 22160,
+    "source_height": 8620
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "Bern Switzerland old town",
+    "commons_title": "File:Blick vom Rosengarten auf Nydeggkirche & Altstadt Bern (2022).jpg",
+    "description": "View from the rose garden to the eastern part of the old town of Bern",
+    "creator": "JoachimKohler-HB",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Blick_vom_Rosengarten_auf_Nydeggkirche_%26_Altstadt_Bern_(2022).jpg",
+    "source_width": 4800,
+    "source_height": 3200
+  }
+]

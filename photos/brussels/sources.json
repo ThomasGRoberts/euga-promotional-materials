@@ -1,0 +1,67 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Grand Place Brussels",
+    "commons_title": "File:Edificios en la Grand-Place, Bruselas, Bélgica, 2021-12-15, DD 184-186 HDR.jpg",
+    "description": "Night view of some of the buildings in Grand-Place, central square of Brussels, Belgium. From left to right: Maison du Mont Thabor (nr. 12, rebuilt in 1699 and restored in 1885), Maison de la Rose or \"The Rose\" (nr. 11, rebuilt in 1702 and restored in 1901), L'Arbre d'Or or \"The Golden Tree\" (nr. 10, built in 1696 and restored in 1901), Le Cygne or the \"Swan House\" (nr. 9, rebuilt in 1698 and restored between 1896 and 1904) and L'Étoile or \"The Star\" (nr. 8, rebuilt in 1695 and 1897).",
+    "creator": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Edificios_en_la_Grand-Place,_Bruselas,_B%C3%A9lgica,_2021-12-15,_DD_184-186_HDR.jpg",
+    "source_width": 7169,
+    "source_height": 4795
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "Grand Place Brussels",
+    "commons_title": "File:Grand-Place, Brussels - panorama, June 2018.jpg",
+    "description": "Panorama of the Grand-Place, Brussels, Belgium taken in June 2018",
+    "creator": "Celuici",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Grand-Place,_Brussels_-_panorama,_June_2018.jpg",
+    "source_width": 10946,
+    "source_height": 6226
+  },
+  {
+    "file": "european-parliament.jpg",
+    "role": "institution",
+    "search_query": "European Parliament Brussels building",
+    "commons_title": "File:European Parliament building Brussels 3.jpg",
+    "description": "Het pand van het Europees Parlement in Brussel.",
+    "creator": "Steven Lek",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:European_Parliament_building_Brussels_3.jpg",
+    "source_width": 4928,
+    "source_height": 3264
+  },
+  {
+    "file": "european-commission.jpg",
+    "role": "institution",
+    "search_query": "Berlaymont European Commission Brussels",
+    "commons_title": "File:Belgique - Bruxelles - Schuman - Berlaymont - 01.jpg",
+    "description": "Belgium - Brussels - Schuman - Berlaymont - Seat of the European Commission",
+    "creator": "EmDee",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Belgique_-_Bruxelles_-_Schuman_-_Berlaymont_-_01.jpg",
+    "source_width": 5180,
+    "source_height": 2894
+  },
+  {
+    "file": "nato-headquarters.png",
+    "role": "institution",
+    "search_query": "NATO headquarters Brussels exterior",
+    "commons_title": "File:Mohammad Shafiq Hamdam at NATO Headquarters, Brussels, 2008.png",
+    "description": "Mohammad Shafiq Hamdam at NATO Headquarters, Brussels, 2008",
+    "creator": "Reality2025",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Mohammad_Shafiq_Hamdam_at_NATO_Headquarters,_Brussels,_2008.png",
+    "source_width": 26624,
+    "source_height": 19968
+  }
+]

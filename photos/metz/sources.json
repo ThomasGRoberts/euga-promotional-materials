@@ -1,0 +1,54 @@
+[
+  {
+    "file": "robert-schuman-house.jpg",
+    "role": "institution",
+    "search_query": "Robert Schuman House Scy-Chazelles",
+    "commons_title": "File:Maison de Robert Schuman à Scy-Chazelles.jpg",
+    "description": "Robert Schuman house in Scy-Chazelles, near Metz, in Lorraine, France.",
+    "creator": "TCY",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Maison_de_Robert_Schuman_%C3%A0_Scy-Chazelles.jpg",
+    "source_width": 2272,
+    "source_height": 1704
+  },
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Metz centre ville.jpg",
+    "commons_title": "File:Metz centre ville.jpg",
+    "description": "Stadtzentrum Metz",
+    "creator": "Philippe Gisselbrecht/ Ville de Metz",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Metz_centre_ville.jpg",
+    "source_width": 6651,
+    "source_height": 4439
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Temple Neuf de Metz und Pont des Roches.jpg",
+    "commons_title": "File:Temple Neuf de Metz und Pont des Roches.jpg",
+    "description": "Temple Neuf in der Mosel, in Metz, Frankreich",
+    "creator": "Michael",
+    "license": "CC BY-SA 3.0 de",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Temple_Neuf_de_Metz_und_Pont_des_Roches.jpg",
+    "source_width": 6016,
+    "source_height": 4000
+  },
+  {
+    "file": "georgia-tech-europe.jpg",
+    "role": "institution",
+    "search_query": "exact Commons file: File:GT Lorraine.jpg",
+    "commons_title": "File:GT Lorraine.jpg",
+    "description": "Photographer Joshua Cuneo agreed to license this image of en:Georgia Tech Lorraine under a free attribution license. Source: https://www.flickr.com/photos/90909210@N00/260271124/in/set-72157594311928827/",
+    "creator": "The original uploader was Disavian at English Wikipedia.",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:GT_Lorraine.jpg",
+    "source_width": 2048,
+    "source_height": 1536
+  }
+]

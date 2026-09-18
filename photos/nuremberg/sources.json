@@ -1,0 +1,41 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Nuremberg old town",
+    "commons_title": "File:Nuremberg old town nov 2020.jpg",
+    "description": "Nuremberg old town in november 2020. From the castle.",
+    "creator": "PiotrPiotrPl",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Nuremberg_old_town_nov_2020.jpg",
+    "source_width": 1210,
+    "source_height": 908
+  },
+  {
+    "file": "palace-of-justice.jpg",
+    "role": "institution",
+    "search_query": "Nuremberg Palace of Justice courtroom 600",
+    "commons_title": "File:Interior of Courtroom 600 - Where Nazi Leaders Were Tried - With Documentary Filmmakers Setting Up - Palace of Justice - Nuremberg-Nurnberg - Germany.jpg",
+    "description": "Interior of Courtroom 600 - Where Nazi Leaders Were Tried - With Documentary Filmmakers Setting Up - Palace of Justice - Nuremberg-Nurnberg - Germany",
+    "creator": "Adam Jones, Ph.D.",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Interior_of_Courtroom_600_-_Where_Nazi_Leaders_Were_Tried_-_With_Documentary_Filmmakers_Setting_Up_-_Palace_of_Justice_-_Nuremberg-Nurnberg_-_Germany.jpg",
+    "source_width": 3648,
+    "source_height": 2736
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Nuernberg Burg Panorama PtGUI.jpg",
+    "commons_title": "File:Nuernberg Burg Panorama PtGUI.jpg",
+    "description": "Nuremberg Castle, courtyard. Better version",
+    "creator": "The original uploader was AlterVista at German Wikipedia.",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Nuernberg_Burg_Panorama_PtGUI.jpg",
+    "source_width": 2889,
+    "source_height": 1400
+  }
+]

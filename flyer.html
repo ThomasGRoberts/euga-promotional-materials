@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Georgia Tech European Union and Global Affairs Study Abroad print flyer.">
+  <title>EU + Global Affairs | Print Flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;800&family=Roboto+Slab:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260919-1">
+</head>
+<body>
+  <main id="app" data-mode="flyer" data-direction="globe">
+    <section class="flyer">
+      <header class="program-heading">
+        <div><h1><span id="hero-line-1">Europe is</span><br><span id="hero-line-2">your classroom</span></h1></div>
+        <p class="headline-support"><strong>The <span id="program-title-inline">European Union and Global Affairs Study Abroad Program</span></strong> <span id="intro-sentence-1">takes you to the cities and institutions shaping Europe and the world.</span> <span id="intro-sentence-2">Study global affairs where they happen in</span> <b><span id="program-term">Summer 2027</span>.</b></p>
+      </header>
+      <figure class="geography">
+        <canvas id="geo-canvas" aria-label="Program cities across a curved Earth centered on Europe"></canvas>
+        <div class="scale-statement" aria-label="Program scale">
+          <div><strong id="city-count">15</strong><span>cities</span></div>
+          <div><strong id="country-count">8</strong><span>countries</span></div>
+          <div><strong id="course-count">4</strong><span>courses</span></div>
+        </div>
+      </figure>
+      <section class="details">
+        <article class="credentials">
+          <h2 id="credentials-heading">Make the summer count</h2>
+          <div class="credential-item"><strong id="certificate-title">Earn a Certificate in European Studies</strong><span id="certificate-detail">with the program's four courses</span></div>
+          <div class="credential-item"><strong id="minor-title">Complete the International Affairs minor</strong><span id="minor-detail">with the program plus one additional course</span></div>
+        </article>
+        <article class="courses">
+          <h2 id="courses-heading">Four courses in global affairs</h2>
+          <ol id="course-list"></ol>
+        </article>
+      </section>
+    </section>
+    <footer class="brand-footer">
+      <img src="assets/Nunnlogo.jpg" alt="Georgia Tech, Sam Nunn School of International Affairs">
+      <div class="footer-action"><span>Apply now at</span><a id="cta" href="https://inta.gatech.edu/euga">inta.gatech.edu/euga</a></div>
+    </footer>
+  </main>
+  <script src="app.js?v=20260919-1" defer></script>
+</body>
+</html>

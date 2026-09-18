@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Georgia Tech European Union and Global Affairs Study Abroad print flyer exploration.">
+  <title>EU + Global Affairs — Print Flyer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <aside class="preview-tools" aria-label="Design directions">
+    <span>Print flyer directions</span>
+    <a href="?mode=flyer&direction=globe">01 Curved Earth</a>
+    <a href="?mode=flyer&direction=atlas">02 Continental Atlas</a>
+  </aside>
+  <aside id="globe-controls" class="globe-controls" aria-label="Globe composition controls">
+    <div class="control-heading">
+      <div><strong>Globe controls</strong><span>Drag to rotate · Shift-drag to move · Option-drag to roll · Scroll to zoom</span></div>
+      <div class="control-actions"><button id="reset-globe" type="button">Reset</button><button id="save-globe" type="button">Save preset</button><button id="copy-globe" type="button">Copy preset</button></div>
+    </div>
+    <div id="control-grid" class="control-grid"></div>
+    <textarea id="preset-output" readonly hidden aria-label="Globe preset JSON"></textarea>
+  </aside>
+
+  <main id="app" data-mode="flyer" data-direction="globe">
+    <header class="brand-header">
+      <img src="assets/Nunnlogo.jpg" alt="Georgia Tech, Sam Nunn School of International Affairs">
+      <p>Summer Study Abroad</p>
+    </header>
+
+    <section class="flyer">
+      <header class="program-heading">
+        <p class="program-name">European Union + Global Affairs</p>
+        <h1><span>Europe is</span><span>the classroom.</span></h1>
+        <p class="headline-support">Study abroad across a continent—through the cities and institutions shaping global affairs.</p>
+      </header>
+
+      <div class="scale-statement" aria-label="Program scale">
+        <div><strong id="city-count">15</strong><span>cities</span></div>
+        <i></i>
+        <div><strong id="country-count">8</strong><span>countries</span></div>
+        <i></i>
+        <div><strong id="course-count">4</strong><span>courses</span></div>
+      </div>
+
+      <figure class="geography">
+        <canvas id="geo-canvas" aria-label="Program cities across a curved Earth centered on Europe"></canvas>
+        <figcaption id="geo-caption">A network of cities. One moving classroom.</figcaption>
+      </figure>
+
+      <section class="details">
+        <div class="places">
+          <h2>Across Europe</h2>
+          <p id="city-list"></p>
+        </div>
+        <div class="courses">
+          <h2>Four perspectives on global affairs</h2>
+          <ol id="course-list"></ol>
+        </div>
+        <div class="next-step">
+          <h2>Georgia Tech in Europe</h2>
+          <p>Program dates and application details will appear here when published.</p>
+          <a id="cta" hidden>Explore the program <span>↗</span></a>
+        </div>
+      </section>
+    </section>
+
+    <footer class="brand-footer">
+      <span>European Union and Global Affairs Study Abroad Program</span>
+      <span class="identity-key">Global affairs in motion</span>
+    </footer>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Romanian Athenaeum Bucharest",
+    "commons_title": "File:Ateneo Rumano, Bucarest, Rumanía, 2016-05-29, DD 73.jpg",
+    "description": "Romanian Athenaeum, Bucharest, Romania",
+    "creator": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Ateneo_Rumano,_Bucarest,_Ruman%C3%ADa,_2016-05-29,_DD_73.jpg",
+    "source_width": 6592,
+    "source_height": 4963
+  },
+  {
+    "file": "nato-force-integration-unit.jpg",
+    "role": "institution",
+    "search_query": "NATO Force Integration Unit Romania",
+    "commons_title": "File:U.S. Marines embark heavy equipment to Romania for NATO-led exercise 151130-M-TV331-088.jpg",
+    "description": "U.S. Marines with the Combined Arms Company, Black Sea Rotational Force load tanks, artillery and light-armored vehicles onto rail cars at Zimnitsa Rail Yard, Bulgaria, Nov. 30, 2015, to transport the heavy equipment to Smardan Training Area, Romania, for participation in Exercise Platinum Lynx 16-2. The NATO-led exercise will begin Monday, Dec. 7 and is a designed to build partner capacity in a combat environment, focusing on mechanized integration and indirect fire techniques. (U.S. Marine Corps photo by Cpl. Justin T. Updegraff/ Released)\nUnit: U.S. Marine Corps Forces Europe and Africa",
+    "creator": "Cpl. Justin Updegraff",
+    "license": "Public domain",
+    "license_url": "",
+    "source_page": "https://commons.wikimedia.org/wiki/File:U.S._Marines_embark_heavy_equipment_to_Romania_for_NATO-led_exercise_151130-M-TV331-088.jpg",
+    "source_width": 4955,
+    "source_height": 3539
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Palace of the Parliament in Bucharest (51878975552).jpg",
+    "commons_title": "File:Palace of the Parliament in Bucharest (51878975552).jpg",
+    "description": "CC BY-SA 2.0 - please attribute to William John Gauthier",
+    "creator": "William John Gauthier from Denmark",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Palace_of_the_Parliament_in_Bucharest_(51878975552).jpg",
+    "source_width": 5184,
+    "source_height": 3456
+  }
+]

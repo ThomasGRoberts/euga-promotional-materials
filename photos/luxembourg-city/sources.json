@@ -1,0 +1,41 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Luxembourg City Night Wikimedia Commons.jpg",
+    "commons_title": "File:Luxembourg City Night Wikimedia Commons.jpg",
+    "description": "Panoramic view of Luxembourg city's Grund and its fortifications (UNESCO world heritage), at dusk, in Luxembourg.",
+    "creator": "Benh LIEU SONG",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Luxembourg_City_Night_Wikimedia_Commons.jpg",
+    "source_width": 11101,
+    "source_height": 5860
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Ville-Haute vue du Fort Verlorenkost (cropped).jpg",
+    "commons_title": "File:Ville-Haute vue du Fort Verlorenkost (cropped).jpg",
+    "description": "La Ville-Haute vue du Fort Verlorenkost",
+    "creator": "Procrastineur49",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Ville-Haute_vue_du_Fort_Verlorenkost_(cropped).jpg",
+    "source_width": 3696,
+    "source_height": 1666
+  },
+  {
+    "file": "court-of-justice-eu.jpg",
+    "role": "institution",
+    "search_query": "exact Commons file: File:EP - Kirchberg from the skies 2025 (3).jpg",
+    "commons_title": "File:EP - Kirchberg from the skies 2025 (3).jpg",
+    "description": "Aerial View of the Konrad ADENAUER building and its surroundsings in Kirchberg, Luxembourg City",
+    "creator": "Simon Schmitt - European Parliament",
+    "license": "Attribution",
+    "license_url": "",
+    "source_page": "https://commons.wikimedia.org/wiki/File:EP_-_Kirchberg_from_the_skies_2025_(3).jpg",
+    "source_width": 1800,
+    "source_height": 1183
+  }
+]

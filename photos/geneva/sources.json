@@ -1,0 +1,54 @@
+[
+  {
+    "file": "united-nations-geneva.jpg",
+    "role": "institution",
+    "search_query": "Palais des Nations United Nations Geneva building",
+    "commons_title": "File:Palace of Nations Geneva 20102014 02.jpg",
+    "description": "Le Palais des Nations à Genève.",
+    "creator": "Vassil",
+    "license": "CC0",
+    "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Palace_of_Nations_Geneva_20102014_02.jpg",
+    "source_width": 4848,
+    "source_height": 3152
+  },
+  {
+    "file": "itu.jpg",
+    "role": "institution",
+    "search_query": "International Telecommunication Union Geneva building",
+    "commons_title": "File:International Telecommunication Union (ITU), Geneva, Switzerland.jpg",
+    "description": "International Telecommunication Union (ITU) Buildings, Geneva, Switzerland",
+    "creator": "ITU/I. Wood",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:International_Telecommunication_Union_(ITU),_Geneva,_Switzerland.jpg",
+    "source_width": 3665,
+    "source_height": 1853
+  },
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Geneva from Saleve 0.jpg",
+    "commons_title": "File:Geneva from Saleve 0.jpg",
+    "description": "View on Geneva from the Salève",
+    "creator": "Björn Sothmann (talk)",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Geneva_from_Saleve_0.jpg",
+    "source_width": 31673,
+    "source_height": 5421
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "exact Commons file: File:Geneva-aerial-view.JPG",
+    "commons_title": "File:Geneva-aerial-view.JPG",
+    "description": "Geneva, aerial view",
+    "creator": "Alexey M.",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Geneva-aerial-view.JPG",
+    "source_width": 2720,
+    "source_height": 2040
+  }
+]

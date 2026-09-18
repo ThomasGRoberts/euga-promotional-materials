@@ -1,0 +1,28 @@
+[
+  {
+    "file": "city-01.jpg",
+    "role": "city",
+    "search_query": "Porta Nigra Trier",
+    "commons_title": "File:1957 Volkswagen Beetle, export model, in front of Porta Nigra in Trier 2023-05-01.jpg",
+    "description": "Volkswagen Beetle, export model, built 1957 (licence plate modified for privacy reasons), in front of UNESCO world heritage site Porta Nigra in Trier.",
+    "creator": "Palauenc05",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source_page": "https://commons.wikimedia.org/wiki/File:1957_Volkswagen_Beetle,_export_model,_in_front_of_Porta_Nigra_in_Trier_2023-05-01.jpg",
+    "source_width": 4873,
+    "source_height": 3581
+  },
+  {
+    "file": "city-02.jpg",
+    "role": "city",
+    "search_query": "Porta Nigra Trier",
+    "commons_title": "File:Porta Nigra morgens (100MP).jpg",
+    "description": "Porta Nigra at Trier, Germany",
+    "creator": "Thomas Wolf, www.foto-tw.de",
+    "license": "CC BY-SA 3.0 de",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0/de/deed.en",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Porta_Nigra_morgens_(100MP).jpg",
+    "source_width": 12172,
+    "source_height": 8216
+  }
+]
