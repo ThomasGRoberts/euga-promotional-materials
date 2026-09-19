@@ -1,5 +1,4 @@
-# EU & Global Affairs Study Abroad — Phase 1 prototype
-
+# EU & Global Affairs Study Abroad Promotional Materials
 This is a lightweight HTML/CSS/JavaScript prototype for the Georgia Tech European Union and Global Affairs Study Abroad Program.
 
 ## GitHub Pages
@@ -7,10 +6,6 @@ This is a lightweight HTML/CSS/JavaScript prototype for the Georgia Tech Europea
 The repository root is the public promotional-materials landing page. A Pages deployment workflow is included at `.github/workflows/pages.yml` and publishes automatically from `main`.
 
 The private faculty message containing the Google Sheet editor URL is intentionally ignored by Git and is never included in the repository or Pages deployment.
-
-## Current inspection status
-
-The supplied SBI visualization was inspected and its real-boundary geographic approach, fine linework, grayscale field, restrained gold accent, and responsive canvas treatment were adapted for this prototype. Its orbital-analysis, satellite, coverage, and floating-control machinery were intentionally excluded. The flyer now loads its editable copy, cities, and courses from the published Google Sheet. The checked-in JSON remains an offline fallback.
 
 ## Run locally
 
