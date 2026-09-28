@@ -17,8 +17,11 @@ Open `http://127.0.0.1:8765/` for the promotional-materials landing page that wi
 
 - `index.html` is the promotional-materials landing page.
 - `flyer.html` is the print-flyer preview.
-- `banner.html` is the self-advancing public banner. Each load features one faculty member, every basecamp, and five randomly selected excursions.
-- `banner.html?present=1` is the manual click-to-advance presentation and includes all faculty.
+- `banner.html` is the self-advancing website carousel. Each load features two base camps, two excursions, two featured site visits, and two faculty members, interleaved with overview/curriculum/gallery content. Site visits rotate between cycles.
+- `banner.html?present=1` is the manual click-to-advance presentation. Its opening slide includes the full program title, prominent shared wordmark, and program QR code; it includes all four faculty on one slide, every base camp, every excursion, and a dedicated closing application slide with a larger QR code. It omits site-visit slides.
+- `hallway.html` is a full-screen 16:9 hallway-TV banner using the shared wordmark and program QR code; a 1920 × 1080 PNG export is in `downloads/`.
+- `office-door.html` is a white-background, half-letter (5.5 × 8.5 in) office-door printout with the shared wordmark and QR code; use its print button or the one-page PDF export in `downloads/`.
+- `branding.html` offers the shared program wordmark as a scalable SVG and transparent PNG.
 
 ## Architecture
 
@@ -30,4 +33,4 @@ Open `http://127.0.0.1:8765/` for the promotional-materials landing page that wi
 - `apps-script/PhotosSync.gs` — proposed Drive-folder → Photos-tab sync implementation.
 - `docs/phase-1-inspection.md` — findings, decisions, and next integration steps.
 
-The flyer intentionally contains no photography. The digital banner has a graceful, text-only fallback for photos until the public image-serving boundary is established.
+The flyer intentionally contains no photography. The canonical wordmark is `assets/branding/program-wordmark.svg`; the flyer, presentation, hallway banner, and office-door printout all reference it. The downloadable PNG is in `downloads/` and is an export, not a second editable logo source. Institution-photo provenance and the one unresolved institution are documented in `photos/institutions/README.md`.
