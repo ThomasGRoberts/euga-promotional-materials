@@ -8,22 +8,26 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;800&family=Roboto+Slab:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="office-door.css">
+  <link rel="stylesheet" href="office-door.css?v=approved-20260928">
+  <link rel="stylesheet" href="material-nav.css">
 </head>
 <body>
-  <div class="preview-tools"><button type="button" onclick="window.print()">Print at 5.5 × 8.5 in</button></div>
+  <nav class="material-tools material-tools--door" aria-label="Material navigation and downloads"><a class="material-back" href="index.html">← Back</a><div class="material-downloads"><a href="downloads/office-door-half-page.pdf?v=approved-20260928" download>Download 1 copy</a><a href="downloads/office-door-two-up.pdf?v=approved-20260928" download>Download 2-up sheet</a></div></nav>
+  <svg class="qr-filter-defs" aria-hidden="true" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
+    <filter id="warm-qr" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="linear" slope="0.52" intercept="0.48"/><feFuncG type="linear" slope="0.55" intercept="0.45"/><feFuncB type="linear" slope="0.59" intercept="0.41"/></feComponentTransfer></filter>
+  </svg>
   <main class="door-page">
-    <header class="door-header"><img src="assets/branding/program-wordmark.svg" alt="EU and Global Affairs Study Abroad Program"></header>
+    <header class="door-header"><img src="assets/branding/program-wordmark.svg?v=approved-20260928" alt="EU and Global Affairs Study Abroad Program"></header>
     <section class="door-message">
       <p class="door-term">Summer 2027</p>
       <h1><span>Let Europe be</span><span>your laboratory</span></h1>
       <p>Study global affairs where they happen. Visit the cities and institutions shaping Europe and the world.</p>
     </section>
+    <figure class="door-earth"><img src="assets/earth-limb-destinations.png" alt="Earth-limb view of Europe with the program destination dots"></figure>
     <section class="door-apply" aria-label="Program website">
       <a href="https://inta.gatech.edu/europeglobal"><img src="assets/program-website-europeglobal-qr.png" alt="QR code linking to the program website"></a>
-      <div><strong>Scan to explore the program</strong><span>inta.gatech.edu/europeglobal</span></div>
+      <div><strong>Apply now at</strong><span>inta.gatech.edu/europeglobal</span></div>
     </section>
-    <footer class="door-footer"><img src="assets/Nunnlogo.jpg" alt="Georgia Tech, Sam Nunn School of International Affairs"></footer>
   </main>
 </body>
 </html>

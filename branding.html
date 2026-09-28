@@ -5,22 +5,53 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Program branding downloads</title>
   <link rel="stylesheet" href="landing.css">
+  <link rel="stylesheet" href="material-nav.css">
   <style>
-    .brand-preview{max-width:100%;width:780px;margin:2rem 0;padding:24px;background:#fff;border:1px solid #ddd}
-    .brand-preview img{display:block;width:100%;height:auto}
+    .brand-intro{margin:0 0 28px}
+    .brand-card{margin:16px 0;padding:18px;border:1px solid #d9dedc;border-radius:9px;background:#f7f6f2}
+    .brand-card h2{margin:0 0 3px;font-size:18px}
+    .brand-card p{margin:0 0 13px;font-size:14px}
+    .brand-swatch{display:flex;align-items:center;min-height:115px;margin-bottom:14px;padding:18px 20px;border:1px solid #d9dedc;border-radius:5px;overflow:hidden}
+    .brand-swatch img{display:block;width:390px;max-width:100%;height:auto}
+    .swatch-transparent{background-color:#fff;background-image:linear-gradient(45deg,#ebedec 25%,transparent 25%),linear-gradient(-45deg,#ebedec 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#ebedec 75%),linear-gradient(-45deg,transparent 75%,#ebedec 75%);background-size:22px 22px;background-position:0 0,0 11px,11px -11px,-11px 0}
+    .swatch-white{background:#fff}
+    .swatch-navy{background:#051e39;border-color:#051e39}
+    .swatch-charcoal{background:#242b33;border-color:#242b33}
+    .brand-card .buttons a{background:#fff}
   </style>
 </head>
 <body>
   <main>
-    <p><a href="index.html">← Promotional materials</a></p>
+    <a class="material-back" href="index.html">← Back</a>
     <h1>Program branding</h1>
-    <p>EU and Global Affairs Study Abroad Program · Georgia Tech</p>
-    <div class="brand-preview"><img src="assets/branding/program-wordmark.svg" alt="EU and Global Affairs Study Abroad Program wordmark"></div>
-    <div class="buttons">
-      <a href="assets/branding/program-wordmark.svg" download="program-wordmark.svg">Download vector SVG</a>
-      <a href="downloads/program-wordmark.png" download>Download transparent PNG</a>
-    </div>
-    <p class="note">The SVG is the single source used by the flyer and presentation. The PNG is a 1560 × 224 px export for use outside this repository.</p>
+    <p class="brand-intro">Approved EU and Global Affairs Study Abroad Program wordmark. All versions below are generated from the same canonical SVG.</p>
+
+    <section class="brand-card">
+      <h2>Standard · transparent</h2><p>Use on a light or white background; transparency keeps the background flexible.</p>
+      <div class="brand-swatch swatch-transparent"><img src="assets/branding/program-wordmark.svg?v=approved-20260928" alt="Standard navy wordmark on a transparent background"></div>
+      <div class="buttons"><a href="assets/branding/program-wordmark.svg?v=approved-20260928" download="program-wordmark.svg">Download SVG</a><a href="downloads/program-wordmark.png?v=approved-20260928" download>Download high-resolution PNG</a></div>
+    </section>
+    <section class="brand-card">
+      <h2>Standard · white background</h2><p>Ready to place in a document with an opaque white background.</p>
+      <div class="brand-swatch swatch-white"><img src="downloads/branding/program-wordmark-white-background.svg" alt="Standard navy wordmark on white"></div>
+      <div class="buttons"><a href="downloads/branding/program-wordmark-white-background.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-white-background.png" download>Download high-resolution PNG</a></div>
+    </section>
+    <section class="brand-card">
+      <h2>On Georgia Tech navy</h2><p>White wordmark with restrained gold EU stars on a navy background.</p>
+      <div class="brand-swatch swatch-navy"><img src="downloads/branding/program-wordmark-blue-background.svg" alt="White and gold wordmark on navy"></div>
+      <div class="buttons"><a href="downloads/branding/program-wordmark-blue-background.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-blue-background.png" download>Download high-resolution PNG</a></div>
+    </section>
+    <section class="brand-card">
+      <h2>Reversed · transparent</h2><p>White wordmark with gold EU stars; use on a dark background of your choice.</p>
+      <div class="brand-swatch swatch-charcoal"><img src="downloads/branding/program-wordmark-reversed.svg" alt="White and gold wordmark on a dark preview background"></div>
+      <div class="buttons"><a href="downloads/branding/program-wordmark-reversed.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-reversed.png" download>Download high-resolution PNG</a></div>
+    </section>
+    <section class="brand-card">
+      <h2>All-white · transparent</h2><p>Single-color white for dark backgrounds and one-color production.</p>
+      <div class="brand-swatch swatch-charcoal"><img src="downloads/branding/program-wordmark-all-white.svg" alt="All-white wordmark on a dark preview background"></div>
+      <div class="buttons"><a href="downloads/branding/program-wordmark-all-white.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-all-white.png" download>Download high-resolution PNG</a></div>
+    </section>
+    <p class="note">The SVGs scale without loss of quality. PNGs are 1560 × 224 pixels. The approved source is <a href="assets/branding/program-wordmark.svg">program-wordmark.svg</a>; the other files are generated exports.</p>
   </main>
 </body>
 </html>

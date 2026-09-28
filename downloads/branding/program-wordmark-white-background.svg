@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 56" role="img" aria-labelledby="title">
+  <rect width="390" height="56" fill="#ffffff"/>
   <title id="title">EU and Global Affairs Study Abroad Program</title>
   <defs><path id="mark-star" d="M0-2.7.62-.85 2.57-.85.99.32 1.59 2.2 0 1.04-1.59 2.2-.99.32-2.57-.85-.62-.85Z"/></defs>
   <g fill="none" stroke="#051e39" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="56" height="46" rx="1"/><rect x="65" y="5" width="56" height="46" rx="1"/></g>

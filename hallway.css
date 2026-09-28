@@ -3,22 +3,23 @@
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--navy)}
 body{font-family:Roboto,Arial,sans-serif}
 .tv-banner{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--navy)}
-.tv-photo{position:absolute;inset:0 0 0 57%;border-left:.6vw solid var(--gold)}
-.tv-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:24% center}
-.tv-photo-credit{position:absolute;z-index:2;right:1vw;bottom:1vh;padding:4px 7px;background:rgba(5,30,57,.75);color:#fff;font-size:max(10px,.7vw);text-decoration:none}
-.tv-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;width:57%;height:100%;padding:5vh 4.5vw 5vh}
-.tv-wordmark{width:35vw;padding:12px 14px;background:var(--paper)}
-.tv-wordmark img{display:block;width:100%;height:auto}
+.tv-map-wrap{position:absolute;inset:0 0 0 50%;background:linear-gradient(135deg,#f6f4ef,#eee9df);border-left:2px solid rgba(179,144,81,.65)}
+#tv-map{display:block;width:100%;height:100%}
+.tv-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;width:50%;height:100%;padding:5vh 4.5vw 5vh}
+.tv-wordmark{width:35vw}
+.tv-wordmark img{display:block;width:100%;height:auto;filter:brightness(0) invert(1)}
 .tv-message{margin:auto 0;color:#fff}
 .tv-term{margin:0 0 2.4vh;color:#dfc68f;font-size:max(18px,1.5vw);font-weight:800;letter-spacing:.13em;text-transform:uppercase}
 .tv-message h1{margin:0;font:800 max(52px,5.1vw)/.97 "Roboto Slab",Georgia,serif;letter-spacing:-.055em}
 .tv-message h1 span{display:block;white-space:nowrap}
 .tv-message h1 span:last-child{color:#c3a266}
 .tv-subline{margin:3vh 0 0;font-size:max(22px,1.9vw);font-weight:400}
-.tv-action{display:flex;align-items:center;gap:1.5vw;max-width:100%;padding:9px 20px 9px 9px;background:#fff;color:var(--navy)}
-.tv-action a,.tv-action img{display:block}
-.tv-action img{width:max(150px,13vw);height:auto}
+.tv-action{display:flex;align-items:center;gap:1.4vw;max-width:100%;color:#fff}
+.tv-action a{display:block;flex:none;margin-left:-2vw;padding:1vw;line-height:0}
+.tv-action img{display:block;width:max(150px,12vw);height:auto;filter:invert(1)}
 .tv-action div{display:flex;flex-direction:column;gap:.8vh}
-.tv-action strong{font-size:max(18px,1.55vw);line-height:1.15}
-.tv-action span{font-size:max(15px,1.15vw);font-weight:700;overflow-wrap:anywhere}
-@media(max-width:900px){.tv-content{width:58%;padding:4vh 3vw}.tv-photo{left:58%}.tv-wordmark{width:39vw;padding:8px}.tv-message h1{font-size:5vw}.tv-action{gap:8px;padding:6px}.tv-action img{width:120px}.tv-action strong{font-size:16px}.tv-action span{font-size:12px}}
+.tv-action strong{font-size:max(18px,1.4vw);line-height:1.15}
+.tv-action span{font-size:max(15px,1.05vw);font-weight:700;overflow-wrap:anywhere}
+@media(max-width:900px){.tv-content{width:55%;padding:4vh 3vw}.tv-map-wrap{left:55%}.tv-wordmark{width:39vw}.tv-message h1{font-size:5vw}.tv-action{gap:8px}.tv-action a{padding:8px}.tv-action img{width:120px}.tv-action strong{font-size:16px}.tv-action span{font-size:12px}}
+.hallway-download{position:fixed;z-index:100;top:15px;right:20px;padding:6px 9px;border-radius:4px;background:rgba(255,255,255,.91);color:#102541;font:600 14px/1.4 Roboto,Arial,sans-serif;text-decoration:none}
+@media print{.hallway-download{display:none}}

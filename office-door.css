@@ -3,22 +3,23 @@
 html,body{margin:0;background:#eee;color:var(--ink);font-family:Roboto,Arial,sans-serif}
 .preview-tools{width:5.5in;margin:22px auto 10px;text-align:right}
 .preview-tools button{padding:8px 12px;border:1px solid #c7c7c7;border-radius:5px;background:#fff;color:var(--navy);font:700 13px Roboto,Arial,sans-serif;cursor:pointer}
+.qr-filter-defs{position:absolute;pointer-events:none}
 .door-page{display:flex;flex-direction:column;width:5.5in;height:8.5in;margin:0 auto 24px;padding:.35in .38in .28in;background:#fff;box-shadow:0 14px 36px rgba(0,0,0,.18);overflow:hidden}
 .door-header{padding-bottom:.16in;border-bottom:1px solid #d7d2c8}
 .door-header img{display:block;width:4.55in;max-width:100%;height:auto}
-.door-message{margin-top:.42in}
+.door-message{margin-top:.22in}
 .door-term{margin:0 0 .14in;color:var(--gold);font-size:13px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
 .door-message h1{margin:0;color:var(--navy);font:800 40px/.98 "Roboto Slab",Georgia,serif;letter-spacing:-.052em}
 .door-message h1 span{display:block;white-space:nowrap}
 .door-message h1 span:last-child{color:var(--gold)}
 .door-message>p:last-child{max-width:31ch;margin:.25in 0 0;font-size:18px;line-height:1.38}
-.door-apply{display:grid;grid-template-columns:1.62in 1fr;gap:.2in;align-items:center;margin-top:auto;padding-top:.18in;border-top:2px solid var(--gold)}
+.door-earth{height:2.68in;flex:none;overflow:hidden;margin:.02in -.1in 0;mask-image:linear-gradient(#000 0 87%,transparent 100%)}
+.door-earth img{display:block;width:100%;height:auto}
+.door-apply{display:grid;grid-template-columns:1.48in 1fr;gap:.24in;align-items:center;margin-top:auto;padding-top:.16in;border-top:.8px solid var(--gold)}
 .door-apply a,.door-apply img{display:block}
-.door-apply img{width:1.62in;height:1.62in}
+.door-apply img{width:1.48in;height:1.48in;filter:url(#warm-qr)}
 .door-apply div{display:flex;flex-direction:column;gap:.11in}
 .door-apply strong{color:var(--navy);font-size:19px;line-height:1.1}
 .door-apply span{color:var(--navy);font-size:13px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
-.door-footer{display:flex;justify-content:flex-end;margin-top:.22in}
-.door-footer img{display:block;width:2.3in;height:auto}
 @page{size:5.5in 8.5in;margin:0}
 @media print{html,body{width:5.5in;height:8.5in;background:#fff}.preview-tools{display:none}.door-page{margin:0;box-shadow:none}}

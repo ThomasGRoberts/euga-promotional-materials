@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 56" role="img" aria-labelledby="title">
   <title id="title">EU and Global Affairs Study Abroad Program</title>
   <defs><path id="mark-star" d="M0-2.7.62-.85 2.57-.85.99.32 1.59 2.2 0 1.04-1.59 2.2-.99.32-2.57-.85-.62-.85Z"/></defs>
-  <g fill="none" stroke="#051e39" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="56" height="46" rx="1"/><rect x="65" y="5" width="56" height="46" rx="1"/></g>
+  <g fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="5" width="56" height="46" rx="1"/><rect x="65" y="5" width="56" height="46" rx="1"/></g>
   <g transform="translate(0 -1.5)">
-    <circle cx="93" cy="30.5" r="11.5" fill="none" stroke="#051e39" stroke-width=".32" stroke-opacity=".68"/>
+    <circle cx="93" cy="30.5" r="11.5" fill="none" stroke="#ffffff" stroke-width=".32" stroke-opacity=".68"/>
     <g id="laurel-branch" transform="rotate(8.5 93 30.5)">
-      <circle cx="93" cy="30.5" r="18.5" fill="none" stroke="#051e39" stroke-width=".7" stroke-linecap="round" stroke-dasharray="34.8717 116.2389" transform="rotate(110 93 30.5)"/>
-      <g fill="#051e39" fill-opacity=".78">
+      <circle cx="93" cy="30.5" r="18.5" fill="none" stroke="#ffffff" stroke-width=".7" stroke-linecap="round" stroke-dasharray="34.8717 116.2389" transform="rotate(110 93 30.5)"/>
+      <g fill="#ffffff" fill-opacity=".78">
         <g transform="rotate(0.3074 93 30.5)"><path d="M86.2 45.5Q83.5 45.9 83.6 48.9Q85.7 48.2 86.2 45.5Z" transform="translate(-1.88 1.33)"/></g>
         <g transform="rotate(1.0003 93 30.5)"><path d="M82.5 42.8Q79.8 42.1 78.6 44.7Q81.6 45.1 82.5 42.8Z" transform="translate(-2.81 .55)"/></g>
         <g transform="rotate(1.6535 93 30.5)"><path d="M78.7 38.8Q76.3 37.3 74.3 39.5Q77.1 40.7 78.7 38.8Z" transform="translate(-2.18 .1)"/></g>
@@ -22,8 +22,8 @@
       </g>
     </g>
     <use href="#laurel-branch" transform="translate(186 0) scale(-1 1)"/>
-    <g fill="none" stroke="#051e39" stroke-width=".38" stroke-opacity=".31" stroke-linecap="round"><circle cx="93" cy="30.5" r="8"/><circle cx="93" cy="30.5" r="4"/><path d="M93 26.5v-6.5M96.46 28.5l5.63-3.25M96.46 32.5l5.63 3.25M93 34.5V41M89.54 32.5l-5.63 3.25M89.54 28.5l-5.63-3.25"/></g>
+    <g fill="none" stroke="#ffffff" stroke-width=".38" stroke-opacity=".31" stroke-linecap="round"><circle cx="93" cy="30.5" r="8"/><circle cx="93" cy="30.5" r="4"/><path d="M93 26.5v-6.5M96.46 28.5l5.63-3.25M96.46 32.5l5.63 3.25M93 34.5V41M89.54 32.5l-5.63 3.25M89.54 28.5l-5.63-3.25"/></g>
   </g>
-  <g fill="#051e39"><use href="#mark-star" x="29" y="15"/><use href="#mark-star" x="35.5" y="17"/><use href="#mark-star" x="40" y="21.5"/><use href="#mark-star" x="42" y="28"/><use href="#mark-star" x="40" y="34.5"/><use href="#mark-star" x="35.5" y="39"/><use href="#mark-star" x="29" y="41"/><use href="#mark-star" x="22.5" y="39"/><use href="#mark-star" x="18" y="34.5"/><use href="#mark-star" x="16" y="28"/><use href="#mark-star" x="18" y="21.5"/><use href="#mark-star" x="22.5" y="17"/></g>
-  <g fill="#051e39" font-family="Roboto, Arial, sans-serif" font-size="22" font-weight="300" letter-spacing="-.44"><text x="145" y="25">EU and Global Affairs</text><text x="145" y="48">Study Abroad Program</text></g>
+  <g fill="#ffffff"><use href="#mark-star" x="29" y="15"/><use href="#mark-star" x="35.5" y="17"/><use href="#mark-star" x="40" y="21.5"/><use href="#mark-star" x="42" y="28"/><use href="#mark-star" x="40" y="34.5"/><use href="#mark-star" x="35.5" y="39"/><use href="#mark-star" x="29" y="41"/><use href="#mark-star" x="22.5" y="39"/><use href="#mark-star" x="18" y="34.5"/><use href="#mark-star" x="16" y="28"/><use href="#mark-star" x="18" y="21.5"/><use href="#mark-star" x="22.5" y="17"/></g>
+  <g fill="#ffffff" font-family="Roboto, Arial, sans-serif" font-size="22" font-weight="300" letter-spacing="-.44"><text x="145" y="25">EU and Global Affairs</text><text x="145" y="48">Study Abroad Program</text></g>
 </svg>
