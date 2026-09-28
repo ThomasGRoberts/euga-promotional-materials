@@ -55,8 +55,11 @@ def main():
             title = evaluate(browser, "(()=>{const first=document.querySelector('.overview-line-one').getBoundingClientRect(),second=document.querySelector('.overview-line-two').getBoundingClientRect(),copy=document.querySelector('.overview-copy').getBoundingClientRect();return {first:first.width,second:second.width,copy:copy.width,secondText:document.querySelector('.overview-line-two').textContent,slides:document.querySelectorAll('.slide').length}})()")
             print('Carousel', title)
             shot(browser, 'euga-carousel-approved.png')
-            open_page(browser, base + '/banner.html?present=1&slide=999')
-            evaluate(browser, "new Promise((resolve,reject)=>{const started=Date.now();const poll=()=>{if(document.querySelector('.application-slide.is-active'))resolve(true);else if(Date.now()-started>15000)reject(Error('presentation timed out'));else setTimeout(poll,50)};poll()})")
+            open_page(browser, base + '/banner.html?present=1')
+            evaluate(browser, "new Promise((resolve,reject)=>{const started=Date.now();const poll=()=>{if(document.querySelector('.opening.is-active'))resolve(true);else if(Date.now()-started>15000)reject(Error('presentation timed out'));else setTimeout(poll,50)};poll()})")
+            navigation = evaluate(browser, "(()=>{const next=document.querySelector('#next');const visible=getComputedStyle(next).display!=='none'&&getComputedStyle(next).opacity==='1';const count=document.querySelectorAll('.slide').length;for(let i=1;i<count;i++)next.click();return {visible,count,readout:document.querySelector('#slide-count').textContent,final:document.querySelector('.slide.is-active')?.className}})()")
+            print('Presentation navigation', navigation)
+            assert navigation['visible'] and 'application-slide' in navigation['final'] and navigation['readout'] == f"{navigation['count']} / {navigation['count']}"
             end = evaluate(browser, "(()=>{const slides=[...document.querySelectorAll('.slide')],last=slides.at(-1);return {slides:slides.length,last:last.className,qr:last.querySelector('.application-qr')?.complete,url:last.querySelector('.application-link')?.textContent,brand:!!last.querySelector('.program-brand')}})()")
             print('Presentation', end)
             print('Back navigation', evaluate(browser, "(()=>{const link=document.querySelector('.material-back'),rect=link.getBoundingClientRect(),style=getComputedStyle(link);return {text:link.textContent,display:style.display,color:style.color,top:rect.top,left:rect.left,elementAtPoint:document.elementFromPoint(rect.left+4,rect.top+4)?.className}})()"))

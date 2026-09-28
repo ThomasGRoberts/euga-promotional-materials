@@ -38,3 +38,12 @@ html[data-slide-focus="site"] .progress-dot.is-active{background:var(--navy)}
 .application-qr{display:block;width:100%;height:auto}
 .application-qr-caption{margin:1.8vh 0 0;color:var(--navy);font-size:clamp(18px,1.3vw,25px);font-weight:800;text-align:center}
 @media(max-width:900px){.site-photo{left:30%;width:70%}.site-gold-panel{width:53%}.site-copy{width:39vw;top:24vh}.site-name{font-size:clamp(27px,3.5vw,56px)}.program-brand{right:4vw;top:3vh}.faculty-group-grid{gap:1.5vw}.faculty-card img{height:37vh}.overview-copy{width:58vw}.overview h1{font-size:5.3vw}}
+html[data-material-mode="presentation"] .deck-nav{top:auto;right:3vw;bottom:2.5vh;left:auto;display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid #d9d6cd;border-radius:7px;background:rgba(247,246,242,.96);box-shadow:0 3px 15px rgba(5,30,57,.12);transform:none}
+html[data-material-mode="presentation"] .deck-nav>button{position:static;display:block;width:auto;height:auto;padding:7px 9px;border:0;border-radius:4px;background:transparent;color:var(--navy);font-size:14px;font-weight:700;opacity:1}
+html[data-material-mode="presentation"] .deck-nav>button:hover:not(:disabled){background:#e9e5dc}
+html[data-material-mode="presentation"] .deck-nav>button:disabled{opacity:.4;cursor:default}
+html[data-material-mode="presentation"] .deck-nav>div{display:flex;flex-direction:row;gap:5px;padding:0}
+html[data-material-mode="presentation"] .progress-dot,html[data-material-mode="presentation"] .progress-dot.is-active{width:6px;height:6px;box-shadow:none}
+html[data-material-mode="presentation"] .progress-dot.is-active{background:var(--gold)}
+html[data-material-mode="presentation"] #slide-count{color:var(--navy);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+html[data-material-mode="carousel"] #slide-count{display:none}
