@@ -51,16 +51,16 @@ function renderText(data){
   const setText=(id,value)=>{const element=$(`#${id}`);if(element&&value)element.textContent=value};
   $('#city-count').textContent=cities.length;$('#country-count').textContent=countries.length;$('#course-count').textContent=courses.length;
   const courseList=$('#course-list');courseList.replaceChildren(...courses.map(course=>{const item=document.createElement('li'),title=document.createElement('strong'),code=document.createElement('span');title.textContent=course.title;code.textContent=course.code;item.append(title,code);return item}));
-  setText('program-title-inline',text.program_title||program.title);
   setText('program-term',text.program_term||(program.year?`Summer ${program.year}`:''));
   setText('hero-line-1',text.hero_line_1);setText('hero-line-2',text.hero_line_2);
   setText('intro-sentence-1',text.intro_sentence_1);setText('intro-sentence-2',text.intro_sentence_2);
   setText('credentials-heading',text.credentials_heading);setText('certificate-title',text.certificate_title);
   setText('certificate-detail',text.certificate_detail);setText('minor-title',text.minor_title);
   setText('minor-detail',text.minor_detail);setText('courses-heading',text.courses_heading);
-  const action=program.ctaUrl;if(action)$('#cta').href=action;
-  $('#cta').href=text.website_url||action||'#';
-  $('#cta').textContent=text.website_display||program.websiteDisplay||$('#cta').textContent;
+  $('#cta').href=text.website_url||'https://inta.gatech.edu/europeglobal';
+  $('#cta').textContent=text.website_display||'inta.gatech.edu/europeglobal';
+  const qr=$('.program-qr');
+  if(qr)qr.src=$('#cta').href==='https://inta.gatech.edu/europeglobal'?'assets/program-website-europeglobal-qr.png':'assets/program-website-qr.png';
 }
 function decodeArc(topology,index){
   const reversed=index<0,arc=topology.arcs[reversed?~index:index],scale=topology.transform?.scale||[1,1],translate=topology.transform?.translate||[0,0];
@@ -98,14 +98,15 @@ function drawGeography(){
   canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
   const isGlobe=direction==='globe',projection=isGlobe?globeProjection(width,height):atlasProjection(width,height),{project,cx,cy,radius}=projection;
   ctx.save();ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip();
-  if(isGlobe){ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.fillStyle='#f7f7f4';ctx.fill();ctx.strokeStyle='rgba(5,30,57,.55)';ctx.lineWidth=1.15*globe.lineWeight;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.clip()}
+  if(isGlobe){ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='rgba(5,30,57,.55)';ctx.lineWidth=1.15*globe.lineWeight;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.clip()}
   drawGraticule(ctx,projection,isGlobe);
   const geometries=state.topology.objects.countries.geometries;
   for(const geometry of geometries)for(const polygon of geometryRings(state.topology,geometry)){ctx.beginPath();polygon.forEach(ring=>traceVisibleRing(ctx,ring,project));if(isGlobe){ctx.fillStyle='#efefeb';ctx.fill('evenodd')}ctx.strokeStyle='rgba(32,32,32,.43)';ctx.lineWidth=.62*(isGlobe?globe.lineWeight:1);ctx.stroke()}
   const cities=state.data.cities||[];
   cities.filter(city=>Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y,z]=project([city.lon,city.lat]);if(z<=0)return;ctx.beginPath();ctx.arc(x,y,3.2,0,Math.PI*2);ctx.fillStyle='#b39051';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.stroke()});
-  const labels=['Amsterdam','Paris','Brussels','Geneva','Berlin','Munich','Vienna','Bucharest'];const offsets={Amsterdam:[-7,-12,'right'],Paris:[-8,13,'right'],Brussels:[-8,-4,'right'],Geneva:[-8,14,'right'],Berlin:[8,-8,'left'],Munich:[8,12,'left'],Vienna:[8,-7,'left'],Bucharest:[9,2,'left']};
-  cities.filter(city=>labels.includes(city.city)&&Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y]=project([city.lon,city.lat]),[dx,dy,align]=offsets[city.city],labelSize=9*(isGlobe?globe.labelScale:1);ctx.fillStyle='#333';ctx.font=`500 ${labelSize}px Roboto, Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(city.city,x+dx,y+dy)});
+  const labels=['Amsterdam','Paris','Brussels','Geneva','Berlin','Munich','Vienna','Bucharest','Bern'];
+  const offsets={Amsterdam:[-7,-10,'right'],Paris:[-8,7,'right'],Brussels:[-8,-5,'right'],Geneva:[-8,16,'right'],Berlin:[8,-5,'left'],Munich:[8,10,'left'],Vienna:[8,-5,'left'],Bucharest:[9,4,'left'],Bern:[8,12,'left']};
+  cities.filter(city=>labels.includes(city.city)&&Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y]=project([city.lon,city.lat]),[dx,dy,align]=offsets[city.city],labelSize=12*(isGlobe?globe.labelScale:1);ctx.fillStyle='#333';ctx.font=`500 ${labelSize}px Roboto, Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(city.city,x+dx,y+dy)});
   ctx.restore();
   window.__EUGA_RENDER_READY__=true;document.documentElement.dataset.renderReady='true';
 }
