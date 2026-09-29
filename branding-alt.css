@@ -9,12 +9,22 @@
 .alternate-preview-shell{margin:21px 0 0;padding:14px;border:1px solid #d8d8d3;border-radius:6px;background:#eae9e4}
 .alternate-stage{position:relative;width:100%;height:400px;overflow:hidden}
 .alternate-artboard{position:absolute;top:0;left:0;display:flex;align-items:center;width:880px;height:400px;padding:64px 72px;background:#fff;box-shadow:0 2px 12px rgba(16,37,65,.08);transform-origin:top left}
+.alternate-artboard[data-layout="single-line"]{width:1240px;height:300px}
 .alternate-lockup{display:flex;align-items:center;gap:var(--alternate-gap,36px);width:100%}
 #alternate-mark{display:block;flex:none;width:var(--alternate-mark-size,220px);height:var(--alternate-mark-size,220px);transform:translateY(var(--alternate-mark-y,0px));overflow:visible}
-.alternate-type{display:flex;flex-direction:column;flex:none;gap:var(--alternate-line-gap,6px);transform:translateY(var(--alternate-type-y,0px));font-family:"DM Serif Display",Georgia,serif;font-weight:400;white-space:nowrap}
-#alternate-line-one{color:#003057;font-size:var(--alternate-title-size,40px);line-height:1.15;letter-spacing:-.01em}
-#alternate-line-two{color:#003057;font-size:var(--alternate-subtitle-size,26px);line-height:1.25;letter-spacing:.02em}
+.alternate-type{flex:none;transform:translateY(var(--alternate-type-y,0px));color:#003057;font-family:Roboto,Arial,sans-serif;font-size:40px;font-weight:300;letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
+.alternate-single-line{display:none}
+.alternate-lockup[data-layout="single-line"] .alternate-two-line{display:none}
+.alternate-lockup[data-layout="single-line"] .alternate-single-line{display:block}
+.alternate-lockup[data-layout="single-line"] .alternate-type{font-size:36px}
+.alternate-layout-switch{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}
+.alternate-layout-switch button{padding:8px 12px;border:1px solid #aab5bd;border-radius:5px;background:#fff;color:#102541;font:650 13px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;cursor:pointer}
+.alternate-layout-switch button.is-selected{border-color:#102541;background:#102541;color:#fff}
+.alternate-layout-switch button:not(.is-selected):hover{background:#eef1f3}
 .alternate-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:23px}
+.alternate-animation-heading{margin:24px 0 -8px;color:#102541;font-size:17px}
+.alternate-animation-controls{grid-template-columns:1fr}
+.alternate-animation-controls .alternate-control-group{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:18px}
 .alternate-control-group{min-width:0;margin:0;padding:9px 14px 14px;border:1px solid #d9dedc;border-radius:6px;background:#fff}
 .alternate-control-group legend{padding:0 5px;color:#102541;font-size:14px;font-weight:700}
 .alternate-control{margin-top:12px}
@@ -25,9 +35,11 @@
 .alternate-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:20px}
 .alternate-actions button{padding:8px 12px;border:1px solid #102541;border-radius:5px;background:#102541;color:#fff;font:650 13px -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;cursor:pointer}
 .alternate-actions button:hover{background:#1b3656}
-.alternate-actions #alternate-export{background:#fff;color:#102541}
-.alternate-actions #alternate-export:hover{background:#eef1f3}
+.alternate-actions #alternate-export,.alternate-actions #alternate-motion-reset{background:#fff;color:#102541}
+.alternate-actions #alternate-export:hover,.alternate-actions #alternate-motion-reset:hover{background:#eef1f3}
 #alternate-status{color:#586778;font-size:13px}
 .alternate-sandbox>.alternate-provenance{margin:17px 0 0;font-size:12px;line-height:1.45}
 .alternate-provenance a{padding:0;border:0;background:none;color:#102541;font-size:inherit;text-decoration:underline}
 @media(max-width:560px){.alternate-sandbox{padding:17px}.alternate-controls{grid-template-columns:1fr}.alternate-preview-shell{padding:8px}}
+@media(max-width:780px){.alternate-animation-controls .alternate-control-group{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.alternate-animation-controls .alternate-control-group{grid-template-columns:1fr}}

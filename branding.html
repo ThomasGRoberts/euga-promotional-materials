@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Program branding · EU stars and globe concept</title>
+  <title>Program branding · animated EU stars and globe concept</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="material-nav.css">
-  <link rel="stylesheet" href="branding-alt.css?v=concept-1">
-  <script src="branding-alt.js?v=concept-1" defer></script>
+  <link rel="stylesheet" href="branding-alt.css?v=concept-motion-1">
+  <script src="branding-alt.js?v=concept-motion-1" defer></script>
   <style>
     .brand-intro{margin:0 0 28px}
     .brand-card{margin:16px 0;padding:18px;border:1px solid #d9dedc;border-radius:9px;background:#f7f6f2}
@@ -34,16 +34,21 @@
     <section id="concept-branding" class="brand-card alternate-sandbox" data-brand-option="concept" aria-labelledby="alternate-heading">
       <p class="alternate-eyebrow">Option 2 · interactive concept</p>
       <h2 id="alternate-heading">EU stars + globe</h2>
-      <p>A monochrome evolution of the colleague’s horizon idea. Tune the vector stars and globe below; changes affect this preview only.</p>
+      <p>The icon uses your tuned geometry with the approved wordmark’s light Roboto typography. Switch lockups to replay their assembly animation; changes here do not affect other materials.</p>
+      <div class="alternate-layout-switch" role="group" aria-label="Concept wordmark layout">
+        <button type="button" class="is-selected" data-layout="two-line" aria-pressed="true">Two-line wordmark</button>
+        <button type="button" data-layout="single-line" aria-pressed="false">Single-line wordmark</button>
+      </div>
       <div class="alternate-preview-shell" aria-label="Live alternate program logo preview">
         <div id="alternate-stage" class="alternate-stage">
-          <div id="alternate-artboard" class="alternate-artboard">
-            <div id="alternate-lockup" class="alternate-lockup">
+          <div id="alternate-artboard" class="alternate-artboard" data-layout="two-line">
+            <div id="alternate-lockup" class="alternate-lockup" data-layout="two-line">
               <svg id="alternate-mark" width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Upper arc of seven European Union stars joining a lower half-globe" xmlns="http://www.w3.org/2000/svg">
                 <title>EU stars and globe concept mark</title>
                 <defs><clipPath id="alternate-lower-half"><rect id="alternate-globe-clip" x="0" y="118" width="220" height="102"/></clipPath></defs>
                 <g id="alternate-globe" data-animation-part="globe">
-                  <g clip-path="url(#alternate-lower-half)" fill="none" stroke="#003057">
+                  <g id="alternate-globe-window" clip-path="url(#alternate-lower-half)" fill="none" stroke="#003057">
+                    <g id="alternate-globe-motion">
                     <circle id="alternate-globe-outline" cx="110" cy="118" r="76"/>
                     <g id="alternate-grid">
                       <ellipse id="alternate-longitude-one" cx="110" cy="118" rx="32" ry="76"/>
@@ -52,18 +57,23 @@
                       <path id="alternate-latitude-one"/>
                       <path id="alternate-latitude-two"/>
                     </g>
+                    </g>
                   </g>
                   <line id="alternate-horizon" x1="34" y1="118" x2="186" y2="118" stroke="#003057" stroke-linecap="round"/>
                 </g>
                 <g id="alternate-stars" data-animation-part="stars" fill="#003057"></g>
               </svg>
-              <div id="alternate-type" class="alternate-type"><div id="alternate-line-one">EU and Global Affairs</div><div id="alternate-line-two">Study Abroad Program</div></div>
+              <div id="alternate-type" class="alternate-type"><div class="alternate-two-line"><div>EU and Global Affairs</div><div>Study Abroad Program</div></div><div class="alternate-single-line">EU and Global Affairs Study Abroad Program</div></div>
             </div>
           </div>
         </div>
       </div>
+      <div class="alternate-actions"><button id="alternate-replay" type="button">Replay animation</button><button id="alternate-motion-reset" type="button">Reset motion</button><span id="alternate-status" aria-live="polite">Showing your tuned icon</span></div>
+      <h3 class="alternate-animation-heading">Animation</h3>
+      <div id="animation-controls" class="alternate-controls alternate-animation-controls" aria-label="Concept animation controls"></div>
+      <h3 class="alternate-animation-heading">Icon geometry</h3>
       <div id="alternate-controls" class="alternate-controls" aria-label="Alternate logo tuning controls"></div>
-      <div class="alternate-actions"><button id="alternate-reset" type="button">Reset concept geometry</button><button id="alternate-export" type="button">Download tuned mark SVG</button><span id="alternate-status" aria-live="polite">Showing concept defaults</span></div>
+      <div class="alternate-actions"><button id="alternate-reset" type="button">Reset tuned geometry</button><button id="alternate-export" type="button">Download current mark SVG</button></div>
       <p class="alternate-provenance">This is a separate vector concept, not the approved wordmark. The colleague’s original <a href="assets/branding/colleague-logo-3e/logo-3e-spec.md">Logo 3e specification</a> and image remain preserved in the repository.</p>
     </section>
 

@@ -1,11 +1,16 @@
-// Experimental vector mark. The approved wordmark and colleague's source files are separate.
-// The globe and individual stars have stable SVG groups for later animation.
+// Experimental vector mark. Approved wordmark and colleague source files are separate.
+// Icon defaults match the user's exported eu-stars-globe-concept-mark.svg (2026-09-29 19:09).
+// Stable globe and star groups support animation without changing final vector geometry.
 const alternateDefaults = Object.freeze({
   markSize: 220, gap: 36, markY: 0, textY: 0,
-  starRadius: 76, starSize: 8.5, starSweep: 180, starY: 0,
+  starRadius: 75, starSize: 11, starSweep: 164, starY: -8,
   globeRadius: 76, globeX: 0, globeY: 0,
-  outlineStroke: 2.5, gridStroke: 1.6, horizonStroke: 2.5,
-  titleSize: 40, subtitleSize: 26, lineGap: 6,
+  outlineStroke: 3.4, gridStroke: 1.6, horizonStroke: 1.6,
+});
+
+const animationDefaults = Object.freeze({
+  globeDuration: 650, starStagger: 65, spinDegrees: 45,
+  revealDelay: 620, revealDuration: 520,
 });
 
 const alternateGroups = [
@@ -29,17 +34,23 @@ const alternateGroups = [
     ['gridStroke', 'Grid stroke', 0.4, 4, 0.1, ' units'],
     ['horizonStroke', 'Horizon stroke', 0.5, 5, 0.1, ' units'],
   ] },
-  { title: 'Typography', fields: [
-    ['titleSize', 'Program-name size', 28, 50, 1, 'px'],
-    ['subtitleSize', 'Study-abroad size', 18, 38, 1, 'px'],
-    ['lineGap', 'Space between lines', 0, 24, 1, 'px'],
-  ] },
 ];
+
+const animationGroups = [{ title: 'Motion timing and character', fields: [
+  ['globeDuration', 'Globe assembly', 300, 1100, 25, ' ms'],
+  ['starStagger', 'Star stagger', 20, 150, 5, ' ms'],
+  ['spinDegrees', 'Globe rotation', 0, 120, 5, '°'],
+  ['revealDelay', 'Wordmark reveal delay', 350, 1100, 25, ' ms'],
+  ['revealDuration', 'Wordmark unfurl', 250, 950, 25, ' ms'],
+] }];
 
 const svgNS = 'http://www.w3.org/2000/svg';
 const alternateValues = { ...alternateDefaults };
+const animationValues = { ...animationDefaults };
 const alternateInputs = new Map();
 const alternateOutputs = new Map();
+const animationInputs = new Map();
+const animationOutputs = new Map();
 const alternateControls = document.querySelector('#alternate-controls');
 const alternateStage = document.querySelector('#alternate-stage');
 const alternateArtboard = document.querySelector('#alternate-artboard');
@@ -47,6 +58,13 @@ const alternateLockup = document.querySelector('#alternate-lockup');
 const alternateMark = document.querySelector('#alternate-mark');
 const alternateStars = document.querySelector('#alternate-stars');
 const alternateStatus = document.querySelector('#alternate-status');
+const alternateType = document.querySelector('#alternate-type');
+const alternateGlobeMotion = document.querySelector('#alternate-globe-motion');
+const alternateHorizon = document.querySelector('#alternate-horizon');
+const alternateGlobeClip = document.querySelector('#alternate-globe-clip');
+let animationFrame = 0;
+let animationStarted = 0;
+let currentLayout = 'two-line';
 
 function alternateFormat(value, unit) {
   return `${Number(value).toString()}${unit}`;
@@ -54,10 +72,12 @@ function alternateFormat(value, unit) {
 
 function alternateFitPreview() {
   const width = alternateStage.clientWidth;
-  const scale = Math.min(1, width / 880);
-  alternateArtboard.style.left = `${(width - 880 * scale) / 2}px`;
+  const artboardWidth = currentLayout === 'single-line' ? 1240 : 880;
+  const artboardHeight = currentLayout === 'single-line' ? 300 : 400;
+  const scale = Math.min(1, width / artboardWidth);
+  alternateArtboard.style.left = `${(width - artboardWidth * scale) / 2}px`;
   alternateArtboard.style.transform = `scale(${scale})`;
-  alternateStage.style.height = `${400 * scale}px`;
+  alternateStage.style.height = `${artboardHeight * scale}px`;
 }
 
 function setSvg(id, attributes) {
@@ -118,9 +138,7 @@ function renderGlobe(value) {
 function alternateRender() {
   const value = alternateValues;
   for (const [property, key] of [
-    ['mark-size', 'markSize'], ['gap', 'gap'], ['mark-y', 'markY'],
-    ['type-y', 'textY'], ['title-size', 'titleSize'],
-    ['subtitle-size', 'subtitleSize'], ['line-gap', 'lineGap'],
+    ['mark-size', 'markSize'], ['gap', 'gap'], ['mark-y', 'markY'], ['type-y', 'textY'],
   ]) alternateLockup.style.setProperty(`--alternate-${property}`, `${value[key]}px`);
   renderStars(value);
   renderGlobe(value);
@@ -128,51 +146,153 @@ function alternateRender() {
     alternateOutputs.get(key).textContent = alternateFormat(value[key], unit);
   }
   const original = Object.keys(alternateDefaults).every(key => value[key] === alternateDefaults[key]);
-  alternateStatus.textContent = original ? 'Showing concept defaults' : 'Preview adjusted · approved logo unchanged';
+  alternateStatus.textContent = original ? 'Showing your tuned icon' : 'Icon adjusted · approved logo unchanged';
 }
 
-for (const group of alternateGroups) {
-  const fieldset = document.createElement('fieldset');
-  fieldset.className = 'alternate-control-group';
-  const legend = document.createElement('legend');
-  legend.textContent = group.title;
-  fieldset.append(legend);
-  for (const [key, label, min, max, step, unit] of group.fields) {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'alternate-control';
-    const labelNode = document.createElement('label');
-    labelNode.htmlFor = `alternate-${key}`;
-    labelNode.append(document.createTextNode(label));
-    const output = document.createElement('output');
-    output.htmlFor = `alternate-${key}`;
-    labelNode.append(output);
-    const input = document.createElement('input');
-    input.id = `alternate-${key}`;
-    input.type = 'range';
-    input.min = String(min);
-    input.max = String(max);
-    input.step = String(step);
-    input.value = String(alternateDefaults[key]);
-    input.addEventListener('input', () => {
-      alternateValues[key] = Number(input.value);
-      alternateRender();
-    });
-    const ends = document.createElement('div');
-    ends.className = 'range-ends';
-    const low = document.createElement('span');
-    low.textContent = alternateFormat(min, unit);
-    const high = document.createElement('span');
-    high.textContent = alternateFormat(max, unit);
-    ends.append(low, high);
-    wrapper.append(labelNode, input, ends);
-    fieldset.append(wrapper);
-    alternateInputs.set(key, input);
-    alternateOutputs.set(key, output);
-  }
-  alternateControls.append(fieldset);
+function finishAnimation() {
+  cancelAnimationFrame(animationFrame);
+  animationFrame = 0;
+  animationStarted = 0;
+  alternateGlobeMotion.removeAttribute('transform');
+  document.querySelector('#alternate-globe-window').style.removeProperty('opacity');
+  alternateHorizon.style.removeProperty('opacity');
+  alternateHorizon.removeAttribute('stroke-dasharray');
+  alternateHorizon.removeAttribute('stroke-dashoffset');
+  alternateType.style.removeProperty('clip-path');
+  alternateType.style.removeProperty('transform');
+  for (const star of alternateStars.children) star.style.removeProperty('opacity');
+  renderStars(alternateValues);
+  renderGlobe(alternateValues);
 }
+
+const clamp = value => Math.max(0, Math.min(1, value));
+const easeOut = value => 1 - Math.pow(1 - clamp(value), 3);
+
+function replayAnimation() {
+  finishAnimation();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const value = alternateValues;
+  const motion = animationValues;
+  const x = 110 + value.globeX;
+  const y = 118 + value.globeY;
+  const r = value.globeRadius;
+  const end = Math.max(motion.globeDuration, 70 + 6 * motion.starStagger + 500, motion.revealDelay + motion.revealDuration);
+  function frame(now) {
+    if (!animationStarted) animationStarted = now;
+    const t = now - animationStarted;
+    const globe = easeOut(t / motion.globeDuration);
+    alternateGlobeClip.setAttribute('y', String(y - r * (1 - globe)));
+    alternateGlobeClip.setAttribute('height', String(220 - y + r * (1 - globe)));
+    alternateGlobeMotion.setAttribute('transform', `rotate(${(motion.spinDegrees * (1 - globe)).toFixed(3)} ${x} ${y})`);
+    document.querySelector('#alternate-globe-window').style.opacity = String(0.35 + 0.65 * globe);
+    const horizon = easeOut((t - motion.globeDuration * 0.45) / (motion.globeDuration * 0.55));
+    alternateHorizon.style.opacity = String(horizon);
+    alternateHorizon.setAttribute('stroke-dasharray', String(2 * r));
+    alternateHorizon.setAttribute('stroke-dashoffset', String(2 * r * (1 - horizon)));
+    for (let i = 0; i < 7; i++) {
+      const star = alternateStars.children[i];
+      const p = easeOut((t - 70 - i * motion.starStagger) / 500);
+      const angle = (270 - value.starSweep / 2 + i * value.starSweep / 6) * Math.PI / 180;
+      const startAngle = angle - 0.4;
+      const startRadius = value.starRadius + 20;
+      const finalX = 110 + value.starRadius * Math.cos(angle);
+      const finalY = 118 + value.starY + value.starRadius * Math.sin(angle);
+      const startX = 110 + startRadius * Math.cos(startAngle);
+      const startY = 118 + value.starY + startRadius * Math.sin(startAngle);
+      const px = startX + (finalX - startX) * p;
+      const py = startY + (finalY - startY) * p;
+      star.setAttribute('transform', `translate(${px.toFixed(3)} ${py.toFixed(3)}) scale(${(0.65 + 0.35 * p).toFixed(3)})`);
+      star.style.opacity = String(p);
+    }
+    const reveal = easeOut((t - motion.revealDelay) / motion.revealDuration);
+    alternateType.style.clipPath = `inset(0 ${(100 * (1 - reveal)).toFixed(3)}% 0 0)`;
+    alternateType.style.transform = `translate(${(-18 * (1 - reveal)).toFixed(3)}px, ${value.textY}px)`;
+    if (t >= end) finishAnimation();
+    else animationFrame = requestAnimationFrame(frame);
+  }
+  animationFrame = requestAnimationFrame(frame);
+}
+
+function buildControls(groups, values, target, onInput, recordInputs, recordOutputs) {
+  for (const group of groups) {
+    const fieldset = document.createElement('fieldset');
+    fieldset.className = 'alternate-control-group';
+    const legend = document.createElement('legend');
+    legend.textContent = group.title;
+    fieldset.append(legend);
+    for (const [key, label, min, max, step, unit] of group.fields) {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'alternate-control';
+      const labelNode = document.createElement('label');
+      labelNode.htmlFor = `alternate-${key}`;
+      labelNode.append(document.createTextNode(label));
+      const output = document.createElement('output');
+      output.htmlFor = `alternate-${key}`;
+      output.textContent = alternateFormat(values[key], unit);
+      labelNode.append(output);
+      const input = document.createElement('input');
+      input.id = `alternate-${key}`;
+      input.type = 'range';
+      input.min = String(min);
+      input.max = String(max);
+      input.step = String(step);
+      input.value = String(values[key]);
+      input.addEventListener('input', () => {
+        values[key] = Number(input.value);
+        output.textContent = alternateFormat(values[key], unit);
+        onInput();
+      });
+      const ends = document.createElement('div');
+      ends.className = 'range-ends';
+      const low = document.createElement('span');
+      low.textContent = alternateFormat(min, unit);
+      const high = document.createElement('span');
+      high.textContent = alternateFormat(max, unit);
+      ends.append(low, high);
+      wrapper.append(labelNode, input, ends);
+      fieldset.append(wrapper);
+      recordInputs.set(key, input);
+      recordOutputs.set(key, output);
+    }
+    target.append(fieldset);
+  }
+}
+
+buildControls(alternateGroups, alternateValues, alternateControls, () => {
+  finishAnimation();
+  alternateRender();
+}, alternateInputs, alternateOutputs);
+buildControls(animationGroups, animationValues, document.querySelector('#animation-controls'), replayAnimation, animationInputs, animationOutputs);
+
+for (const button of document.querySelectorAll('.alternate-layout-switch button')) {
+  button.addEventListener('click', () => {
+    currentLayout = button.dataset.layout;
+    for (const item of document.querySelectorAll('.alternate-layout-switch button')) {
+      const selected = item === button;
+      item.classList.toggle('is-selected', selected);
+      item.setAttribute('aria-pressed', String(selected));
+    }
+    alternateArtboard.dataset.layout = currentLayout;
+    alternateLockup.dataset.layout = currentLayout;
+    alternateFitPreview();
+    replayAnimation();
+  });
+}
+
+document.querySelector('#alternate-replay').addEventListener('click', replayAnimation);
+document.querySelector('#alternate-motion-reset').addEventListener('click', () => {
+  for (const [key, baseline] of Object.entries(animationDefaults)) {
+    animationValues[key] = baseline;
+    animationInputs.get(key).value = String(baseline);
+  }
+  for (const group of animationGroups) for (const [key, , , , , unit] of group.fields) {
+    animationOutputs.get(key).textContent = alternateFormat(animationValues[key], unit);
+  }
+  replayAnimation();
+});
 
 document.querySelector('#alternate-reset').addEventListener('click', () => {
+  finishAnimation();
   for (const [key, baseline] of Object.entries(alternateDefaults)) {
     alternateValues[key] = baseline;
     alternateInputs.get(key).value = String(baseline);
@@ -181,6 +301,7 @@ document.querySelector('#alternate-reset').addEventListener('click', () => {
 });
 
 document.querySelector('#alternate-export').addEventListener('click', () => {
+  finishAnimation();
   const svg = alternateMark.cloneNode(true);
   svg.removeAttribute('id');
   svg.removeAttribute('role');
@@ -198,3 +319,4 @@ alternateRender();
 alternateFitPreview();
 new ResizeObserver(alternateFitPreview).observe(alternateStage);
 window.addEventListener('resize', alternateFitPreview);
+document.fonts.ready.then(replayAnimation);
