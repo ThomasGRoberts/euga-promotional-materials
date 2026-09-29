@@ -3,9 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Program branding downloads</title>
+  <title>Program branding and alternate logo sandbox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="material-nav.css">
+  <link rel="stylesheet" href="branding-alt.css?v=logo-3e-1">
+  <script src="branding-alt.js?v=logo-3e-1" defer></script>
   <style>
     .brand-intro{margin:0 0 28px}
     .brand-card{margin:16px 0;padding:18px;border:1px solid #d9dedc;border-radius:9px;background:#f7f6f2}
@@ -20,11 +25,54 @@
     .brand-card .buttons a{background:#fff}
   </style>
 </head>
-<body>
+<body class="branding-page">
   <main>
     <a class="material-back" href="index.html">← Back</a>
     <h1>Program branding</h1>
-    <p class="brand-intro">Approved EU and Global Affairs Study Abroad Program wordmark. All versions below are generated from the same canonical SVG.</p>
+    <p class="brand-intro">Compare the approved wordmark with a colleague's alternate design. The alternate is a tuning sandbox only; it is not used by the promotional materials.</p>
+
+    <section class="brand-card alternate-sandbox" aria-labelledby="alternate-heading">
+      <p class="alternate-eyebrow">Alternate concept · sandbox</p>
+      <h2 id="alternate-heading">Horizon logo · colleague's Logo 3e</h2>
+      <p>Reconstructed from the supplied 220 × 220 mark specification and transparent GT image. Adjustments below affect this preview only.</p>
+      <div class="alternate-preview-shell" aria-label="Live alternate program logo preview">
+        <div id="alternate-stage" class="alternate-stage">
+          <div id="alternate-artboard" class="alternate-artboard">
+            <div id="alternate-lockup" class="alternate-lockup">
+              <svg id="alternate-mark" width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Seven gold stars over a half globe with the GT mark at the horizon" xmlns="http://www.w3.org/2000/svg">
+                <defs><clipPath id="alternate-lower-half"><rect x="0" y="128" width="220" height="100"/></clipPath></defs>
+                <g clip-path="url(#alternate-lower-half)">
+                  <circle cx="110" cy="128" r="72" fill="#003057"/>
+                  <g id="alternate-grid" fill="none" stroke="#B3A369" stroke-width="2">
+                    <ellipse cx="110" cy="128" rx="30" ry="72"/>
+                    <ellipse cx="110" cy="128" rx="56" ry="72"/>
+                    <line x1="110" y1="128" x2="110" y2="200"/>
+                    <path d="M48,164 Q110,172 172,164"/>
+                  </g>
+                </g>
+                <rect id="alternate-horizon" x="36" y="125" width="148" height="6" rx="3" fill="#B3A369"/>
+                <g id="alternate-stars" fill="#B3A369">
+                  <polygon data-angle="180" data-cx="24" data-cy="128" points="24.0,118.0 26.4,124.8 33.5,124.9 27.8,129.2 29.9,136.1 24.0,132.0 18.1,136.1 20.2,129.2 14.5,124.9 21.6,124.8"/>
+                  <polygon data-angle="210" data-cx="35.5" data-cy="85" points="35.5,75.0 37.9,81.8 45.0,81.9 39.3,86.2 41.4,93.1 35.5,89.0 29.6,93.1 31.7,86.2 26.0,81.9 33.2,81.8"/>
+                  <polygon data-angle="240" data-cx="67" data-cy="53.5" points="67.0,43.5 69.4,50.3 76.5,50.4 70.8,54.8 72.9,61.6 67.0,57.5 61.1,61.6 63.2,54.8 57.5,50.4 64.6,50.3"/>
+                  <polygon data-angle="270" data-cx="110" data-cy="42" points="110.0,32.0 112.4,38.8 119.5,38.9 113.8,43.2 115.9,50.1 110.0,46.0 104.1,50.1 106.2,43.2 100.5,38.9 107.6,38.8"/>
+                  <polygon data-angle="300" data-cx="153" data-cy="53.5" points="153.0,43.5 155.4,50.3 162.5,50.4 156.8,54.8 158.9,61.6 153.0,57.5 147.1,61.6 149.2,54.8 143.5,50.4 150.6,50.3"/>
+                  <polygon data-angle="330" data-cx="184.5" data-cy="85" points="184.5,75.0 186.8,81.8 194.0,81.9 188.3,86.2 190.4,93.1 184.5,89.0 178.6,93.1 180.7,86.2 175.0,81.9 182.1,81.8"/>
+                  <polygon data-angle="360" data-cx="196" data-cy="128" points="196.0,118.0 198.4,124.8 205.5,124.9 199.8,129.2 201.9,136.1 196.0,132.0 190.1,136.1 192.2,129.2 186.5,124.9 193.6,124.8"/>
+                </g>
+                <g id="alternate-gt"><image href="assets/branding/colleague-logo-3e/gt-navy.png" x="79" y="80" width="62" height="38"/><text x="142" y="115" font-family="Georgia, serif" font-size="7" fill="#003057">®</text></g>
+              </svg>
+              <div id="alternate-type" class="alternate-type"><div id="alternate-line-one">EU and Global Affairs</div><div id="alternate-line-two">Study Abroad Program</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="alternate-controls" class="alternate-controls" aria-label="Alternate logo tuning controls"></div>
+      <div class="alternate-actions"><button id="alternate-reset" type="button">Reset to colleague's original</button><span id="alternate-status" aria-live="polite">Showing colleague's original values</span></div>
+      <p class="alternate-provenance">Baseline source: <a href="assets/branding/colleague-logo-3e/logo-3e-spec.md">Logo 3e specification</a>. The supplied navy GT artwork is a transparent PNG mockup asset; the ZIP did not contain a complete rendered Logo 3e file.</p>
+    </section>
+
+    <h2 class="approved-heading">Approved wordmark downloads</h2>
 
     <section class="brand-card">
       <h2>Standard · transparent</h2><p>Use on a light or white background; transparency keeps the background flexible.</p>

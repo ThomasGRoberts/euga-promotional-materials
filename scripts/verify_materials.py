@@ -47,9 +47,26 @@ def main():
             shot(browser, 'euga-hub-mobile.png')
             browser.call('Emulation.setDeviceMetricsOverride', {'width': 1920, 'height': 1080, 'deviceScaleFactor': 1, 'mobile': False})
             open_page(browser, base + '/branding.html')
-            brand = evaluate(browser, "({cards:document.querySelectorAll('.brand-card').length,sliders:document.querySelectorAll('input[type=range]').length})")
+            evaluate(browser, "document.fonts.ready.then(()=>true)")
+            brand = evaluate(browser, "({cards:document.querySelectorAll('.brand-card').length,sliders:document.querySelectorAll('#alternate-controls input[type=range]').length,markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,gtLoaded:document.querySelector('#alternate-mark image').href.baseVal.includes('gt-navy.png'),baseline:document.querySelector('#alternate-status').textContent})")
             print('Branding', brand)
+            assert brand['cards'] == 6 and brand['sliders'] == 12 and brand['markWidth'] == 220 and brand['gtLoaded']
             shot(browser, 'euga-branding-approved.png')
+            browser.call('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 1, 'mobile': True})
+            evaluate(browser, "new Promise(resolve=>setTimeout(resolve,100))")
+            mobile_brand = evaluate(browser, "({viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth,stageWidth:document.querySelector('#alternate-stage').getBoundingClientRect().width,artboardWidth:document.querySelector('#alternate-artboard').getBoundingClientRect().width})")
+            print('Alternate mobile', mobile_brand)
+            assert mobile_brand['scrollWidth'] <= mobile_brand['viewport'] and mobile_brand['artboardWidth'] <= mobile_brand['stageWidth'] + 1
+            shot(browser, 'euga-branding-alternate-mobile.png')
+            browser.call('Emulation.setDeviceMetricsOverride', {'width': 1920, 'height': 1080, 'deviceScaleFactor': 1, 'mobile': False})
+            evaluate(browser, "new Promise(resolve=>setTimeout(resolve,100))")
+            tune = evaluate(browser, "(()=>{const mark=document.querySelector('#alternate-markSize'),stars=document.querySelector('#alternate-starRadius');mark.value='235';mark.dispatchEvent(new Event('input',{bubbles:true}));stars.value='92';stars.dispatchEvent(new Event('input',{bubbles:true}));return {markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,starTransform:document.querySelector('#alternate-stars polygon').getAttribute('transform'),status:document.querySelector('#alternate-status').textContent}})()")
+            assert tune['markWidth'] == 235 and tune['starTransform'] and 'adjusted' in tune['status']
+            print('Alternate tuning', tune)
+            shot(browser, 'euga-branding-alternate-tuned.png')
+            reset = evaluate(browser, "(()=>{document.querySelector('#alternate-reset').click();return {markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,starTransform:document.querySelector('#alternate-stars polygon').getAttribute('transform'),status:document.querySelector('#alternate-status').textContent}})()")
+            assert reset['markWidth'] == 220 and reset['starTransform'] is None and 'original' in reset['status']
+            print('Alternate reset', reset)
             open_page(browser, base + '/banner.html?autoplay=0')
             evaluate(browser, "new Promise((resolve,reject)=>{const started=Date.now();const poll=()=>{if(document.querySelector('.overview.is-active'))resolve(true);else if(Date.now()-started>15000)reject(Error('carousel timed out'));else setTimeout(poll,50)};poll()})")
             title = evaluate(browser, "(()=>{const first=document.querySelector('.overview-line-one').getBoundingClientRect(),second=document.querySelector('.overview-line-two').getBoundingClientRect(),copy=document.querySelector('.overview-copy').getBoundingClientRect();return {first:first.width,second:second.width,copy:copy.width,secondText:document.querySelector('.overview-line-two').textContent,slides:document.querySelectorAll('.slide').length,verticalDots:getComputedStyle(document.querySelector('#progress-dots')).flexDirection,stepper:getComputedStyle(document.querySelector('.presentation-stepper')).display}})()")
