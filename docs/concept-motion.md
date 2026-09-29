@@ -22,6 +22,6 @@ The icon and text share one navy ink (`#003057`). Text uses the approved wordmar
 
 ## Animation and future integration
 
-The SVG has stable globe, clipping-window, and per-star groups. The animation temporarily reveals a full globe, turns it, clips it to the lower hemisphere, seats the stars along the tuned arc, and reveals text left-to-right. Finishing or interrupting motion restores the exact static geometry from the tunable parameters. Reduced-motion preference skips straight to that resting frame.
+The SVG has stable globe, clipping-window, and per-star groups. Its sequential animation draws a full globe, moves projected meridian curves inside a stationary circular outline to imply polar-axis rotation, breaks the upper hemisphere into short drifting line fragments, seats the stars along the tuned arc, then reveals text left-to-right. The motion controls expose overall speed, each stage's duration, signed stage spacing (negative values overlap), polar turns, and fragment drift. Finishing or interrupting motion removes all temporary geometry and restores the exact static geometry from the tunable parameters. Reduced-motion preference skips straight to that resting frame.
 
 `branding.html` has separate `data-brand-option="approved"` and `data-brand-option="concept"` sections, ready for a later selector. No selector or automatic propagation to other products is implemented yet.

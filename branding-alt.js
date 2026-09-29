@@ -9,8 +9,9 @@ const alternateDefaults = Object.freeze({
 });
 
 const animationDefaults = Object.freeze({
-  globeDuration: 650, starStagger: 65, spinDegrees: 45,
-  revealDelay: 620, revealDuration: 520,
+  overallSpeed: 1, appearDuration: 250, rotationDuration: 850,
+  disintegrationDuration: 650, starDuration: 800, revealDuration: 600,
+  stageSpacing: 50, globeTurns: 1, fragmentDrift: 16,
 });
 
 const alternateGroups = [
@@ -37,11 +38,15 @@ const alternateGroups = [
 ];
 
 const animationGroups = [{ title: 'Motion timing and character', fields: [
-  ['globeDuration', 'Globe assembly', 300, 1100, 25, ' ms'],
-  ['starStagger', 'Star stagger', 20, 150, 5, ' ms'],
-  ['spinDegrees', 'Globe rotation', 0, 120, 5, '°'],
-  ['revealDelay', 'Wordmark reveal delay', 350, 1100, 25, ' ms'],
-  ['revealDuration', 'Wordmark unfurl', 250, 950, 25, ' ms'],
+  ['overallSpeed', 'Overall speed', 0.6, 1.6, 0.05, '×'],
+  ['appearDuration', 'Globe appearance', 150, 650, 25, ' ms'],
+  ['rotationDuration', 'Polar rotation', 400, 1500, 25, ' ms'],
+  ['disintegrationDuration', 'Upper-globe disintegration', 350, 1200, 25, ' ms'],
+  ['starDuration', 'Star assembly', 450, 1400, 25, ' ms'],
+  ['revealDuration', 'Wordmark unfurl', 300, 1100, 25, ' ms'],
+  ['stageSpacing', 'Stage spacing (− = overlap)', -250, 300, 10, ' ms'],
+  ['globeTurns', 'Polar turns', 0.5, 2, 0.1, '×'],
+  ['fragmentDrift', 'Fragment drift', 6, 28, 1, ' units'],
 ] }];
 
 const svgNS = 'http://www.w3.org/2000/svg';
@@ -62,9 +67,13 @@ const alternateType = document.querySelector('#alternate-type');
 const alternateGlobeMotion = document.querySelector('#alternate-globe-motion');
 const alternateHorizon = document.querySelector('#alternate-horizon');
 const alternateGlobeClip = document.querySelector('#alternate-globe-clip');
+const alternateOutline = document.querySelector('#alternate-globe-outline');
+const alternateStaticGrid = document.querySelector('#alternate-grid');
 let animationFrame = 0;
 let animationStarted = 0;
 let currentLayout = 'two-line';
+let temporaryRotationGrid = null;
+let temporaryFragments = null;
 
 function alternateFormat(value, unit) {
   return `${Number(value).toString()}${unit}`;
@@ -153,8 +162,15 @@ function finishAnimation() {
   cancelAnimationFrame(animationFrame);
   animationFrame = 0;
   animationStarted = 0;
+  temporaryRotationGrid?.remove();
+  temporaryFragments?.remove();
+  temporaryRotationGrid = null;
+  temporaryFragments = null;
   alternateGlobeMotion.removeAttribute('transform');
+  alternateOutline.removeAttribute('stroke-dasharray');
+  alternateOutline.removeAttribute('stroke-dashoffset');
   document.querySelector('#alternate-globe-window').style.removeProperty('opacity');
+  alternateStaticGrid.style.removeProperty('opacity');
   alternateHorizon.style.removeProperty('opacity');
   alternateHorizon.removeAttribute('stroke-dasharray');
   alternateHorizon.removeAttribute('stroke-dashoffset');
@@ -167,31 +183,157 @@ function finishAnimation() {
 
 const clamp = value => Math.max(0, Math.min(1, value));
 const easeOut = value => 1 - Math.pow(1 - clamp(value), 3);
+const easeInOut = value => {
+  const p = clamp(value);
+  return p * p * (3 - 2 * p);
+};
 
-function replayAnimation() {
-  finishAnimation();
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const value = alternateValues;
-  const motion = animationValues;
+function makeSvg(tag, attributes = {}) {
+  const node = document.createElementNS(svgNS, tag);
+  for (const [name, value] of Object.entries(attributes)) node.setAttribute(name, String(value));
+  return node;
+}
+
+function meridianPath(x, y, radius, degrees, from = -1, to = 1) {
+  const points = [];
+  for (let i = 0; i <= 20; i++) {
+    const latitude = from + (to - from) * i / 20;
+    const px = x + radius * Math.sin(degrees * Math.PI / 180) * Math.sqrt(Math.max(0, 1 - latitude * latitude));
+    points.push(`${i ? 'L' : 'M'} ${px.toFixed(3)} ${(y + radius * latitude).toFixed(3)}`);
+  }
+  return points.join(' ');
+}
+
+function createRotationGrid(value) {
   const x = 110 + value.globeX;
   const y = 118 + value.globeY;
   const r = value.globeRadius;
-  const end = Math.max(motion.globeDuration, 70 + 6 * motion.starStagger + 500, motion.revealDelay + motion.revealDuration);
+  const group = makeSvg('g', { id: 'alternate-rotation-grid', fill: 'none', stroke: '#003057', 'stroke-width': value.gridStroke });
+  const meridians = [-46, -25, 0, 25, 46].map(() => {
+    const path = makeSvg('path');
+    group.append(path);
+    return path;
+  });
+  for (const fraction of [-0.72, -0.38, 0.38, 0.72]) {
+    const dy = r * fraction;
+    const halfWidth = Math.sqrt(r * r - dy * dy) * 0.97;
+    const direction = fraction < 0 ? -1 : 1;
+    group.append(makeSvg('path', { d: `M ${(x - halfWidth).toFixed(3)} ${(y + dy).toFixed(3)} Q ${x} ${(y + dy + direction * r * 0.08).toFixed(3)} ${(x + halfWidth).toFixed(3)} ${(y + dy).toFixed(3)}` }));
+  }
+  alternateGlobeMotion.append(group);
+  return { group, meridians };
+}
+
+function renderRotationGrid(paths, value, progress) {
+  const x = 110 + value.globeX;
+  const y = 118 + value.globeY;
+  const phase = 360 * animationValues.globeTurns * easeInOut(progress);
+  for (let i = 0; i < paths.length; i++) {
+    const degrees = [-46, -25, 0, 25, 46][i] + phase;
+    paths[i].setAttribute('d', meridianPath(x, y, value.globeRadius, degrees));
+    paths[i].style.opacity = String(0.22 + 0.78 * Math.max(0, Math.cos(degrees * Math.PI / 180)));
+  }
+}
+
+function createUpperFragments(value) {
+  const x = 110 + value.globeX;
+  const y = 118 + value.globeY;
+  const r = value.globeRadius;
+  const group = makeSvg('g', { id: 'alternate-upper-fragments', fill: 'none', stroke: '#003057', 'stroke-linecap': 'round' });
+  const fragments = [];
+  function addFragment(d, width, index) {
+    const path = makeSvg('path', { d, 'stroke-width': width });
+    group.append(path);
+    fragments.push({ path, index });
+  }
+  for (let i = 0; i < 10; i++) {
+    const points = [];
+    for (let j = 0; j <= 4; j++) {
+      const angle = Math.PI + Math.PI * (i + j / 4) / 10;
+      points.push(`${j ? 'L' : 'M'} ${(x + r * Math.cos(angle)).toFixed(3)} ${(y + r * Math.sin(angle)).toFixed(3)}`);
+    }
+    addFragment(points.join(' '), value.outlineStroke, i);
+  }
+  for (const degrees of [-46, -25, 0, 25, 46]) {
+    for (const [from, to] of [[-0.95, -0.7], [-0.66, -0.43], [-0.39, -0.14]]) {
+      addFragment(meridianPath(x, y, r, degrees, from, to), value.gridStroke, fragments.length);
+    }
+  }
+  document.querySelector('#alternate-globe').append(group);
+  return { group, fragments };
+}
+
+function motionTimeline(motion) {
+  const appear = { start: 0, end: motion.appearDuration };
+  const rotation = { start: Math.max(0, appear.end + motion.stageSpacing) };
+  rotation.end = rotation.start + motion.rotationDuration;
+  const disintegration = { start: Math.max(0, rotation.end + motion.stageSpacing) };
+  disintegration.end = disintegration.start + motion.disintegrationDuration;
+  const stars = { start: Math.max(0, disintegration.end + motion.stageSpacing) };
+  stars.end = stars.start + motion.starDuration;
+  const text = { start: Math.max(0, stars.end + motion.stageSpacing) };
+  text.end = text.start + motion.revealDuration;
+  return { appear, rotation, disintegration, stars, text, end: text.end };
+}
+
+function renderMotionSummary() {
+  const duration = motionTimeline(animationValues).end / animationValues.overallSpeed / 1000;
+  const handoff = animationValues.stageSpacing < 0 ? `${Math.abs(animationValues.stageSpacing)} ms overlap` : `${animationValues.stageSpacing} ms gap`;
+  document.querySelector('#animation-summary').textContent = `Approx. ${duration.toFixed(2)} seconds total · ${handoff} between stages. Negative spacing makes stages overlap.`;
+}
+
+function replayAnimation() {
+  finishAnimation();
+  renderMotionSummary();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const value = alternateValues;
+  const motion = animationValues;
+  const timeline = motionTimeline(motion);
+  const x = 110 + value.globeX;
+  const y = 118 + value.globeY;
+  const r = value.globeRadius;
+  const rotationGrid = createRotationGrid(value);
+  const upper = createUpperFragments(value);
+  temporaryRotationGrid = rotationGrid.group;
+  temporaryFragments = upper.group;
+  upper.group.style.display = 'none';
+  const circumference = 2 * Math.PI * r;
   function frame(now) {
     if (!animationStarted) animationStarted = now;
-    const t = now - animationStarted;
-    const globe = easeOut(t / motion.globeDuration);
-    alternateGlobeClip.setAttribute('y', String(y - r * (1 - globe)));
-    alternateGlobeClip.setAttribute('height', String(220 - y + r * (1 - globe)));
-    alternateGlobeMotion.setAttribute('transform', `rotate(${(motion.spinDegrees * (1 - globe)).toFixed(3)} ${x} ${y})`);
-    document.querySelector('#alternate-globe-window').style.opacity = String(0.35 + 0.65 * globe);
-    const horizon = easeOut((t - motion.globeDuration * 0.45) / (motion.globeDuration * 0.55));
-    alternateHorizon.style.opacity = String(horizon);
+    const t = (now - animationStarted) * motion.overallSpeed;
+    const appearing = easeOut(t / motion.appearDuration);
+    const rotating = clamp((t - timeline.rotation.start) / motion.rotationDuration);
+    const dissolving = clamp((t - timeline.disintegration.start) / motion.disintegrationDuration);
+    const dissolvingEase = easeInOut(dissolving);
+    alternateOutline.setAttribute('stroke-dasharray', String(circumference));
+    alternateOutline.setAttribute('stroke-dashoffset', String(circumference * (1 - appearing)));
+    rotationGrid.group.style.opacity = String(appearing * (1 - dissolvingEase));
+    renderRotationGrid(rotationGrid.meridians, value, rotating);
+    alternateStaticGrid.style.opacity = String(dissolvingEase);
+    // At the handoff, discrete upper arcs continue the circle while the lower clip settles.
+    const brokenAway = dissolving > 0.08;
+    const clipY = brokenAway ? y : y - r;
+    alternateGlobeClip.setAttribute('y', String(clipY));
+    alternateGlobeClip.setAttribute('height', String(220 - clipY));
+    upper.group.style.display = dissolving > 0 ? '' : 'none';
+    upper.group.style.opacity = String(Math.min(1, dissolving / 0.08));
+    const fragmentProgress = clamp((dissolving - 0.08) / 0.92);
+    for (const { path, index } of upper.fragments) {
+      const stagger = (index % 7) * 0.035;
+      const p = easeInOut((fragmentProgress - stagger) / (1 - stagger));
+      const dx = ((index % 5) - 2) * 1.5 * p;
+      const dy = -motion.fragmentDrift * (0.7 + (index % 4) * 0.13) * p;
+      path.setAttribute('transform', `translate(${dx.toFixed(3)} ${dy.toFixed(3)})`);
+      path.style.opacity = String(Math.pow(1 - p, 1.25));
+    }
+    alternateHorizon.style.opacity = String(dissolvingEase);
     alternateHorizon.setAttribute('stroke-dasharray', String(2 * r));
-    alternateHorizon.setAttribute('stroke-dashoffset', String(2 * r * (1 - horizon)));
+    alternateHorizon.setAttribute('stroke-dashoffset', String(2 * r * (1 - dissolvingEase)));
+    const starPieceDuration = Math.min(300, motion.starDuration * 0.42);
+    const starStep = (motion.starDuration - starPieceDuration) / 6;
     for (let i = 0; i < 7; i++) {
       const star = alternateStars.children[i];
-      const p = easeOut((t - 70 - i * motion.starStagger) / 500);
+      const p = easeOut((t - timeline.stars.start - i * starStep) / starPieceDuration);
       const angle = (270 - value.starSweep / 2 + i * value.starSweep / 6) * Math.PI / 180;
       const startAngle = angle - 0.4;
       const startRadius = value.starRadius + 20;
@@ -204,10 +346,10 @@ function replayAnimation() {
       star.setAttribute('transform', `translate(${px.toFixed(3)} ${py.toFixed(3)}) scale(${(0.65 + 0.35 * p).toFixed(3)})`);
       star.style.opacity = String(p);
     }
-    const reveal = easeOut((t - motion.revealDelay) / motion.revealDuration);
+    const reveal = easeOut((t - timeline.text.start) / motion.revealDuration);
     alternateType.style.clipPath = `inset(0 ${(100 * (1 - reveal)).toFixed(3)}% 0 0)`;
     alternateType.style.transform = `translate(${(-18 * (1 - reveal)).toFixed(3)}px, ${value.textY}px)`;
-    if (t >= end) finishAnimation();
+    if (t >= timeline.end) finishAnimation();
     else animationFrame = requestAnimationFrame(frame);
   }
   animationFrame = requestAnimationFrame(frame);
