@@ -1,33 +1,33 @@
-// Logo 3e is a preview-only reconstruction of the supplied colleague specification.
-// The approved program-wordmark.svg and the supplied reference files stay untouched.
+// Experimental vector mark. The approved wordmark and colleague's source files are separate.
+// The globe and individual stars have stable SVG groups for later animation.
 const alternateDefaults = Object.freeze({
-  markSize: 220,
-  gap: 36,
-  markY: 0,
-  textY: 0,
-  starRadius: 86,
-  starScale: 1,
-  gtScale: 1,
-  gridStroke: 2,
-  horizonHeight: 6,
-  titleSize: 40,
-  subtitleSize: 26,
-  lineGap: 6,
+  markSize: 220, gap: 36, markY: 0, textY: 0,
+  starRadius: 76, starSize: 8.5, starSweep: 180, starY: 0,
+  globeRadius: 76, globeX: 0, globeY: 0,
+  outlineStroke: 2.5, gridStroke: 1.6, horizonStroke: 2.5,
+  titleSize: 40, subtitleSize: 26, lineGap: 6,
 });
 
 const alternateGroups = [
-  { title: 'Composition', fields: [
+  { title: 'Overall lockup', fields: [
     ['markSize', 'Mark size', 150, 260, 1, 'px'],
     ['gap', 'Mark–text gap', 0, 90, 1, 'px'],
     ['markY', 'Mark vertical shift', -40, 40, 1, 'px'],
     ['textY', 'Text vertical shift', -40, 40, 1, 'px'],
   ] },
-  { title: 'Horizon mark', fields: [
-    ['starRadius', 'Star arc radius', 75, 100, 1, ' units'],
-    ['starScale', 'Star size', 0.65, 1.45, 0.01, '×'],
-    ['gtScale', 'GT size', 0.7, 1.5, 0.01, '×'],
-    ['gridStroke', 'Globe grid stroke', 0.5, 4, 0.1, ' units'],
-    ['horizonHeight', 'Horizon thickness', 2, 12, 0.5, ' units'],
+  { title: 'EU stars', fields: [
+    ['starRadius', 'Star-circle radius', 55, 96, 1, ' units'],
+    ['starSize', 'Star size', 4, 13, 0.5, ' units'],
+    ['starSweep', 'Arc extent', 130, 180, 1, '°'],
+    ['starY', 'Stars vertical shift', -25, 25, 1, ' units'],
+  ] },
+  { title: 'Globe', fields: [
+    ['globeRadius', 'Globe radius', 55, 84, 1, ' units'],
+    ['globeX', 'Globe horizontal shift', -15, 15, 1, ' units'],
+    ['globeY', 'Globe vertical shift', -15, 15, 1, ' units'],
+    ['outlineStroke', 'Outer-circle stroke', 0.5, 5, 0.1, ' units'],
+    ['gridStroke', 'Grid stroke', 0.4, 4, 0.1, ' units'],
+    ['horizonStroke', 'Horizon stroke', 0.5, 5, 0.1, ' units'],
   ] },
   { title: 'Typography', fields: [
     ['titleSize', 'Program-name size', 28, 50, 1, 'px'],
@@ -36,6 +36,7 @@ const alternateGroups = [
   ] },
 ];
 
+const svgNS = 'http://www.w3.org/2000/svg';
 const alternateValues = { ...alternateDefaults };
 const alternateInputs = new Map();
 const alternateOutputs = new Map();
@@ -43,10 +44,8 @@ const alternateControls = document.querySelector('#alternate-controls');
 const alternateStage = document.querySelector('#alternate-stage');
 const alternateArtboard = document.querySelector('#alternate-artboard');
 const alternateLockup = document.querySelector('#alternate-lockup');
-const alternateStars = [...document.querySelectorAll('#alternate-stars polygon')];
-const alternateGrid = document.querySelector('#alternate-grid');
-const alternateHorizon = document.querySelector('#alternate-horizon');
-const alternateGt = document.querySelector('#alternate-gt');
+const alternateMark = document.querySelector('#alternate-mark');
+const alternateStars = document.querySelector('#alternate-stars');
 const alternateStatus = document.querySelector('#alternate-status');
 
 function alternateFormat(value, unit) {
@@ -61,40 +60,75 @@ function alternateFitPreview() {
   alternateStage.style.height = `${400 * scale}px`;
 }
 
+function setSvg(id, attributes) {
+  const node = document.getElementById(id);
+  for (const [name, value] of Object.entries(attributes)) node.setAttribute(name, String(value));
+}
+
+function makeStarPath(radius) {
+  const points = [];
+  for (let i = 0; i < 10; i++) {
+    const angle = -Math.PI / 2 + i * Math.PI / 5;
+    const r = i % 2 ? radius * 0.43 : radius;
+    points.push(`${(Math.cos(angle) * r).toFixed(3)} ${(Math.sin(angle) * r).toFixed(3)}`);
+  }
+  return `M ${points.join(' L ')} Z`;
+}
+
+function renderStars(value) {
+  const path = makeStarPath(value.starSize);
+  // Seven independently addressable stars allow later fly-in/settle animation.
+  for (let i = 0; i < 7; i++) {
+    let star = alternateStars.children[i];
+    if (!star) {
+      star = document.createElementNS(svgNS, 'g');
+      star.setAttribute('data-star-index', String(i));
+      star.setAttribute('data-animation-part', 'star');
+      star.append(document.createElementNS(svgNS, 'path'));
+      alternateStars.append(star);
+    }
+    const angle = (270 - value.starSweep / 2 + i * value.starSweep / 6) * Math.PI / 180;
+    const x = 110 + value.starRadius * Math.cos(angle);
+    const y = 118 + value.starY + value.starRadius * Math.sin(angle);
+    star.setAttribute('transform', `translate(${x.toFixed(3)} ${y.toFixed(3)})`);
+    star.firstElementChild.setAttribute('d', path);
+  }
+}
+
+function renderGlobe(value) {
+  const x = 110 + value.globeX;
+  const y = 118 + value.globeY;
+  const r = value.globeRadius;
+  setSvg('alternate-globe-clip', { y, height: 220 - y });
+  setSvg('alternate-globe-outline', { cx: x, cy: y, r, 'stroke-width': value.outlineStroke });
+  setSvg('alternate-longitude-one', { cx: x, cy: y, rx: (r * 0.42).toFixed(3), ry: r });
+  setSvg('alternate-longitude-two', { cx: x, cy: y, rx: (r * 0.72).toFixed(3), ry: r });
+  setSvg('alternate-meridian', { x1: x, x2: x, y1: y, y2: y + r });
+  for (const [index, fraction] of [['one', 0.38], ['two', 0.72]]) {
+    const dy = r * fraction;
+    const halfWidth = Math.sqrt(r * r - dy * dy) * 0.97;
+    setSvg(`alternate-latitude-${index}`, {
+      d: `M ${(x - halfWidth).toFixed(3)} ${(y + dy).toFixed(3)} Q ${x} ${(y + dy + r * 0.08).toFixed(3)} ${(x + halfWidth).toFixed(3)} ${(y + dy).toFixed(3)}`,
+    });
+  }
+  document.querySelector('#alternate-grid').setAttribute('stroke-width', String(value.gridStroke));
+  setSvg('alternate-horizon', { x1: x - r, x2: x + r, y1: y, y2: y, 'stroke-width': value.horizonStroke });
+}
+
 function alternateRender() {
   const value = alternateValues;
-  alternateLockup.style.setProperty('--alternate-mark-size', `${value.markSize}px`);
-  alternateLockup.style.setProperty('--alternate-gap', `${value.gap}px`);
-  alternateLockup.style.setProperty('--alternate-mark-y', `${value.markY}px`);
-  alternateLockup.style.setProperty('--alternate-type-y', `${value.textY}px`);
-  alternateLockup.style.setProperty('--alternate-title-size', `${value.titleSize}px`);
-  alternateLockup.style.setProperty('--alternate-subtitle-size', `${value.subtitleSize}px`);
-  alternateLockup.style.setProperty('--alternate-line-gap', `${value.lineGap}px`);
-
-  for (const star of alternateStars) {
-    const angle = Number(star.dataset.angle) * Math.PI / 180;
-    const dx = (value.starRadius - alternateDefaults.starRadius) * Math.cos(angle);
-    const dy = (value.starRadius - alternateDefaults.starRadius) * Math.sin(angle);
-    const cx = Number(star.dataset.cx);
-    const cy = Number(star.dataset.cy);
-    if (value.starRadius === alternateDefaults.starRadius && value.starScale === 1) {
-      star.removeAttribute('transform');
-    } else {
-      star.setAttribute('transform', `translate(${dx.toFixed(3)} ${dy.toFixed(3)}) translate(${cx} ${cy}) scale(${value.starScale}) translate(${-cx} ${-cy})`);
-    }
-  }
-  if (value.gtScale === 1) alternateGt.removeAttribute('transform');
-  else alternateGt.setAttribute('transform', `translate(110 99) scale(${value.gtScale}) translate(-110 -99)`);
-  alternateGrid.setAttribute('stroke-width', String(value.gridStroke));
-  alternateHorizon.setAttribute('y', String(128 - value.horizonHeight / 2));
-  alternateHorizon.setAttribute('height', String(value.horizonHeight));
-  alternateHorizon.setAttribute('rx', String(value.horizonHeight / 2));
-
+  for (const [property, key] of [
+    ['mark-size', 'markSize'], ['gap', 'gap'], ['mark-y', 'markY'],
+    ['type-y', 'textY'], ['title-size', 'titleSize'],
+    ['subtitle-size', 'subtitleSize'], ['line-gap', 'lineGap'],
+  ]) alternateLockup.style.setProperty(`--alternate-${property}`, `${value[key]}px`);
+  renderStars(value);
+  renderGlobe(value);
   for (const group of alternateGroups) for (const [key, , , , , unit] of group.fields) {
     alternateOutputs.get(key).textContent = alternateFormat(value[key], unit);
   }
   const original = Object.keys(alternateDefaults).every(key => value[key] === alternateDefaults[key]);
-  alternateStatus.textContent = original ? "Showing colleague's original values" : 'Preview adjusted · original files unchanged';
+  alternateStatus.textContent = original ? 'Showing concept defaults' : 'Preview adjusted · approved logo unchanged';
 }
 
 for (const group of alternateGroups) {
@@ -146,6 +180,21 @@ document.querySelector('#alternate-reset').addEventListener('click', () => {
   alternateRender();
 });
 
+document.querySelector('#alternate-export').addEventListener('click', () => {
+  const svg = alternateMark.cloneNode(true);
+  svg.removeAttribute('id');
+  svg.removeAttribute('role');
+  svg.removeAttribute('aria-label');
+  const blob = new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'eu-stars-globe-concept-mark.svg';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+
 alternateRender();
 alternateFitPreview();
-new ResizeObserver(alternateFitPreview).observe(document.querySelector('.alternate-preview-shell'));
+new ResizeObserver(alternateFitPreview).observe(alternateStage);
+window.addEventListener('resize', alternateFitPreview);

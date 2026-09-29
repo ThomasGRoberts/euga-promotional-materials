@@ -48,9 +48,10 @@ def main():
             browser.call('Emulation.setDeviceMetricsOverride', {'width': 1920, 'height': 1080, 'deviceScaleFactor': 1, 'mobile': False})
             open_page(browser, base + '/branding.html')
             evaluate(browser, "document.fonts.ready.then(()=>true)")
-            brand = evaluate(browser, "({cards:document.querySelectorAll('.brand-card').length,sliders:document.querySelectorAll('#alternate-controls input[type=range]').length,markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,gtLoaded:document.querySelector('#alternate-mark image').href.baseVal.includes('gt-navy.png'),baseline:document.querySelector('#alternate-status').textContent})")
+            brand = evaluate(browser, "({cards:document.querySelectorAll('.brand-card').length,sliders:document.querySelectorAll('#alternate-controls input[type=range]').length,markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,stars:document.querySelectorAll('#alternate-stars [data-animation-part=star]').length,images:document.querySelectorAll('#alternate-mark image').length,inks:[...document.querySelectorAll('#alternate-mark [fill],#alternate-mark [stroke]')].map(node=>node.getAttribute('fill')||node.getAttribute('stroke')).filter(ink=>ink!=='none'),baseline:document.querySelector('#alternate-status').textContent})")
             print('Branding', brand)
-            assert brand['cards'] == 6 and brand['sliders'] == 12 and brand['markWidth'] == 220 and brand['gtLoaded']
+            assert brand['cards'] == 6 and brand['sliders'] == 17 and brand['markWidth'] == 220
+            assert brand['stars'] == 7 and brand['images'] == 0 and set(brand['inks']) == {'#003057'}
             shot(browser, 'euga-branding-approved.png')
             browser.call('Emulation.setDeviceMetricsOverride', {'width': 390, 'height': 844, 'deviceScaleFactor': 1, 'mobile': True})
             evaluate(browser, "new Promise(resolve=>setTimeout(resolve,100))")
@@ -60,12 +61,12 @@ def main():
             shot(browser, 'euga-branding-alternate-mobile.png')
             browser.call('Emulation.setDeviceMetricsOverride', {'width': 1920, 'height': 1080, 'deviceScaleFactor': 1, 'mobile': False})
             evaluate(browser, "new Promise(resolve=>setTimeout(resolve,100))")
-            tune = evaluate(browser, "(()=>{const mark=document.querySelector('#alternate-markSize'),stars=document.querySelector('#alternate-starRadius');mark.value='235';mark.dispatchEvent(new Event('input',{bubbles:true}));stars.value='92';stars.dispatchEvent(new Event('input',{bubbles:true}));return {markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,starTransform:document.querySelector('#alternate-stars polygon').getAttribute('transform'),status:document.querySelector('#alternate-status').textContent}})()")
-            assert tune['markWidth'] == 235 and tune['starTransform'] and 'adjusted' in tune['status']
+            tune = evaluate(browser, "(()=>{for(const [id,value] of [['markSize','235'],['starRadius','92'],['starSize','11'],['globeRadius','83'],['gridStroke','2.3']]){const input=document.querySelector('#alternate-'+id);input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}))}return {markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,starTransform:document.querySelector('#alternate-stars g').getAttribute('transform'),globeRadius:document.querySelector('#alternate-globe-outline').getAttribute('r'),gridStroke:document.querySelector('#alternate-grid').getAttribute('stroke-width'),status:document.querySelector('#alternate-status').textContent}})()")
+            assert tune['markWidth'] == 235 and tune['starTransform'] != 'translate(34.000 118.000)' and tune['globeRadius'] == '83' and tune['gridStroke'] == '2.3' and 'adjusted' in tune['status']
             print('Alternate tuning', tune)
             shot(browser, 'euga-branding-alternate-tuned.png')
-            reset = evaluate(browser, "(()=>{document.querySelector('#alternate-reset').click();return {markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,starTransform:document.querySelector('#alternate-stars polygon').getAttribute('transform'),status:document.querySelector('#alternate-status').textContent}})()")
-            assert reset['markWidth'] == 220 and reset['starTransform'] is None and 'original' in reset['status']
+            reset = evaluate(browser, "(()=>{document.querySelector('#alternate-reset').click();const svg=document.querySelector('#alternate-mark').cloneNode(true);const xml=new XMLSerializer().serializeToString(svg);const parsed=new DOMParser().parseFromString(xml,'image/svg+xml');return {markWidth:document.querySelector('#alternate-mark').getBoundingClientRect().width,starTransform:document.querySelector('#alternate-stars g').getAttribute('transform'),globeRadius:document.querySelector('#alternate-globe-outline').getAttribute('r'),exportHasRaster:!!svg.querySelector('image'),exportValid:!parsed.querySelector('parsererror')&&parsed.querySelectorAll('[data-animation-part=star]').length===7,options:document.querySelectorAll('[data-brand-option]').length,status:document.querySelector('#alternate-status').textContent}})()")
+            assert reset['markWidth'] == 220 and reset['starTransform'] == 'translate(34.000 118.000)' and reset['globeRadius'] == '76' and not reset['exportHasRaster'] and reset['exportValid'] and reset['options'] == 2 and 'defaults' in reset['status']
             print('Alternate reset', reset)
             open_page(browser, base + '/banner.html?autoplay=0')
             evaluate(browser, "new Promise((resolve,reject)=>{const started=Date.now();const poll=()=>{if(document.querySelector('.overview.is-active'))resolve(true);else if(Date.now()-started>15000)reject(Error('carousel timed out'));else setTimeout(poll,50)};poll()})")
