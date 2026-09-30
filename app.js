@@ -39,7 +39,7 @@ async function loadPublishedSheet(fallback){
   const knownCities=new Map((fallback.cities||[]).map(city=>[city.city.toLowerCase(),city]));
   const cities=cityRows.map(row=>{
     const city=row.City||'',known=knownCities.get(city.toLowerCase())||{};
-    return{...known,city,country:row.Country||known.country||'',category:row.Category||known.category||''};
+    return{...known,city,country:row.Country||known.country||'',category:row.Category||known.category||'',featured:EUGACities.isFeatured(row.Featured)};
   }).filter(city=>city.city);
   const courses=courseRows.map(row=>({code:row.Code||'',title:row.Course||''})).filter(course=>course.title);
   return{...fallback,text,cities:cities.length?cities:fallback.cities,courses:courses.length?courses:fallback.courses};
@@ -106,7 +106,7 @@ function drawGeography(){
   cities.filter(city=>Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y,z]=project([city.lon,city.lat]);if(z<=0)return;ctx.beginPath();ctx.arc(x,y,3.2,0,Math.PI*2);ctx.fillStyle='#b39051';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.stroke()});
   const labels=['Amsterdam','Paris','Brussels','Geneva','Berlin','Munich','Vienna','Bucharest','Bern'];
   const offsets={Amsterdam:[-7,-10,'right'],Paris:[-8,7,'right'],Brussels:[-8,-5,'right'],Geneva:[-8,16,'right'],Berlin:[8,-5,'left'],Munich:[8,10,'left'],Vienna:[8,-5,'left'],Bucharest:[9,4,'left'],Bern:[8,12,'left']};
-  if(new URLSearchParams(location.search).get('mapLabels')!=='0')cities.filter(city=>labels.includes(city.city)&&Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y]=project([city.lon,city.lat]),[dx,dy,align]=offsets[city.city],labelSize=12*(isGlobe?globe.labelScale:1);ctx.fillStyle='#333';ctx.font=`500 ${labelSize}px Roboto, Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(city.city,x+dx,y+dy)});
+  if(new URLSearchParams(location.search).get('mapLabels')!=='0')cities.filter(city=>EUGACities.isFeatured(city.featured)&&labels.includes(city.city)&&Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y]=project([city.lon,city.lat]),[dx,dy,align]=offsets[city.city],labelSize=12*(isGlobe?globe.labelScale:1);ctx.fillStyle='#333';ctx.font=`500 ${labelSize}px Roboto, Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(city.city,x+dx,y+dy)});
   ctx.restore();
   window.__EUGA_RENDER_READY__=true;document.documentElement.dataset.renderReady='true';
 }

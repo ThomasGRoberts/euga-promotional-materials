@@ -5,14 +5,20 @@
   <title>EU and Global Affairs | Two-up office-door print sheet</title>
   <style>
     *{box-sizing:border-box}
-    html,body{width:11in;height:8.5in;margin:0;background:#fff}
-    .sheet{position:relative;display:grid;grid-template-columns:5.5in 5.5in;width:11in;height:8.5in;overflow:hidden}
-    .panel{display:flex;align-items:center;justify-content:center;width:5.5in;height:8.5in;overflow:hidden}
-    iframe{display:block;flex:none;width:5.5in;height:8.5in;border:0;transform:scale(.94)}
-    .sheet::before,.sheet::after{content:"";position:absolute;z-index:2;left:5.5in;width:1px;height:.13in;background:#b6b6b6}
-    .sheet::before{top:0}.sheet::after{bottom:0}
-    @page{size:11in 8.5in;margin:0}
+    html,body{width:8.5in;height:11in;margin:0;background:#fff}
+    .sheet{position:relative;display:grid;grid-template-rows:5in 5in;row-gap:0;width:8.5in;height:11in;padding:.5in 0;overflow:hidden}
+    .panel{width:8.5in;height:5in;overflow:hidden}
+    iframe{display:block;width:8.5in;height:5in;border:0}
+    .sheet::before,.sheet::after{content:"";position:absolute;z-index:2;top:5.5in;width:.12in;height:1px;background:#999}
+    .sheet::before{left:0}.sheet::after{right:0}
+    @page{size:8.5in 11in;margin:0}
   </style>
 </head>
-<body><main class="sheet" aria-label="Two office-door signs on one landscape letter sheet"><div class="panel"><iframe src="office-door.html" title="Left office-door sign"></iframe></div><div class="panel"><iframe src="office-door.html" title="Right office-door sign"></iframe></div></main></body>
+<body>
+  <main class="sheet" aria-label="Two actual-size 8.5 by 5 inch office-door signs on one letter sheet">
+    <div class="panel"><iframe src="office-door.html?sheet=1" title="Upper office-door sign"></iframe></div>
+    <div class="panel"><iframe src="office-door.html?sheet=1" title="Lower office-door sign"></iframe></div>
+  </main>
+  <script>const brand=new URLSearchParams(location.search).get('brand');if(brand==='standard'||brand==='concept')document.querySelectorAll('iframe').forEach(frame=>frame.src=`office-door.html?sheet=1&brand=${brand}`);</script>
+</body>
 </html>

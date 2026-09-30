@@ -1,5 +1,4 @@
 const citySheetUrl='https://docs.google.com/spreadsheets/d/e/2PACX-1vS8qY-gHmx2pseRmx18-8U2ET5Fs8KW8CTeFDP9xV5v3aAF1fWQoRAudwxSaaGXJzm6t8TQ05dbLHOG/pub?output=csv&gid=0';
-const currentCityFallback=['Brussels','Geneva','Paris','Bucharest','Berlin','Bern','Vienna'];
 const mapCanvas=document.querySelector('#tv-map');
 let mapTopology=null,programCities=[];
 
@@ -28,10 +27,10 @@ function drawMap(){
 
 async function initMap(){
   const [topology,snapshot]=await Promise.all([fetch('assets/countries-110m.json').then(response=>response.json()),fetch('data/program.json').then(response=>response.json())]);mapTopology=topology;
-  const known=new Map(snapshot.cities.map(city=>[city.city,city]));let names=currentCityFallback;
-  try{const response=await fetch(citySheetUrl,{cache:'no-store'});if(!response.ok)throw Error(response.status);const rows=parseCsv(await response.text()),headers=rows.shift(),cityIndex=headers.indexOf('City');if(cityIndex<0)throw Error('City column missing');names=rows.map(row=>row[cityIndex]).filter(Boolean)}catch(error){console.warn('Using current-city snapshot for signage map.',error)}
-  programCities=names.map(name=>known.get(name)).filter(city=>city&&Number.isFinite(city.lat)&&Number.isFinite(city.lon));
-  if(programCities.length!==names.length)console.warn('Missing map coordinates for:',names.filter(name=>!known.has(name)));
+  const known=new Map(snapshot.cities.map(city=>[city.city,city]));let rows=snapshot.cities.map(city=>({name:city.city,featured:city.featured}));
+  try{const response=await fetch(citySheetUrl,{cache:'no-store'});if(!response.ok)throw Error(response.status);const sheetRows=parseCsv(await response.text()),headers=sheetRows.shift().map(header=>header.trim()),cityIndex=headers.indexOf('City'),featuredIndex=headers.indexOf('Featured');if(cityIndex<0||featuredIndex<0)throw Error('City or Featured column missing');rows=sheetRows.map(row=>({name:row[cityIndex],featured:EUGACities.isFeatured(row[featuredIndex])})).filter(row=>row.name)}catch(error){console.warn('Using current-city snapshot for signage map.',error)}
+  programCities=rows.map(row=>known.has(row.name)?{...known.get(row.name),featured:row.featured}:null).filter(city=>city&&Number.isFinite(city.lat)&&Number.isFinite(city.lon));
+  if(programCities.length!==rows.length)console.warn('Missing map coordinates for:',rows.filter(row=>!known.has(row.name)).map(row=>row.name));
   drawMap();window.addEventListener('resize',drawMap);
 }
 initMap();

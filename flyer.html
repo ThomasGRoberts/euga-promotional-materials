@@ -8,16 +8,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;800&family=Roboto+Slab:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260928-10">
+  <link rel="stylesheet" href="styles.css?v=flyer-watermark-5">
   <link rel="stylesheet" href="material-nav.css">
 </head>
 <body>
-  <nav class="material-tools" aria-label="Material navigation and downloads"><a class="material-back" href="index.html">← Back</a><div class="material-downloads"><a href="downloads/print-flyer-current.pdf?v=approved-20260928" download>Download flyer PDF</a></div></nav>
+  <nav class="material-tools" aria-label="Material navigation and downloads"><a class="material-back" href="index.html">← Back</a><div class="material-downloads"><a href="downloads/print-flyer-current.pdf" data-download-standard="downloads/print-flyer-current.pdf" data-download-concept="downloads/print-flyer-concept.pdf" download>Download flyer PDF</a></div></nav>
   <main id="app" data-mode="flyer" data-direction="globe">
     <section class="flyer">
       <header class="program-heading">
         <div class="flyer-identity">
-          <img class="program-wordmark" src="assets/branding/program-wordmark.svg?v=approved-20260928" alt="EU and Global Affairs Study Abroad Program">
+          <img class="program-wordmark" data-brand-logo src="assets/branding/program-wordmark.svg" alt="EU and Global Affairs Study Abroad Program">
         </div>
         <div><h1><span id="hero-line-1">Let Europe be</span><br><span id="hero-line-2">your laboratory</span></h1></div>
         <p class="headline-support">The <em>European Union and Global Affairs Study Abroad Program</em> <span id="intro-sentence-1">takes you to the cities and institutions shaping Europe and the world.</span> <span id="intro-sentence-2">Study global affairs where they happen in</span> <b><span id="program-term">Summer 2027</span>.</b></p>
@@ -57,6 +57,8 @@
       <img class="program-qr" src="assets/program-website-europeglobal-qr.png" alt="QR code linking to the program website">
     </footer>
   </main>
-  <script src="app.js?v=20260928-6" defer></script>
+  <script src="brand-choice.js" defer></script>
+  <script src="city-featured.js" defer></script>
+  <script src="app.js?v=featured-cities-2" defer></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 # EU stars + globe concept
 
-This is an experimental option, not a replacement for the approved `assets/branding/program-wordmark.svg` used by promotional products.
+This is the Stars + Globe option alongside the EU/UN Flags wordmark in `assets/branding/program-wordmark.svg`. The Program Branding page selects which option promotional products display in the current browser.
 
 ## Tuned icon baseline
 
@@ -22,6 +22,7 @@ The icon and text share one navy ink (`#003057`). Text uses the approved wordmar
 
 ## Animation and future integration
 
-The SVG has stable globe, clipping-window, and per-star groups. Its sequential animation draws a full globe, moves projected meridian curves inside a stationary circular outline to imply polar-axis rotation, breaks the upper hemisphere into short drifting line fragments, seats the stars along the tuned arc, then reveals text left-to-right. The motion controls expose overall speed, each stage's duration, signed stage spacing (negative values overlap), polar turns, and fragment drift. Finishing or interrupting motion removes all temporary geometry and restores the exact static geometry from the tunable parameters. Reduced-motion preference skips straight to that resting frame.
+The SVG has stable globe, clipping-window, and per-star groups. Its animation draws a full globe, moves exact elliptical meridian arcs inside a stationary circular outline to imply polar-axis rotation, withdraws the upper hemisphere toward the equator while fading it, sweeps the stars into the tuned arc, then reveals the light-Roboto wordmark. The two-line lockup reveals its lines separately. Finishing or interrupting motion removes all temporary geometry and restores the exact static geometry. Reduced-motion preference skips straight to that resting frame. The advanced tuning controls were removed from the page; the tuned constants remain in `branding-alt.js`.
 
-`branding.html` has separate `data-brand-option="approved"` and `data-brand-option="concept"` sections, ready for a later selector. No selector or automatic propagation to other products is implemented yet.
+`branding.html` has separate `data-brand-option="standard"` and `data-brand-option="concept"` sections with a selector. `brand-choice.js` propagates the browser-local selection to all materials. The Stars + Globe selector preview is a scaled clone of the settled live lockup, so it shares the same geometry and browser typography. `scripts/export_concept.py` generates the GIF and static product SVG.
+The same export script also generates a flyer lockup whose icon, 36-unit gap, and 60-unit text match the live 220-unit mark proportions; the compact product SVG remains available for the other existing products.

@@ -6,6 +6,7 @@ import http.server
 import pathlib
 import re
 import subprocess
+import sys
 import tempfile
 import threading
 import time
@@ -14,8 +15,13 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
 JOBS = [
     ("flyer.html", "downloads/print-flyer-current.pdf", (612, 792), 9000),
-    ("office-door.html", "downloads/office-door-half-page.pdf", (396, 612), 4000),
-    ("office-door-two-up.html", "downloads/office-door-two-up.pdf", (792, 612), 5000),
+    ("office-door.html", "downloads/office-door-half-page.pdf", (612, 360), 9000),
+    ("office-door-two-up.html", "downloads/office-door-two-up.pdf", (612, 792), 9000),
+    ("table-tent.html", "downloads/table-tent-letter.pdf", (612, 792), 9000),
+    ("flyer.html", "downloads/print-flyer-concept.pdf", (612, 792), 9000),
+    ("office-door.html", "downloads/office-door-half-page-concept.pdf", (612, 360), 9000),
+    ("office-door-two-up.html", "downloads/office-door-two-up-concept.pdf", (612, 792), 9000),
+    ("table-tent.html", "downloads/table-tent-letter-concept.pdf", (612, 792), 9000),
 ]
 
 
@@ -25,7 +31,7 @@ def export(server, page, dest, size, budget):
             CHROME, "--headless=new", "--disable-gpu", "--no-first-run",
             f"--user-data-dir={profile}", f"--virtual-time-budget={budget}",
             "--run-all-compositor-stages-before-draw", "--no-pdf-header-footer",
-            f"--print-to-pdf={dest}", f"http://127.0.0.1:{server.server_port}/{page}?export=approved-wordmark",
+            f"--print-to-pdf={dest}", f"http://127.0.0.1:{server.server_port}/{page}?brand={'concept' if '-concept' in dest.name else 'standard'}",
         ]
         started = time.time()
         try:
@@ -50,7 +56,16 @@ def main():
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     try:
-        for page, relative_dest, size, budget in JOBS:
+        jobs = JOBS
+        if '--concept-only' in sys.argv:
+            jobs = [job for job in jobs if '-concept' in job[1]]
+        if '--flyer-only' in sys.argv:
+            jobs = [job for job in jobs if job[0] == 'flyer.html']
+        if '--office-only' in sys.argv:
+            jobs = [job for job in jobs if job[0].startswith('office-door')]
+        if '--tent-only' in sys.argv:
+            jobs = [job for job in jobs if job[0] == 'table-tent.html']
+        for page, relative_dest, size, budget in jobs:
             export(server, page, ROOT / relative_dest, size, budget)
     finally:
         server.shutdown()

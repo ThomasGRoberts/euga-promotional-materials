@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Website carousel · Program materials</title>
+  <link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+  <main class="viewer">
+    <header class="viewer-toolbar">
+      <a href="index.html">← Back to materials</a>
+      <div><h1>Website carousel</h1><p>Live, isolated embed preview</p></div>
+      <button id="copy-embed" type="button">Copy WordPress embed HTML</button>
+    </header>
+    <iframe id="material-frame" title="Website carousel" src="banner.html?autoplay=1" allow="autoplay"></iframe>
+    <p id="copy-status" role="status" aria-live="polite">Paste the copied HTML into a WordPress Custom HTML block.</p>
+    <textarea id="embed-code" class="embed-code" readonly hidden aria-label="WordPress embed HTML"></textarea>
+  </main>
+  <script src="viewer.js" defer></script>
+</body>
+</html>

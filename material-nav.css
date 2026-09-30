@@ -5,7 +5,7 @@
 .material-downloads{display:flex;gap:8px;flex-wrap:wrap}
 .material-downloads a{display:inline-block;padding:7px 11px;border:1px solid #cbd2d1;border-radius:5px;background:#fff;color:#102541;font:600 13px/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;text-decoration:none}
 .material-downloads a:hover{background:#f2f4f4}
-.material-tools--door{width:5.5in;max-width:calc(100% - 32px)}
+.material-tools--door{width:8.5in;max-width:calc(100% - 32px)}
 .material-back--overlay{position:fixed;z-index:100;top:18px;left:20px;margin:0;padding:0;border:0;border-radius:0;background:none}
 html[data-slide-focus="city"] .material-back--overlay,html[data-slide-focus="site"] .material-back--overlay,body:has(.tv-banner) .material-back--overlay{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
 @media print{.material-tools,.material-back--overlay{display:none!important}}

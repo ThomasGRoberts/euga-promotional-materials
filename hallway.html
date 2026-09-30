@@ -13,11 +13,11 @@
 </head>
 <body>
   <a class="material-back material-back--overlay" href="index.html">← Back</a>
-  <a class="hallway-download" href="downloads/hallway-tv-1920x1080.png?v=approved-20260928" download>Download 1920 × 1080 PNG</a>
+  <a class="hallway-download" href="downloads/hallway-tv-1920x1080.png" data-download-standard="downloads/hallway-tv-1920x1080.png" data-download-concept="downloads/hallway-tv-concept-1920x1080.png" download>Download 1920 × 1080 PNG</a>
   <main class="tv-banner">
     <div class="tv-map-wrap"><canvas id="tv-map" aria-label="Map of Europe showing dots for the program cities"></canvas></div>
     <div class="tv-content">
-      <div class="tv-wordmark"><img src="assets/branding/program-wordmark.svg?v=approved-20260928" alt="EU and Global Affairs Study Abroad Program"></div>
+      <div class="tv-wordmark"><img data-brand-logo src="assets/branding/program-wordmark.svg" alt="EU and Global Affairs Study Abroad Program"></div>
       <div class="tv-message">
         <p class="tv-term">Georgia Tech · Summer 2027</p>
         <h1><span>Let Europe be</span><span>your laboratory</span></h1>
@@ -29,6 +29,8 @@
       </div>
     </div>
   </main>
-  <script src="hallway-map.js" defer></script>
+  <script src="brand-choice.js" defer></script>
+  <script src="city-featured.js" defer></script>
+  <script src="hallway-map.js?v=featured-cities-2" defer></script>
 </body>
 </html>

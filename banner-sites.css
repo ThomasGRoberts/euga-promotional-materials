@@ -1,12 +1,6 @@
 .program-brand{position:absolute;z-index:8;right:5vw;top:4vh;display:block;width:clamp(230px,21vw,390px);height:auto;padding:8px 11px;background:rgba(247,246,242,.94)}
-.presentation-brand-row{position:absolute;z-index:7;top:4.5vh;left:6vw;right:6vw;display:flex;align-items:center;justify-content:space-between;min-height:12vh;gap:4vw;padding-bottom:1.5vh;border-bottom:2px solid var(--gold)}
-.presentation-brand-row .program-brand{position:static;width:min(35vw,520px);height:auto;padding:0;background:transparent}
-.presentation-school-logo{display:block;width:min(26vw,365px);height:auto;mix-blend-mode:multiply}
-.opening-copy{width:51vw;margin-top:12vh}
-.opening h1{font-size:clamp(39px,4.55vw,82px);line-height:1.04}
 .overview h1{font-size:clamp(49px,5.25vw,100px)}
 .overview h1 span{white-space:nowrap}
-html[data-material-mode="carousel"] .overview h1 span{text-transform:capitalize}
 html[data-material-mode="carousel"] .overview h1 .overview-line-two{font-size:clamp(42px,4.35vw,82px)}
 .overview h1 .overview-line-one{color:var(--navy)}
 .overview-copy{width:53vw}
@@ -34,13 +28,15 @@ html[data-slide-focus="site"] .progress-dot.is-active{background:var(--navy)}
 .application-copy h1{margin:0;font:750 clamp(62px,7vw,120px)/.96 var(--display);letter-spacing:-.055em}
 .application-instruction{max-width:36ch;margin:4vh 0 0;color:var(--ink);font-size:clamp(19px,1.6vw,30px);line-height:1.35}
 .application-link{display:inline-block;margin-top:6vh;padding-bottom:1vh;border-bottom:3px solid var(--gold);color:var(--navy);font-size:clamp(24px,2.2vw,42px);font-weight:700;text-decoration:none}
-.application-qr-frame{position:absolute;right:8vw;top:25vh;width:clamp(320px,29vw,520px);padding:clamp(22px,2vw,34px);background:#fff;border:1px solid #d8d6d0;box-shadow:0 12px 40px rgba(5,30,57,.08)}
+.application-qr-frame{position:absolute;right:8vw;top:25vh;width:clamp(320px,29vw,520px);padding:clamp(22px,2vw,34px);background:transparent}
 .application-qr{display:block;width:100%;height:auto}
 .application-qr-caption{margin:1.8vh 0 0;color:var(--navy);font-size:clamp(18px,1.3vw,25px);font-weight:800;text-align:center}
 @media(max-width:900px){.site-photo{left:30%;width:70%}.site-gold-panel{width:53%}.site-copy{width:39vw;top:24vh}.site-name{font-size:clamp(27px,3.5vw,56px)}.program-brand{right:4vw;top:3vh}.faculty-group-grid{gap:1.5vw}.faculty-card img{height:37vh}.overview-copy{width:58vw}.overview h1{font-size:5.3vw}}
-.presentation-stepper{display:none}
-html[data-material-mode="presentation"] .presentation-stepper{position:fixed;z-index:81;right:3vw;bottom:2.5vh;display:flex;align-items:center;gap:12px;padding:8px 12px;border:1px solid #d9d6cd;border-radius:7px;background:rgba(247,246,242,.96);box-shadow:0 3px 15px rgba(5,30,57,.12)}
-.presentation-stepper button{padding:7px 9px;border:0;border-radius:4px;background:transparent;color:var(--navy);font:700 14px var(--sans);cursor:pointer}
-.presentation-stepper button:hover:not(:disabled){background:#e9e5dc}
-.presentation-stepper button:disabled{opacity:.4;cursor:default}
-#slide-count{color:var(--navy);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* The presentation is navigated by keyboard; viewer chrome belongs outside this document. */
+html[data-material-mode="presentation"] .overview .presentation-title-motion,
+html[data-material-mode="presentation"] .overview .presentation-logo{position:absolute;z-index:5;left:6vw;top:6vh;display:block;width:min(38vw,730px);height:16vh;border:0;background:transparent;pointer-events:none}
+html[data-material-mode="presentation"] .overview .presentation-logo{height:auto}
+html[data-material-mode="presentation"] .overview .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}
+html[data-material-mode="presentation"] .overview-copy{margin-top:18vh}
+html[data-material-mode="presentation"] .city-slide .presentation-logo{position:absolute;z-index:8;left:4.5vw;top:5vh;width:min(25vw,400px);filter:brightness(0) invert(1)}
+html[data-material-mode="presentation"] .city-slide .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}

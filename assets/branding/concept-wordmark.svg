@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 220" role="img" aria-label="EU and Global Affairs Study Abroad Program"><svg width="220" height="220" viewBox="0 0 220 220" x="0" y="0">
+                <title>EU stars and globe concept mark</title>
+                <defs><clipPath id="alternate-lower-half"><rect id="alternate-globe-clip" x="0" y="118" width="220" height="102" /></clipPath></defs>
+                <g id="alternate-globe" data-animation-part="globe">
+                  <g id="alternate-globe-window" clip-path="url(#alternate-lower-half)" fill="none" stroke="#003057">
+                    <g id="alternate-globe-motion">
+                    <circle id="alternate-globe-outline" cx="110" cy="118" r="76" stroke-width="3.4" />
+                    <g id="alternate-grid" stroke-width="1.6" style="">
+                      <ellipse id="alternate-longitude-one" cx="110" cy="118" rx="31.920" ry="76" />
+                      <ellipse id="alternate-longitude-two" cx="110" cy="118" rx="54.720" ry="76" />
+                      <line id="alternate-meridian" x1="110" y1="118" x2="110" y2="194" />
+                      <path id="alternate-latitude-one" d="M 41.810 146.880 Q 110 152.960 178.190 146.880" />
+                      <path id="alternate-latitude-two" d="M 58.840 172.720 Q 110 178.800 161.160 172.720" />
+                    </g>
+                    </g>
+                  </g>
+                  <line id="alternate-horizon" x1="34" y1="118" x2="186" y2="118" stroke="#003057" stroke-linecap="round" stroke-width="1.6" style="" />
+                </g>
+                <g id="alternate-stars" data-animation-part="stars" fill="#003057"><g data-star-index="0" data-animation-part="star" transform="translate(35.730 99.562)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g><g data-star-index="1" data-animation-part="star" transform="translate(48.815 66.625)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g><g data-star-index="2" data-animation-part="star" transform="translate(75.563 43.374)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g><g data-star-index="3" data-animation-part="star" transform="translate(110.000 35.000)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g><g data-star-index="4" data-animation-part="star" transform="translate(144.437 43.374)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g><g data-star-index="5" data-animation-part="star" transform="translate(171.185 66.625)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g><g data-star-index="6" data-animation-part="star" transform="translate(184.270 99.562)" style=""><path d="M 0.000 -11.000 L 2.780 -3.827 L 10.462 -3.399 L 4.498 1.462 L 6.466 8.899 L 0.000 4.730 L -6.466 8.899 L -4.498 1.462 L -10.462 -3.399 L -2.780 -3.827 Z" /></g></g>
+              </svg><g fill="#003057" font-family="Roboto, Arial, sans-serif" font-size="60" font-weight="300" letter-spacing="-1.2"><text x="256" y="101">EU and Global Affairs</text><text x="256" y="164">Study Abroad Program</text></g></svg>

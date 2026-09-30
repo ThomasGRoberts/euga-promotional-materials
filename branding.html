@@ -3,14 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Program branding · animated EU stars and globe concept</title>
+  <title>Program branding · choose a logo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="landing.css">
   <link rel="stylesheet" href="material-nav.css">
-  <link rel="stylesheet" href="branding-alt.css?v=concept-motion-2">
-  <script src="branding-alt.js?v=concept-motion-2" defer></script>
+  <link rel="stylesheet" href="branding-alt.css?v=brand-selector-5">
+  <script>if(new URLSearchParams(location.search).get('motion')==='1')document.documentElement.classList.add('motion-only')</script>
+  <script src="brand-choice.js" defer></script>
+  <script src="branding-alt.js?v=brand-selector-7" defer></script>
   <style>
     .brand-intro{margin:0 0 28px}
     .brand-card{margin:16px 0;padding:18px;border:1px solid #d9dedc;border-radius:9px;background:#f7f6f2}
@@ -23,18 +25,49 @@
     .swatch-navy{background:#051e39;border-color:#051e39}
     .swatch-charcoal{background:#242b33;border-color:#242b33}
     .brand-card .buttons a{background:#fff}
+    .brand-choice{display:grid;grid-template-columns:minmax(0,1fr) 76px minmax(0,1fr);align-items:center;gap:14px;margin:0 0 18px;padding:15px;border:1px solid #d9dedc;border-radius:9px;background:#f7f6f2}
+    .brand-choice-option{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;min-width:0;min-height:145px;padding:16px;border:1px solid #d9dedc;border-radius:7px;background:#fff;color:#102541;cursor:pointer}
+    .brand-choice-option:hover{border-color:#8c6c2f}
+    .brand-choice-option.is-active{border-color:#8c6c2f;box-shadow:inset 0 0 0 1px #8c6c2f}
+    .brand-choice-option img{display:block;width:100%;max-width:390px;height:auto}
+    .brand-choice-live-preview{position:relative;width:100%;max-width:390px;overflow:hidden}
+    .brand-choice-live-preview .alternate-artboard{box-shadow:none;pointer-events:none}
+    .brand-choice-label{font-size:15px;font-weight:700}
+    .brand-choice-option.is-active .brand-choice-label{color:#8c6c2f}
+    .brand-toggle{position:relative;width:76px;height:40px;padding:3px;border:2px solid #102541;border-radius:24px;background:#fff;cursor:pointer}
+    .brand-toggle::after{content:"";display:block;width:30px;height:30px;border-radius:50%;background:#102541;transition:transform .2s ease}
+    .brand-toggle[aria-checked="true"]::after{transform:translateX(36px)}
+    .brand-choice-note{text-align:center;color:#586778;font-size:13px}
+    .brand-card[hidden]{display:none}
+    .brand-card .buttons{display:flex;gap:10px;flex-wrap:wrap}
+    .brand-card .buttons a{padding:8px 12px;border:1px solid #102541;border-radius:5px;color:#102541;text-decoration:none;font-size:13px;font-weight:650}
+    .brand-card .buttons a:hover{background:#eef1f3}
+    @media(max-width:650px){.brand-choice{gap:7px;padding:8px;grid-template-columns:minmax(0,1fr) 60px minmax(0,1fr)}.brand-choice-option{min-height:95px;padding:8px;gap:8px}.brand-choice-label{font-size:12px}.brand-toggle{width:60px;height:34px}.brand-toggle::after{width:24px;height:24px}.brand-toggle[aria-checked="true"]::after{transform:translateX(26px)}}
   </style>
+  <link rel="stylesheet" href="branding-motion.css">
 </head>
 <body class="branding-page">
   <main>
     <a class="material-back" href="index.html">← Back</a>
     <h1>Program branding</h1>
-    <p class="brand-intro">Two branding options are under consideration: the approved wordmark below and an experimental EU-stars/globe concept. The concept is a tuning sandbox only; promotional materials still use the approved wordmark.</p>
+    <p class="brand-intro">Choose which of the two program logos appears across the flyer, website presentation, hallway banner, and office-door sign. Your choice is saved in this browser and updates other open material tabs.</p>
+    <div class="brand-choice" role="group" aria-label="Choose the program logo">
+      <button class="brand-choice-option" type="button" data-select-brand="standard" aria-pressed="true"><img src="assets/branding/program-wordmark.svg" alt=""><span id="standard-choice-label" class="brand-choice-label">EU/UN Flags</span></button>
+      <button id="brand-toggle" class="brand-toggle" type="button" role="switch" aria-checked="false" aria-labelledby="standard-choice-label concept-choice-label" title="Switch between EU/UN Flags and Stars + Globe"></button>
+      <button class="brand-choice-option" type="button" data-select-brand="concept" aria-pressed="false"><span id="concept-choice-visual" class="brand-choice-live-preview" aria-hidden="true"></span><span id="concept-choice-label" class="brand-choice-label">Stars + Globe</span></button>
+    </div>
+    <p id="brand-choice-note" class="brand-choice-note" aria-live="polite"></p>
 
-    <section id="concept-branding" class="brand-card alternate-sandbox" data-brand-option="concept" aria-labelledby="alternate-heading">
-      <p class="alternate-eyebrow">Option 2 · interactive concept</p>
-      <h2 id="alternate-heading">EU stars + globe</h2>
-      <p>The icon uses your tuned geometry with the approved wordmark’s light Roboto typography. Switch lockups to replay their assembly animation; changes here do not affect other materials.</p>
+    <section id="approved-branding" class="brand-card" data-brand-option="standard">
+      <h2>EU/UN Flags</h2>
+      <p>The established EU/UN wordmark on a transparent background.</p>
+      <div class="brand-swatch swatch-transparent"><img src="assets/branding/program-wordmark.svg" alt="Standard transparent program wordmark"></div>
+      <div class="buttons"><a href="assets/branding/program-wordmark.svg" download>Download SVG</a><a href="downloads/program-wordmark.png" download>Download PNG</a></div>
+    </section>
+
+    <section id="concept-branding" class="brand-card alternate-sandbox" data-brand-option="concept" aria-labelledby="alternate-heading" hidden>
+      <h2 id="alternate-heading">Stars + Globe</h2>
+      <p>Your tuned icon with the established light Roboto wordmark. The animation plays here; other materials use its matching static lockup.</p>
       <div class="alternate-layout-switch" role="group" aria-label="Concept wordmark layout">
         <button type="button" class="is-selected" data-layout="two-line" aria-pressed="true">Two-line wordmark</button>
         <button type="button" data-layout="single-line" aria-pressed="false">Single-line wordmark</button>
@@ -68,46 +101,8 @@
           </div>
         </div>
       </div>
-      <div class="alternate-actions"><button id="alternate-replay" type="button">Replay animation</button><button id="alternate-motion-reset" type="button">Reset motion</button><span id="alternate-status" aria-live="polite">Showing your tuned icon</span></div>
-      <h3 class="alternate-animation-heading">Animation</h3>
-      <div id="animation-controls" class="alternate-controls alternate-animation-controls" aria-label="Concept animation controls"></div>
-      <p id="animation-summary" class="alternate-motion-note" aria-live="polite"></p>
-      <h3 class="alternate-animation-heading">Icon geometry</h3>
-      <div id="alternate-controls" class="alternate-controls" aria-label="Alternate logo tuning controls"></div>
-      <div class="alternate-actions"><button id="alternate-reset" type="button">Reset tuned geometry</button><button id="alternate-export" type="button">Download current mark SVG</button></div>
-      <p class="alternate-provenance">This is a separate vector concept, not the approved wordmark. The colleague’s original <a href="assets/branding/colleague-logo-3e/logo-3e-spec.md">Logo 3e specification</a> and image remain preserved in the repository.</p>
+      <div class="alternate-actions"><button id="alternate-replay" type="button">Replay animation</button><a href="downloads/eu-stars-globe-animated.gif" download>Download animated GIF</a><a href="assets/branding/concept-wordmark.svg" download>Download static SVG</a><span id="alternate-status" aria-live="polite">Showing your tuned icon</span></div>
     </section>
-
-    <div id="approved-branding" data-brand-option="approved">
-    <h2 class="approved-heading">Option 1 · approved wordmark downloads</h2>
-
-    <section class="brand-card">
-      <h2>Standard · transparent</h2><p>Use on a light or white background; transparency keeps the background flexible.</p>
-      <div class="brand-swatch swatch-transparent"><img src="assets/branding/program-wordmark.svg?v=approved-20260928" alt="Standard navy wordmark on a transparent background"></div>
-      <div class="buttons"><a href="assets/branding/program-wordmark.svg?v=approved-20260928" download="program-wordmark.svg">Download SVG</a><a href="downloads/program-wordmark.png?v=approved-20260928" download>Download high-resolution PNG</a></div>
-    </section>
-    <section class="brand-card">
-      <h2>Standard · white background</h2><p>Ready to place in a document with an opaque white background.</p>
-      <div class="brand-swatch swatch-white"><img src="downloads/branding/program-wordmark-white-background.svg" alt="Standard navy wordmark on white"></div>
-      <div class="buttons"><a href="downloads/branding/program-wordmark-white-background.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-white-background.png" download>Download high-resolution PNG</a></div>
-    </section>
-    <section class="brand-card">
-      <h2>On Georgia Tech navy</h2><p>White wordmark with restrained gold EU stars on a navy background.</p>
-      <div class="brand-swatch swatch-navy"><img src="downloads/branding/program-wordmark-blue-background.svg" alt="White and gold wordmark on navy"></div>
-      <div class="buttons"><a href="downloads/branding/program-wordmark-blue-background.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-blue-background.png" download>Download high-resolution PNG</a></div>
-    </section>
-    <section class="brand-card">
-      <h2>Reversed · transparent</h2><p>White wordmark with gold EU stars; use on a dark background of your choice.</p>
-      <div class="brand-swatch swatch-charcoal"><img src="downloads/branding/program-wordmark-reversed.svg" alt="White and gold wordmark on a dark preview background"></div>
-      <div class="buttons"><a href="downloads/branding/program-wordmark-reversed.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-reversed.png" download>Download high-resolution PNG</a></div>
-    </section>
-    <section class="brand-card">
-      <h2>All-white · transparent</h2><p>Single-color white for dark backgrounds and one-color production.</p>
-      <div class="brand-swatch swatch-charcoal"><img src="downloads/branding/program-wordmark-all-white.svg" alt="All-white wordmark on a dark preview background"></div>
-      <div class="buttons"><a href="downloads/branding/program-wordmark-all-white.svg" download>Download SVG</a><a href="downloads/branding/program-wordmark-all-white.png" download>Download high-resolution PNG</a></div>
-    </section>
-    <p class="note">The SVGs scale without loss of quality. PNGs are 1560 × 224 pixels. The approved source is <a href="assets/branding/program-wordmark.svg">program-wordmark.svg</a>; the other files are generated exports.</p>
-    </div>
   </main>
 </body>
 </html>

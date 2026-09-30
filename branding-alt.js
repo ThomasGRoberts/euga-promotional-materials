@@ -10,59 +10,21 @@ const alternateDefaults = Object.freeze({
 
 const animationDefaults = Object.freeze({
   overallSpeed: 1, appearDuration: 250, rotationDuration: 850,
-  disintegrationDuration: 650, starDuration: 800, revealDuration: 600,
-  stageSpacing: 50, globeTurns: 1, fragmentDrift: 16,
+  disintegrationDuration: 650, starDuration: 900, revealDuration: 600,
+  stageSpacing: 50, globeTurns: 1, starLaunchAngle: 140,
+  textLead: 300, lineDelay: 180,
 });
-
-const alternateGroups = [
-  { title: 'Overall lockup', fields: [
-    ['markSize', 'Mark size', 150, 260, 1, 'px'],
-    ['gap', 'Mark–text gap', 0, 90, 1, 'px'],
-    ['markY', 'Mark vertical shift', -40, 40, 1, 'px'],
-    ['textY', 'Text vertical shift', -40, 40, 1, 'px'],
-  ] },
-  { title: 'EU stars', fields: [
-    ['starRadius', 'Star-circle radius', 55, 96, 1, ' units'],
-    ['starSize', 'Star size', 4, 13, 0.5, ' units'],
-    ['starSweep', 'Arc extent', 130, 180, 1, '°'],
-    ['starY', 'Stars vertical shift', -25, 25, 1, ' units'],
-  ] },
-  { title: 'Globe', fields: [
-    ['globeRadius', 'Globe radius', 55, 84, 1, ' units'],
-    ['globeX', 'Globe horizontal shift', -15, 15, 1, ' units'],
-    ['globeY', 'Globe vertical shift', -15, 15, 1, ' units'],
-    ['outlineStroke', 'Outer-circle stroke', 0.5, 5, 0.1, ' units'],
-    ['gridStroke', 'Grid stroke', 0.4, 4, 0.1, ' units'],
-    ['horizonStroke', 'Horizon stroke', 0.5, 5, 0.1, ' units'],
-  ] },
-];
-
-const animationGroups = [{ title: 'Motion timing and character', fields: [
-  ['overallSpeed', 'Overall speed', 0.6, 1.6, 0.05, '×'],
-  ['appearDuration', 'Globe appearance', 150, 650, 25, ' ms'],
-  ['rotationDuration', 'Polar rotation', 400, 1500, 25, ' ms'],
-  ['disintegrationDuration', 'Upper-globe disintegration', 350, 1200, 25, ' ms'],
-  ['starDuration', 'Star assembly', 450, 1400, 25, ' ms'],
-  ['revealDuration', 'Wordmark unfurl', 300, 1100, 25, ' ms'],
-  ['stageSpacing', 'Stage spacing (− = overlap)', -250, 300, 10, ' ms'],
-  ['globeTurns', 'Polar turns', 0.5, 2, 0.1, '×'],
-  ['fragmentDrift', 'Fragment drift', 6, 28, 1, ' units'],
-] }];
 
 const svgNS = 'http://www.w3.org/2000/svg';
 const alternateValues = { ...alternateDefaults };
 const animationValues = { ...animationDefaults };
-const alternateInputs = new Map();
-const alternateOutputs = new Map();
-const animationInputs = new Map();
-const animationOutputs = new Map();
-const alternateControls = document.querySelector('#alternate-controls');
 const alternateStage = document.querySelector('#alternate-stage');
 const alternateArtboard = document.querySelector('#alternate-artboard');
 const alternateLockup = document.querySelector('#alternate-lockup');
 const alternateMark = document.querySelector('#alternate-mark');
 const alternateStars = document.querySelector('#alternate-stars');
 const alternateStatus = document.querySelector('#alternate-status');
+const choiceVisual = document.querySelector('#concept-choice-visual');
 const alternateType = document.querySelector('#alternate-type');
 const alternateGlobeMotion = document.querySelector('#alternate-globe-motion');
 const alternateHorizon = document.querySelector('#alternate-horizon');
@@ -73,15 +35,39 @@ let animationFrame = 0;
 let animationStarted = 0;
 let currentLayout = 'two-line';
 let temporaryRotationGrid = null;
-let temporaryFragments = null;
+let temporaryUpperWithdrawal = null;
+let temporaryUpperClip = null;
 
-function alternateFormat(value, unit) {
-  return `${Number(value).toString()}${unit}`;
+function fitChoicePreview() {
+  const preview = choiceVisual.firstElementChild;
+  if (!preview) return;
+  const width = preview.dataset.layout === 'single-line' ? 1440 : 1120;
+  const height = preview.dataset.layout === 'single-line' ? 300 : 400;
+  const scale = Math.min(1, choiceVisual.clientWidth / width);
+  preview.style.left = '0px';
+  preview.style.transform = `scale(${scale})`;
+  choiceVisual.style.height = `${height * scale}px`;
+}
+
+function syncChoicePreview() {
+  const preview = alternateArtboard.cloneNode(true);
+  preview.id = 'brand-preview-artboard';
+  for (const node of preview.querySelectorAll('[id]')) node.id = `brand-preview-${node.id}`;
+  for (const node of preview.querySelectorAll('*')) {
+    for (const attribute of node.attributes) {
+      if (attribute.value.includes('url(#alternate-')) {
+        node.setAttribute(attribute.name, attribute.value.replaceAll('url(#alternate-', 'url(#brand-preview-alternate-'));
+      }
+    }
+  }
+  preview.querySelector('#brand-preview-alternate-mark').setAttribute('data-brand-preview-mark', '');
+  choiceVisual.replaceChildren(preview);
+  fitChoicePreview();
 }
 
 function alternateFitPreview() {
   const width = alternateStage.clientWidth;
-  const artboardWidth = currentLayout === 'single-line' ? 1240 : 880;
+  const artboardWidth = currentLayout === 'single-line' ? 1440 : 1120;
   const artboardHeight = currentLayout === 'single-line' ? 300 : 400;
   const scale = Math.min(1, width / artboardWidth);
   alternateArtboard.style.left = `${(width - artboardWidth * scale) / 2}px`;
@@ -151,11 +137,7 @@ function alternateRender() {
   ]) alternateLockup.style.setProperty(`--alternate-${property}`, `${value[key]}px`);
   renderStars(value);
   renderGlobe(value);
-  for (const group of alternateGroups) for (const [key, , , , , unit] of group.fields) {
-    alternateOutputs.get(key).textContent = alternateFormat(value[key], unit);
-  }
-  const original = Object.keys(alternateDefaults).every(key => value[key] === alternateDefaults[key]);
-  alternateStatus.textContent = original ? 'Showing your tuned icon' : 'Icon adjusted · approved logo unchanged';
+  alternateStatus.textContent = 'Showing your tuned icon';
 }
 
 function finishAnimation() {
@@ -163,9 +145,11 @@ function finishAnimation() {
   animationFrame = 0;
   animationStarted = 0;
   temporaryRotationGrid?.remove();
-  temporaryFragments?.remove();
+  temporaryUpperWithdrawal?.remove();
+  temporaryUpperClip?.remove();
   temporaryRotationGrid = null;
-  temporaryFragments = null;
+  temporaryUpperWithdrawal = null;
+  temporaryUpperClip = null;
   alternateGlobeMotion.removeAttribute('transform');
   alternateOutline.removeAttribute('stroke-dasharray');
   alternateOutline.removeAttribute('stroke-dashoffset');
@@ -174,11 +158,14 @@ function finishAnimation() {
   alternateHorizon.style.removeProperty('opacity');
   alternateHorizon.removeAttribute('stroke-dasharray');
   alternateHorizon.removeAttribute('stroke-dashoffset');
-  alternateType.style.removeProperty('clip-path');
-  alternateType.style.removeProperty('transform');
+  for (const line of alternateType.querySelectorAll('.alternate-two-line > div,.alternate-single-line')) {
+    line.style.removeProperty('clip-path');
+    line.style.removeProperty('transform');
+  }
   for (const star of alternateStars.children) star.style.removeProperty('opacity');
   renderStars(alternateValues);
   renderGlobe(alternateValues);
+  syncChoicePreview();
 }
 
 const clamp = value => Math.max(0, Math.min(1, value));
@@ -194,14 +181,12 @@ function makeSvg(tag, attributes = {}) {
   return node;
 }
 
-function meridianPath(x, y, radius, degrees, from = -1, to = 1) {
-  const points = [];
-  for (let i = 0; i <= 20; i++) {
-    const latitude = from + (to - from) * i / 20;
-    const px = x + radius * Math.sin(degrees * Math.PI / 180) * Math.sqrt(Math.max(0, 1 - latitude * latitude));
-    points.push(`${i ? 'L' : 'M'} ${px.toFixed(3)} ${(y + radius * latitude).toFixed(3)}`);
-  }
-  return points.join(' ');
+function meridianPath(x, y, radius, degrees) {
+  // Orthographic projection of a meridian is an exact half-ellipse, not a polyline.
+  const projectedRadius = radius * Math.sin(degrees * Math.PI / 180);
+  if (Math.abs(projectedRadius) < 0.01) return `M ${x} ${y - radius} L ${x} ${y + radius}`;
+  const sweep = projectedRadius > 0 ? 1 : 0;
+  return `M ${x} ${y - radius} A ${Math.abs(projectedRadius).toFixed(4)} ${radius} 0 0 ${sweep} ${x} ${y + radius}`;
 }
 
 function createRotationGrid(value) {
@@ -235,32 +220,23 @@ function renderRotationGrid(paths, value, progress) {
   }
 }
 
-function createUpperFragments(value) {
+function createUpperWithdrawal(value, rotatingGrid) {
   const x = 110 + value.globeX;
   const y = 118 + value.globeY;
   const r = value.globeRadius;
-  const group = makeSvg('g', { id: 'alternate-upper-fragments', fill: 'none', stroke: '#003057', 'stroke-linecap': 'round' });
-  const fragments = [];
-  function addFragment(d, width, index) {
-    const path = makeSvg('path', { d, 'stroke-width': width });
-    group.append(path);
-    fragments.push({ path, index });
-  }
-  for (let i = 0; i < 10; i++) {
-    const points = [];
-    for (let j = 0; j <= 4; j++) {
-      const angle = Math.PI + Math.PI * (i + j / 4) / 10;
-      points.push(`${j ? 'L' : 'M'} ${(x + r * Math.cos(angle)).toFixed(3)} ${(y + r * Math.sin(angle)).toFixed(3)}`);
-    }
-    addFragment(points.join(' '), value.outlineStroke, i);
-  }
-  for (const degrees of [-46, -25, 0, 25, 46]) {
-    for (const [from, to] of [[-0.95, -0.7], [-0.66, -0.43], [-0.39, -0.14]]) {
-      addFragment(meridianPath(x, y, r, degrees, from, to), value.gridStroke, fragments.length);
-    }
-  }
+  const clip = makeSvg('clipPath', { id: 'alternate-upper-window' });
+  clip.append(makeSvg('rect', { x: 0, y: 0, width: 220, height: y }));
+  alternateMark.querySelector('defs').append(clip);
+  const group = makeSvg('g', { id: 'alternate-upper-withdrawal', 'clip-path': 'url(#alternate-upper-window)', fill: 'none', stroke: '#003057' });
+  const motion = makeSvg('g', { id: 'alternate-upper-withdrawal-motion' });
+  motion.append(makeSvg('circle', { cx: x, cy: y, r, 'stroke-width': value.outlineStroke }));
+  const upperGrid = rotatingGrid.cloneNode(true);
+  upperGrid.removeAttribute('id');
+  upperGrid.style.removeProperty('opacity');
+  motion.append(upperGrid);
+  group.append(motion);
   document.querySelector('#alternate-globe').append(group);
-  return { group, fragments };
+  return { group, motion, clip };
 }
 
 function motionTimeline(motion) {
@@ -271,20 +247,13 @@ function motionTimeline(motion) {
   disintegration.end = disintegration.start + motion.disintegrationDuration;
   const stars = { start: Math.max(0, disintegration.end + motion.stageSpacing) };
   stars.end = stars.start + motion.starDuration;
-  const text = { start: Math.max(0, stars.end + motion.stageSpacing) };
-  text.end = text.start + motion.revealDuration;
-  return { appear, rotation, disintegration, stars, text, end: text.end };
-}
-
-function renderMotionSummary() {
-  const duration = motionTimeline(animationValues).end / animationValues.overallSpeed / 1000;
-  const handoff = animationValues.stageSpacing < 0 ? `${Math.abs(animationValues.stageSpacing)} ms overlap` : `${animationValues.stageSpacing} ms gap`;
-  document.querySelector('#animation-summary').textContent = `Approx. ${duration.toFixed(2)} seconds total · ${handoff} between stages. Negative spacing makes stages overlap.`;
+  const text = { start: Math.max(0, stars.end + motion.stageSpacing - motion.textLead) };
+  text.end = text.start + motion.revealDuration + (currentLayout === 'two-line' ? motion.lineDelay : 0);
+  return { appear, rotation, disintegration, stars, text, end: Math.max(text.end, stars.end, disintegration.end, rotation.end, appear.end) };
 }
 
 function replayAnimation() {
   finishAnimation();
-  renderMotionSummary();
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const value = alternateValues;
   const motion = animationValues;
@@ -293,11 +262,13 @@ function replayAnimation() {
   const y = 118 + value.globeY;
   const r = value.globeRadius;
   const rotationGrid = createRotationGrid(value);
-  const upper = createUpperFragments(value);
   temporaryRotationGrid = rotationGrid.group;
-  temporaryFragments = upper.group;
-  upper.group.style.display = 'none';
+  let upper = null;
   const circumference = 2 * Math.PI * r;
+  const fullTop = y - r - Math.max(4, value.outlineStroke);
+  const activeLines = currentLayout === 'two-line'
+    ? [...alternateType.querySelectorAll('.alternate-two-line > div')]
+    : [alternateType.querySelector('.alternate-single-line')];
   function frame(now) {
     if (!animationStarted) animationStarted = now;
     const t = (now - animationStarted) * motion.overallSpeed;
@@ -310,101 +281,47 @@ function replayAnimation() {
     rotationGrid.group.style.opacity = String(appearing * (1 - dissolvingEase));
     renderRotationGrid(rotationGrid.meridians, value, rotating);
     alternateStaticGrid.style.opacity = String(dissolvingEase);
-    // At the handoff, discrete upper arcs continue the circle while the lower clip settles.
-    const brokenAway = dissolving > 0.08;
-    const clipY = brokenAway ? y : y - r;
+    if (t >= timeline.disintegration.start && !upper) {
+      upper = createUpperWithdrawal(value, rotationGrid.group);
+      temporaryUpperWithdrawal = upper.group;
+      temporaryUpperClip = upper.clip;
+    }
+    // The upper strokes retreat toward the equator; the lower half stays in place.
+    const clipY = upper ? y : fullTop;
     alternateGlobeClip.setAttribute('y', String(clipY));
     alternateGlobeClip.setAttribute('height', String(220 - clipY));
-    upper.group.style.display = dissolving > 0 ? '' : 'none';
-    upper.group.style.opacity = String(Math.min(1, dissolving / 0.08));
-    const fragmentProgress = clamp((dissolving - 0.08) / 0.92);
-    for (const { path, index } of upper.fragments) {
-      const stagger = (index % 7) * 0.035;
-      const p = easeInOut((fragmentProgress - stagger) / (1 - stagger));
-      const dx = ((index % 5) - 2) * 1.5 * p;
-      const dy = -motion.fragmentDrift * (0.7 + (index % 4) * 0.13) * p;
-      path.setAttribute('transform', `translate(${dx.toFixed(3)} ${dy.toFixed(3)})`);
-      path.style.opacity = String(Math.pow(1 - p, 1.25));
+    if (upper) {
+      const remainingHeight = 1 - 0.96 * dissolvingEase;
+      upper.motion.setAttribute('transform', `translate(0 ${y * (1 - remainingHeight)}) scale(1 ${remainingHeight})`);
+      upper.group.style.opacity = String(1 - easeInOut(clamp((dissolving - 0.28) / 0.72)));
     }
     alternateHorizon.style.opacity = String(dissolvingEase);
     alternateHorizon.setAttribute('stroke-dasharray', String(2 * r));
     alternateHorizon.setAttribute('stroke-dashoffset', String(2 * r * (1 - dissolvingEase)));
-    const starPieceDuration = Math.min(300, motion.starDuration * 0.42);
+    const starPieceDuration = Math.min(600, motion.starDuration * 0.55);
     const starStep = (motion.starDuration - starPieceDuration) / 6;
     for (let i = 0; i < 7; i++) {
       const star = alternateStars.children[i];
-      const p = easeOut((t - timeline.stars.start - i * starStep) / starPieceDuration);
-      const angle = (270 - value.starSweep / 2 + i * value.starSweep / 6) * Math.PI / 180;
-      const startAngle = angle - 0.4;
-      const startRadius = value.starRadius + 20;
-      const finalX = 110 + value.starRadius * Math.cos(angle);
-      const finalY = 118 + value.starY + value.starRadius * Math.sin(angle);
-      const startX = 110 + startRadius * Math.cos(startAngle);
-      const startY = 118 + value.starY + startRadius * Math.sin(startAngle);
-      const px = startX + (finalX - startX) * p;
-      const py = startY + (finalY - startY) * p;
-      star.setAttribute('transform', `translate(${px.toFixed(3)} ${py.toFixed(3)}) scale(${(0.65 + 0.35 * p).toFixed(3)})`);
-      star.style.opacity = String(p);
+      const p = easeInOut((t - timeline.stars.start - i * starStep) / starPieceDuration);
+      const finalAngle = 270 - value.starSweep / 2 + i * value.starSweep / 6;
+      const angle = (motion.starLaunchAngle + (finalAngle - motion.starLaunchAngle) * p) * Math.PI / 180;
+      const radius = value.starRadius + 28 * (1 - easeOut(p)) + 7 * Math.sin(Math.PI * p);
+      const px = 110 + radius * Math.cos(angle);
+      const py = 118 + value.starY + radius * Math.sin(angle);
+      star.setAttribute('transform', `translate(${px.toFixed(3)} ${py.toFixed(3)}) scale(${(0.5 + 0.5 * easeOut(p)).toFixed(3)})`);
+      star.style.opacity = String(clamp(p * 1.7));
     }
-    const reveal = easeOut((t - timeline.text.start) / motion.revealDuration);
-    alternateType.style.clipPath = `inset(0 ${(100 * (1 - reveal)).toFixed(3)}% 0 0)`;
-    alternateType.style.transform = `translate(${(-18 * (1 - reveal)).toFixed(3)}px, ${value.textY}px)`;
+    for (let i = 0; i < activeLines.length; i++) {
+      const start = timeline.text.start + (i === 1 ? motion.lineDelay : 0);
+      const reveal = easeOut((t - start) / motion.revealDuration);
+      activeLines[i].style.clipPath = `inset(0 ${(100 * (1 - reveal)).toFixed(3)}% 0 0)`;
+      activeLines[i].style.transform = `translateX(${(-18 * (1 - reveal)).toFixed(3)}px)`;
+    }
     if (t >= timeline.end) finishAnimation();
     else animationFrame = requestAnimationFrame(frame);
   }
   animationFrame = requestAnimationFrame(frame);
 }
-
-function buildControls(groups, values, target, onInput, recordInputs, recordOutputs) {
-  for (const group of groups) {
-    const fieldset = document.createElement('fieldset');
-    fieldset.className = 'alternate-control-group';
-    const legend = document.createElement('legend');
-    legend.textContent = group.title;
-    fieldset.append(legend);
-    for (const [key, label, min, max, step, unit] of group.fields) {
-      const wrapper = document.createElement('div');
-      wrapper.className = 'alternate-control';
-      const labelNode = document.createElement('label');
-      labelNode.htmlFor = `alternate-${key}`;
-      labelNode.append(document.createTextNode(label));
-      const output = document.createElement('output');
-      output.htmlFor = `alternate-${key}`;
-      output.textContent = alternateFormat(values[key], unit);
-      labelNode.append(output);
-      const input = document.createElement('input');
-      input.id = `alternate-${key}`;
-      input.type = 'range';
-      input.min = String(min);
-      input.max = String(max);
-      input.step = String(step);
-      input.value = String(values[key]);
-      input.addEventListener('input', () => {
-        values[key] = Number(input.value);
-        output.textContent = alternateFormat(values[key], unit);
-        onInput();
-      });
-      const ends = document.createElement('div');
-      ends.className = 'range-ends';
-      const low = document.createElement('span');
-      low.textContent = alternateFormat(min, unit);
-      const high = document.createElement('span');
-      high.textContent = alternateFormat(max, unit);
-      ends.append(low, high);
-      wrapper.append(labelNode, input, ends);
-      fieldset.append(wrapper);
-      recordInputs.set(key, input);
-      recordOutputs.set(key, output);
-    }
-    target.append(fieldset);
-  }
-}
-
-buildControls(alternateGroups, alternateValues, alternateControls, () => {
-  finishAnimation();
-  alternateRender();
-}, alternateInputs, alternateOutputs);
-buildControls(animationGroups, animationValues, document.querySelector('#animation-controls'), replayAnimation, animationInputs, animationOutputs);
 
 for (const button of document.querySelectorAll('.alternate-layout-switch button')) {
   button.addEventListener('click', () => {
@@ -422,43 +339,34 @@ for (const button of document.querySelectorAll('.alternate-layout-switch button'
 }
 
 document.querySelector('#alternate-replay').addEventListener('click', replayAnimation);
-document.querySelector('#alternate-motion-reset').addEventListener('click', () => {
-  for (const [key, baseline] of Object.entries(animationDefaults)) {
-    animationValues[key] = baseline;
-    animationInputs.get(key).value = String(baseline);
-  }
-  for (const group of animationGroups) for (const [key, , , , , unit] of group.fields) {
-    animationOutputs.get(key).textContent = alternateFormat(animationValues[key], unit);
-  }
-  replayAnimation();
-});
-
-document.querySelector('#alternate-reset').addEventListener('click', () => {
-  finishAnimation();
-  for (const [key, baseline] of Object.entries(alternateDefaults)) {
-    alternateValues[key] = baseline;
-    alternateInputs.get(key).value = String(baseline);
-  }
-  alternateRender();
-});
-
-document.querySelector('#alternate-export').addEventListener('click', () => {
-  finishAnimation();
-  const svg = alternateMark.cloneNode(true);
-  svg.removeAttribute('id');
-  svg.removeAttribute('role');
-  svg.removeAttribute('aria-label');
-  const blob = new Blob([new XMLSerializer().serializeToString(svg)], { type: 'image/svg+xml' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = 'eu-stars-globe-concept-mark.svg';
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-});
 
 alternateRender();
 alternateFitPreview();
 new ResizeObserver(alternateFitPreview).observe(alternateStage);
+new ResizeObserver(fitChoicePreview).observe(choiceVisual);
 window.addEventListener('resize', alternateFitPreview);
 document.fonts.ready.then(replayAnimation);
+
+const brandToggle = document.querySelector('#brand-toggle');
+function renderBrandChoice() {
+  const choice = window.EUGABranding.current();
+  const concept = choice === 'concept';
+  brandToggle.setAttribute('aria-checked', String(concept));
+  document.querySelector('#approved-branding').hidden = concept;
+  document.querySelector('#concept-branding').hidden = !concept;
+  document.querySelectorAll('[data-select-brand]').forEach(button => {
+    const selected = button.dataset.selectBrand === choice;
+    button.classList.toggle('is-active', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
+  document.querySelector('#brand-choice-note').textContent = `Selected for all materials: ${concept ? 'Stars + Globe' : 'EU/UN Flags'}`;
+  if (concept) {
+    alternateFitPreview();
+    // The isolated presentation view starts exactly once, after its font is ready.
+    if (!document.documentElement.classList.contains('motion-only')) replayAnimation();
+  } else finishAnimation();
+}
+brandToggle.addEventListener('click', () => window.EUGABranding.select(window.EUGABranding.current() === 'concept' ? 'standard' : 'concept'));
+document.querySelectorAll('[data-select-brand]').forEach(button => button.addEventListener('click', () => window.EUGABranding.select(button.dataset.selectBrand)));
+document.addEventListener('euga:brand-change', renderBrandChoice);
+renderBrandChoice();

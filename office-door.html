@@ -3,31 +3,60 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Half-page Georgia Tech EU and Global Affairs Study Abroad office-door printout.">
-  <title>EU + Global Affairs | Office-Door Printout</title>
+  <meta name="description" content="8.5 by 5 inch Georgia Tech EU and Global Affairs Study Abroad office-door sign.">
+  <title>EU + Global Affairs | Office-Door Sign</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;800&family=Roboto+Slab:wght@700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="office-door.css?v=approved-20260928">
+  <link rel="stylesheet" href="office-door.css?v=landscape-2">
   <link rel="stylesheet" href="material-nav.css">
+  <script>if(new URLSearchParams(location.search).has('sheet'))document.documentElement.classList.add('sheet-embed')</script>
 </head>
 <body>
-  <nav class="material-tools material-tools--door" aria-label="Material navigation and downloads"><a class="material-back" href="index.html">← Back</a><div class="material-downloads"><a href="downloads/office-door-half-page.pdf?v=approved-20260928" download>Download 1 copy</a><a href="downloads/office-door-two-up.pdf?v=approved-20260928" download>Download 2-up sheet</a></div></nav>
-  <svg class="qr-filter-defs" aria-hidden="true" width="0" height="0" xmlns="http://www.w3.org/2000/svg">
-    <filter id="warm-qr" color-interpolation-filters="sRGB"><feComponentTransfer><feFuncR type="linear" slope="0.52" intercept="0.48"/><feFuncG type="linear" slope="0.55" intercept="0.45"/><feFuncB type="linear" slope="0.59" intercept="0.41"/></feComponentTransfer></filter>
-  </svg>
+  <nav class="material-tools material-tools--door" aria-label="Material navigation and downloads">
+    <a class="material-back" href="index.html">← Back</a>
+    <div class="material-downloads">
+      <a href="downloads/office-door-half-page.pdf" data-download-standard="downloads/office-door-half-page.pdf" data-download-concept="downloads/office-door-half-page-concept.pdf" download>Download 8.5 × 5 sign</a>
+      <a href="downloads/office-door-two-up.pdf" data-download-standard="downloads/office-door-two-up.pdf" data-download-concept="downloads/office-door-two-up-concept.pdf" download>Download two on letter</a>
+    </div>
+  </nav>
   <main class="door-page">
-    <header class="door-header"><img src="assets/branding/program-wordmark.svg?v=approved-20260928" alt="EU and Global Affairs Study Abroad Program"></header>
-    <section class="door-message">
-      <p class="door-term">Summer 2027</p>
+    <img class="door-globe" src="assets/earth-limb-destinations.png" alt="" aria-hidden="true">
+    <header class="door-header">
+      <img class="door-wordmark" data-brand-logo src="assets/branding/program-wordmark.svg" alt="EU and Global Affairs Study Abroad Program">
+      <div class="door-stats" aria-label="Program scale">
+        <div><strong data-city-count>8</strong><span>Cities</span></div>
+        <div><strong data-country-count>7</strong><span>Countries</span></div>
+        <div><strong data-course-count>4</strong><span>Courses</span></div>
+      </div>
+    </header>
+    <section class="door-intro">
       <h1><span>Let Europe be</span><span>your laboratory</span></h1>
-      <p>Study global affairs where they happen. Visit the cities and institutions shaping Europe and the world.</p>
+      <p>The <em>European Union and Global Affairs Study Abroad Program</em> takes you to the cities and institutions shaping Europe and the world. Study global affairs where they happen in <strong data-program-term>Summer 2027.</strong></p>
     </section>
-    <figure class="door-earth"><img src="assets/earth-limb-destinations.png" alt="Earth-limb view of Europe with the program destination dots"></figure>
-    <section class="door-apply" aria-label="Program website">
-      <a href="https://inta.gatech.edu/europeglobal"><img src="assets/program-website-europeglobal-qr.png" alt="QR code linking to the program website"></a>
-      <div><strong>Apply now at</strong><span>inta.gatech.edu/europeglobal</span></div>
+    <section class="door-details">
+      <div class="door-credentials">
+        <h2>Make the summer count</h2>
+        <p><strong>Earn a Certificate in European Studies</strong><span>with the program's four courses</span></p>
+        <p><strong>Complete the International Affairs minor</strong><span>with the program plus one additional course</span></p>
+        <p class="door-apply"><strong>Apply now at</strong><a href="https://inta.gatech.edu/europeglobal">inta.gatech.edu/europeglobal</a></p>
+      </div>
+      <div class="door-courses">
+        <h2>Four courses in global affairs</h2>
+        <ol>
+          <li><strong data-course-title="0">Politics of the European Union</strong><span data-course-code="0">INTA 2221 / 4903</span></li>
+          <li><strong data-course-title="1">Transatlantic Relations</strong><span data-course-code="1">INTA 3223 / 6833</span></li>
+          <li><strong data-course-title="2">European Security Issues</strong><span data-course-code="2">INTA 3120 / 6121</span></li>
+          <li><strong data-course-title="3">Global Politics of Technology</strong><span data-course-code="3">INTA 3044 / 8803</span></li>
+        </ol>
+      </div>
+      <div class="door-action">
+        <a class="door-qr" href="https://inta.gatech.edu/europeglobal" aria-label="Open the program website"><img src="assets/program-website-europeglobal-qr.png" alt="QR code for the program website"></a>
+        <img class="door-school" src="assets/Nunnlogo-transparent.png" alt="Georgia Tech Sam Nunn School of International Affairs">
+      </div>
     </section>
   </main>
+  <script src="brand-choice.js" defer></script>
+  <script src="print-content.js" defer></script>
 </body>
 </html>
