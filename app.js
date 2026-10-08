@@ -78,7 +78,7 @@ function globeProjection(width,height){
   const visibilityCutoff=Number.isFinite(perspectiveDistance)?1/perspectiveDistance:0;
   const project=([lonDeg,latDeg])=>{const lon=lonDeg*Math.PI/180,lat=latDeg*Math.PI/180,dl=lon-lon0,rawX=Math.cos(lat)*Math.sin(dl),rawY=Math.cos(lat0)*Math.sin(lat)-Math.sin(lat0)*Math.cos(lat)*Math.cos(dl),z=Math.sin(lat0)*Math.sin(lat)+Math.cos(lat0)*Math.cos(lat)*Math.cos(dl),factor=Number.isFinite(perspectiveDistance)?(perspectiveDistance-1)/(perspectiveDistance-z):1,x=(rawX*Math.cos(roll)-rawY*Math.sin(roll))*factor,y=(rawX*Math.sin(roll)+rawY*Math.cos(roll))*factor;return[cx+radius*x,cy-radius*y,z-visibilityCutoff]};
   const horizonScale=Number.isFinite(perspectiveDistance)?Math.sqrt((perspectiveDistance-1)/(perspectiveDistance+1)):1;
-  return{project,cx,cy,radius:radius*horizonScale};
+  return{project,cx,cy,radius:radius*horizonScale,visibilityCutoff};
 }
 function atlasProjection(width,height){
   const lon0=10*Math.PI/180,lat0=49*Math.PI/180,scale=Math.min(width/.9,height/.7),cx=width*.5,cy=height*.53;
@@ -87,6 +87,49 @@ function atlasProjection(width,height){
 }
 function traceVisibleRing(ctx,ring,project){
   let drawing=false;for(const point of ring){const[x,y,z]=project(point);if(z<=.02){drawing=false;continue}if(!drawing){ctx.moveTo(x,y);drawing=true}else ctx.lineTo(x,y)}
+}
+// Clip closed spherical polygons before projecting them. Dropping hidden vertices
+// leaves open subpaths that Canvas fills with artificial straight closing chords.
+function clipGlobePolygon(polygon,projection){
+  const radians=Math.PI/180,degrees=180/Math.PI;
+  const rotate=d3.geoRotation([-globe.longitude,-globe.latitude]);
+  const rings=[];let ring;
+  const stream=d3.geoClipCircle(Math.acos(projection.visibilityCutoff))({
+    polygonStart(){},polygonEnd(){},
+    lineStart(){rings.push(ring=[])},lineEnd(){},
+    point(lon,lat){ring.push(projection.project(rotate.invert([lon*degrees,lat*degrees])))}
+  });
+  stream.polygonStart();
+  for(const coordinates of polygon){
+    stream.lineStart();
+    // The spherical stream closes each ring itself; omit the repeated endpoint.
+    const last=coordinates.length-1,closed=last>0&&coordinates[0][0]===coordinates[last][0]&&coordinates[0][1]===coordinates[last][1];
+    for(let i=0;i<coordinates.length-(closed?1:0);i++){
+      const [lon,lat]=rotate(coordinates[i]);stream.point(lon*radians,lat*radians);
+    }
+    stream.lineEnd();
+  }
+  stream.polygonEnd();return rings;
+}
+function traceClippedGlobe(ctx,rings,projection,fill){
+  const {cx,cy,radius}=projection;
+  for(const ring of rings){
+    if(!ring.length)continue;
+    ctx.moveTo(ring[0][0],ring[0][1]);
+    for(let i=1;i<=ring.length;i++){
+      const previous=ring[i-1],point=ring[i%ring.length];
+      const onHorizon=Math.abs(previous[2])<1e-7&&Math.abs(point[2])<1e-7;
+      if(onHorizon){
+        if(fill){
+          // Use the exact circular limb, rather than chords between clip samples.
+          const from=Math.atan2(previous[1]-cy,previous[0]-cx),to=Math.atan2(point[1]-cy,point[0]-cx);
+          const delta=Math.atan2(Math.sin(to-from),Math.cos(to-from));
+          ctx.arc(cx,cy,radius,from,from+delta,delta<0);
+        }else ctx.moveTo(point[0],point[1]); // The limb is not a country border.
+      }else ctx.lineTo(point[0],point[1]);
+    }
+    if(fill)ctx.closePath();
+  }
 }
 function drawGraticule(ctx,projection,isGlobe){
   const {project}=projection;ctx.strokeStyle=isGlobe?'rgba(5,30,57,.11)':'rgba(5,30,57,.08)';ctx.lineWidth=.65;
@@ -101,7 +144,15 @@ function drawGeography(){
   if(isGlobe){ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='rgba(5,30,57,.55)';ctx.lineWidth=1.15*globe.lineWeight;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.clip()}
   drawGraticule(ctx,projection,isGlobe);
   const geometries=state.topology.objects.countries.geometries;
-  for(const geometry of geometries)for(const polygon of geometryRings(state.topology,geometry)){ctx.beginPath();polygon.forEach(ring=>traceVisibleRing(ctx,ring,project));if(isGlobe){ctx.fillStyle='#efefeb';ctx.fill('evenodd')}ctx.strokeStyle='rgba(32,32,32,.43)';ctx.lineWidth=.62*(isGlobe?globe.lineWeight:1);ctx.stroke()}
+  for(const geometry of geometries)for(const polygon of geometryRings(state.topology,geometry)){
+    ctx.beginPath();
+    if(isGlobe){
+      const rings=clipGlobePolygon(polygon,projection);
+      traceClippedGlobe(ctx,rings,projection,true);ctx.fillStyle='#d9d9d4';ctx.fill('evenodd');
+      ctx.beginPath();traceClippedGlobe(ctx,rings,projection,false);
+    }else polygon.forEach(ring=>traceVisibleRing(ctx,ring,project));
+    ctx.strokeStyle='rgba(32,32,32,.43)';ctx.lineWidth=.62*(isGlobe?globe.lineWeight:1);ctx.stroke();
+  }
   const cities=state.data.cities||[];
   cities.filter(city=>Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y,z]=project([city.lon,city.lat]);if(z<=0)return;ctx.beginPath();ctx.arc(x,y,3.2,0,Math.PI*2);ctx.fillStyle='#b39051';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.4;ctx.stroke()});
   const labels=['Amsterdam','Paris','Brussels','Geneva','Berlin','Munich','Vienna','Bucharest','Bern'];
