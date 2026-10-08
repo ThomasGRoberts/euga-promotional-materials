@@ -18,7 +18,8 @@ html,body{margin:0;background:#eee;color:#1a1a1a;font-family:Roboto,Arial,sans-s
 .tent-art::before,.tent-art::after{content:"";position:absolute;left:0;right:0;z-index:1}
 .tent-art::before{top:0;height:7px;background:var(--navy)}
 .tent-art::after{top:7px;height:3px;background:var(--gold)}
-.tent-globe{position:absolute;z-index:-1;width:5.3in;right:1.05in;bottom:-1.04in;opacity:.31;pointer-events:none}
+/* Complete globe; offsets retain the old 724 × 412 crop’s geographic placement. */
+.tent-globe{position:absolute;z-index:-1;width:calc(5.3in * 909 / 724);right:calc(1.05in + 92 * 5.3in / 724);bottom:calc(-1.04in - 532 * 5.3in / 724);pointer-events:none}
 .tent-copy,.tent-action{position:relative;z-index:2}
 .tent-wordmark{display:block;width:4in;height:.79in;object-fit:contain;object-position:left center}
 .tent-term{margin:.18in 0 .31in;color:var(--dark-gold);font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}

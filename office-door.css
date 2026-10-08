@@ -2,7 +2,8 @@
 *{box-sizing:border-box}
 html,body{margin:0;background:#eee;color:var(--ink);font-family:Roboto,Arial,sans-serif}
 .door-page{position:relative;isolation:isolate;display:grid;grid-template-rows:.74in 1.38in 1fr;row-gap:.16in;width:8.5in;height:5in;margin:0 auto 24px;padding:.25in .32in .23in;background:#fff;box-shadow:0 14px 36px rgba(0,0,0,.17);overflow:hidden}
-.door-globe{position:absolute;z-index:-1;width:6.35in;max-width:none;right:-.23in;bottom:-.83in;opacity:.34;pointer-events:none}
+/* Complete globe; offsets retain the old 724 × 412 crop’s geographic placement. */
+.door-globe{position:absolute;z-index:-1;width:calc(6.35in * 909 / 724);max-width:none;right:calc(-.23in + 92 * 6.35in / 724);bottom:calc(-.83in - 532 * 6.35in / 724);pointer-events:none}
 .door-header{display:flex;align-items:center;justify-content:space-between;gap:.22in}
 .door-wordmark{display:block;width:4.1in;height:.74in;object-fit:contain;object-position:left center}
 .door-stats{display:flex;justify-content:flex-end;gap:.17in;text-align:center;flex:none}

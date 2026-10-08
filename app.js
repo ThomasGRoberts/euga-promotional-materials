@@ -139,8 +139,15 @@ function drawGraticule(ctx,projection,isGlobe){
 function drawGeography(){
   if(!state.data||!state.topology)return;const canvas=$('#geo-canvas'),rect=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2),width=rect.width,height=rect.height;
   canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
+  paintGeography(ctx,width,height);
+  window.__EUGA_RENDER_READY__=true;document.documentElement.dataset.renderReady='true';
+}
+// The flyer canvas crops itself; print assets can render the same projection
+// into a larger canvas so their circles are never cropped inside a panel.
+function paintGeography(ctx,width,height,{crop=true}={}){
   const isGlobe=direction==='globe',projection=isGlobe?globeProjection(width,height):atlasProjection(width,height),{project,cx,cy,radius}=projection;
-  ctx.save();ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip();
+  ctx.save();
+  if(crop){ctx.beginPath();ctx.rect(0,0,width,height);ctx.clip()}
   if(isGlobe){ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();ctx.strokeStyle='rgba(5,30,57,.55)';ctx.lineWidth=1.15*globe.lineWeight;ctx.stroke();ctx.beginPath();ctx.arc(cx,cy,radius,0,Math.PI*2);ctx.clip()}
   drawGraticule(ctx,projection,isGlobe);
   const geometries=state.topology.objects.countries.geometries;
@@ -159,7 +166,6 @@ function drawGeography(){
   const offsets={Amsterdam:[-7,-10,'right'],Paris:[-8,7,'right'],Brussels:[-8,-5,'right'],Geneva:[-8,16,'right'],Berlin:[8,-5,'left'],Munich:[8,10,'left'],Vienna:[8,-5,'left'],Bucharest:[9,4,'left'],Bern:[8,12,'left']};
   if(new URLSearchParams(location.search).get('mapLabels')!=='0')cities.filter(city=>EUGACities.isFeatured(city.featured)&&labels.includes(city.city)&&Number.isFinite(city.lon)&&Number.isFinite(city.lat)).forEach(city=>{const[x,y]=project([city.lon,city.lat]),[dx,dy,align]=offsets[city.city],labelSize=12*(isGlobe?globe.labelScale:1);ctx.fillStyle='#333';ctx.font=`500 ${labelSize}px Roboto, Arial, sans-serif`;ctx.textAlign=align;ctx.fillText(city.city,x+dx,y+dy)});
   ctx.restore();
-  window.__EUGA_RENDER_READY__=true;document.documentElement.dataset.renderReady='true';
 }
 Promise.all([loadJson('data/program.json'),loadJson('assets/countries-110m.json')]).then(async([fallback,topology])=>{
   state.topology=topology;
