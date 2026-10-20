@@ -27,9 +27,11 @@ The current paste-ready version is in `google-sheet-text-tab-paste.tsv`.
 
 ## Other tabs
 
-- `Cities` uses `City`, `Country`, `Category`, and `Featured`. City and country totals are calculated from named rows. Current-city coordinates are retained in local geographic data. To add a city not already in that data and place it on the maps, add `Latitude` and `Longitude` columns and fill them for the new row.
+- `Cities` uses `City`, `Country`, `Category`, and `Featured`. City and country totals are calculated from named rows. Maps resolve new city names against the local GeoNames gazetteer. Optional `Latitude` and `Longitude` values override geocoding when needed for a place the gazetteer does not recognize.
 - `Courses` uses `Code` and `Course`. The course total and lower-right course list are calculated from these rows.
 - `Faculty` is read from the master sheet's `Full name`, `Program role`, and `University profile URL` columns for carousel and presentation slides.
 - `Institutions` is read from `Institution`, `City`, and `Country`. Featured-site photographs remain local assets matched by institution name; new rows need a corresponding local photo before they can appear in the carousel.
+
+The local city lookup is derived from GeoNames' `cities5000` data, filtered to European country codes. Map pages link to the GeoNames and CC BY 4.0 attribution. Regenerate the lookup with `python3 scripts/build_city_geocoder.py`; see `data/GEONAMES-ATTRIBUTION.md` for coverage and source details.
 
 If the published spreadsheet cannot be reached, the flyer uses its checked-in local content so the preview and PDF export still render.

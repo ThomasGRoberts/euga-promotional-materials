@@ -24,6 +24,7 @@
       </header>
       <figure class="geography">
         <canvas id="geo-canvas" aria-label="Program cities across a curved Earth centered on Europe"></canvas>
+        <figcaption class="geodata-credit">City-name geocoding: <a href="https://www.geonames.org/" target="_blank" rel="noreferrer">GeoNames</a>, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a></figcaption>
         <div class="scale-statement" aria-label="Program scale">
           <div><strong id="city-count">15</strong><span>cities</span></div>
           <div><strong id="country-count">8</strong><span>countries</span></div>
@@ -59,8 +60,9 @@
   </main>
   <script src="brand-choice.js" defer></script>
   <script src="city-featured.js" defer></script>
+  <script src="city-geocoder.js?v=geonames-1" defer></script>
   <script src="assets/vendor/d3-array-3.2.4.min.js" defer></script>
   <script src="assets/vendor/d3-geo-3.1.1.min.js" defer></script>
-  <script src="app.js?v=horizon-clip-1" defer></script>
+  <script src="app.js?v=website-language-geocoding-1" defer></script>
 </body>
 </html>

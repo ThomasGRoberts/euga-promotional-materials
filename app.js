@@ -37,11 +37,10 @@ async function loadPublishedSheet(fallback){
   ]);
   const text=Object.fromEntries(textRows.filter(row=>row.Key).map(row=>[row.Key,row.Value]));
   const knownCities=new Map((fallback.cities||[]).map(city=>[city.city.toLowerCase(),city]));
-  const cities=cityRows.map(row=>{
+  const cities=await window.EUGACityGeocoder.resolve(cityRows.map(row=>{
     const city=row.City||'',known=knownCities.get(city.toLowerCase())||{};
-    const latitude=Number.parseFloat(row.Latitude),longitude=Number.parseFloat(row.Longitude);
-    return{...known,city,country:row.Country||known.country||'',category:row.Category||known.category||'',featured:EUGACities.isFeatured(row.Featured),...(Number.isFinite(latitude)?{lat:latitude}:{}),...(Number.isFinite(longitude)?{lon:longitude}:{})};
-  }).filter(city=>city.city);
+    return{...known,city,country:row.Country||known.country||'',category:row.Category||known.category||'',featured:EUGACities.isFeatured(row.Featured),lat:row.Latitude,lon:row.Longitude};
+  }).filter(city=>city.city),fallback.cities||[]);
   const courses=courseRows.map(row=>({code:row.Code||'',title:row.Course||''})).filter(course=>course.title);
   return{...fallback,text,cities:cities.length?cities:fallback.cities,courses:courses.length?courses:fallback.courses};
 }
