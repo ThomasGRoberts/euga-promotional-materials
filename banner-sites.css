@@ -7,10 +7,10 @@ html[data-material-mode="carousel"] .overview h1 .overview-line-two{font-size:cl
 .site-slide{background:#aa8543}
 .site-photo{position:absolute;inset:0 0 0 35%;width:65%;height:100%;object-fit:cover}
 .site-gold-panel{position:absolute;inset:0 auto 0 0;width:43%;background:linear-gradient(145deg,#bea063,#9c7536);clip-path:polygon(0 0,100% 0,89% 100%,0 100%)}
-.site-copy{position:absolute;z-index:3;left:5vw;top:25vh;width:32vw;color:#fff}
+.site-copy{position:absolute;z-index:3;left:5vw;top:25vh;width:max-content;max-width:84vw;color:#fff}
 .site-index{margin:0;color:#fff5e3;font-size:clamp(13px,1vw,20px);font-weight:800;letter-spacing:.16em;text-transform:uppercase}
 .site-rule{width:5rem;height:3px;margin:2.4vh 0;background:#fff5e3}
-.site-name{margin:0;font:700 clamp(30px,3.55vw,68px)/.97 var(--display);letter-spacing:-.045em;overflow-wrap:break-word}
+.site-name{margin:0;font:700 clamp(30px,3.55vw,68px)/.97 var(--display);letter-spacing:-.045em;white-space:nowrap;overflow-wrap:normal}
 .site-location{margin:3vh 0 0;color:#fff4df;font-size:clamp(18px,1.5vw,29px);font-weight:700}
 .site-photo-caption{position:absolute;z-index:4;left:45%;bottom:3vh;max-width:31vw;margin:0;padding:5px 8px;background:rgba(5,30,57,.66);color:#fff;font-size:clamp(11px,.75vw,14px);font-weight:700;letter-spacing:.02em}
 .site-photo-caption:empty{display:none}
@@ -40,3 +40,5 @@ html[data-material-mode="presentation"] .overview .presentation-logo .program-br
 html[data-material-mode="presentation"] .overview-copy{margin-top:18vh}
 html[data-material-mode="presentation"] .city-slide .presentation-logo{position:absolute;z-index:8;left:4.5vw;top:5vh;width:min(25vw,400px);filter:brightness(0) invert(1)}
 html[data-material-mode="presentation"] .city-slide .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}
+
+.site-slide{cursor:pointer}.site-slide:focus-visible,.overview:focus-visible,.curriculum-slide:focus-visible{outline:3px solid var(--gold);outline-offset:-5px}.site-name{white-space:nowrap;overflow-wrap:normal}
