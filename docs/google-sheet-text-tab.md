@@ -32,6 +32,6 @@ The current paste-ready version is in `google-sheet-text-tab-paste.tsv`.
 - `Faculty` is read from the master sheet's `Full name`, `Program role`, and `University profile URL` columns for carousel and presentation slides.
 - `Institutions` is read from `Institution`, `City`, and `Country`. Featured-site photographs remain local assets matched by institution name; new rows need a corresponding local photo before they can appear in the carousel.
 
-The local city lookup is derived from GeoNames' `cities5000` data, filtered to European country codes. Map pages link to the GeoNames and CC BY 4.0 attribution. Regenerate the lookup with `python3 scripts/build_city_geocoder.py`; see `data/GEONAMES-ATTRIBUTION.md` for coverage and source details.
+The local city lookup is derived from GeoNames' `cities5000` data, filtered to European country codes. Map pages link to the public data sources page for the GeoNames and CC BY 4.0 attribution. Regenerate the lookup with `python3 scripts/build_city_geocoder.py`; see `data/GEONAMES-ATTRIBUTION.md` for coverage and source details.
 
 If the published spreadsheet cannot be reached, the flyer uses its checked-in local content so the preview and PDF export still render.
