@@ -18,7 +18,7 @@ The published workbook exposes three tabs:
 - `Cities`: `City | Country | Category`, with 15 rows—3 Basecamp and 12 Excursion.
 - `Courses`: `Code | Course`, with four rows.
 
-The prototype derives 15 cities, 8 countries, and 4 courses. Dates, fee, credits, contact, application deadline, and CTA are omitted because the authoritative Text tab does not contain them.
+At the time of this Phase 1 inspection, the prototype derived 15 cities, 8 countries, and 4 courses. The promotional frontends now read from the `Promo Text`, `Cities`, and `Courses` tabs in the authoritative Website Language Google Sheet.
 
 ## Revised Phase 1 visual system
 

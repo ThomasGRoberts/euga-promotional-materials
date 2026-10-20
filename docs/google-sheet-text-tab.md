@@ -1,10 +1,10 @@
-# Google Sheet content contract
+# Website Language Google Sheet content contract
 
-The flyer loads live content from the published spreadsheet.
+The promotional-materials frontends read live content from the published **Website Language** spreadsheet. This spreadsheet is the editable source of truth; local JSON files are offline fallbacks.
 
-## `Text` tab
+## `Promo Text` tab
 
-The `Text` tab has exactly two columns: `Key` and `Value`. Faculty should edit values only. Keys are permanent identifiers used by the flyer code.
+The `Promo Text` tab uses two columns: `Key` and `Value`. Faculty should edit values only. Keys are permanent identifiers used by the promotional-materials code.
 
 The approved keys are:
 
@@ -27,7 +27,9 @@ The current paste-ready version is in `google-sheet-text-tab-paste.tsv`.
 
 ## Other tabs
 
-- `Cities` uses `City`, `Country`, and `Category`. City and country totals are calculated from these rows. Coordinates for the current cities are retained in the local geographic data.
+- `Cities` uses `City`, `Country`, `Category`, and `Featured`. City and country totals are calculated from named rows. Current-city coordinates are retained in local geographic data. To add a city not already in that data and place it on the maps, add `Latitude` and `Longitude` columns and fill them for the new row.
 - `Courses` uses `Code` and `Course`. The course total and lower-right course list are calculated from these rows.
+- `Faculty` is read from the master sheet's `Full name`, `Program role`, and `University profile URL` columns for carousel and presentation slides.
+- `Institutions` is read from `Institution`, `City`, and `Country`. Featured-site photographs remain local assets matched by institution name; new rows need a corresponding local photo before they can appear in the carousel.
 
 If the published spreadsheet cannot be reached, the flyer uses its checked-in local content so the preview and PDF export still render.

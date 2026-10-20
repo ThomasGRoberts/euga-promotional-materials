@@ -1,5 +1,5 @@
-const sheetBase='https://docs.google.com/spreadsheets/d/e/2PACX-1vS8qY-gHmx2pseRmx18-8U2ET5Fs8KW8CTeFDP9xV5v3aAF1fWQoRAudwxSaaGXJzm6t8TQ05dbLHOG/pub';
-const gids={text:'1338367530',cities:'0',courses:'753875659',faculty:'1239199803',institutions:'1659852286'};
+const sheetBase='https://docs.google.com/spreadsheets/d/e/2PACX-1vTllMNLudWj3eU7xuLZN-1wg7t4gphrYIiZpBYrJ3KQOm9IgCXvshIIUaFjT59GD1vvCsNeW-0aSHEj/pub';
+const gids={text:'1445390567',cities:'96966171',courses:'821289567',faculty:'1337172044',institutions:'301199586'};
 const citySlugs={'Luxembourg City':'luxembourg-city','The Hague':'the-hague'};
 const params=new URLSearchParams(location.search);
 const presentationMode=params.get('present')==='1';
@@ -79,8 +79,8 @@ async function init(){
     const [textRows,cityRows,courseRows,facultyRows,institutionRows,photoResponse,topology]=await Promise.all([sheet(gids.text),sheet(gids.cities),sheet(gids.courses),sheet(gids.faculty),presentationMode?Promise.resolve([]):sheet(gids.institutions),fetch('photos/sources.json'),fetch('assets/countries-110m.json').then(r=>r.json())]);
     text={...text,...Object.fromEntries(textRows.filter(r=>r.Key).map(r=>[r.Key,r.Value]))};
     const coordinates=new Map(fallback.cities.map(c=>[c.city.toLowerCase(),c]));
-    cities=cityRows.map(row=>({...coordinates.get((row.City||'').toLowerCase()),city:row.City,country:row.Country,category:row.Category,featured:EUGACities.isFeatured(row.Featured)})).filter(city=>city.city&&Number.isFinite(city.lon));
-    courses=courseRows;faculty=facultyRows.filter(row=>row.Name&&row.Link);photos=await photoResponse.json();globeState.topology=topology;
+    cities=cityRows.map(row=>{const known=coordinates.get((row.City||'').toLowerCase())||{},latitude=Number.parseFloat(row.Latitude),longitude=Number.parseFloat(row.Longitude);return{...known,city:row.City,country:row.Country,category:row.Category,featured:EUGACities.isFeatured(row.Featured),...(Number.isFinite(latitude)?{lat:latitude}:{}),...(Number.isFinite(longitude)?{lon:longitude}:{})}}).filter(city=>city.city&&Number.isFinite(city.lon));
+    courses=courseRows;faculty=facultyRows.map(row=>({...row,Name:row.Name||row['Full name'],Link:row.Link||row['University profile URL'],'Program Title':row['Program Title']||row['Program role']})).filter(row=>row.Name&&row.Link);photos=await photoResponse.json();globeState.topology=topology;
     const media=new Map(manifest.map(site=>[site.institution,site]));
     institutions=institutionRows.filter(row=>row.Institution&&row.City&&row.Country).map(row=>({institution:row.Institution,city:row.City,country:row.Country,photo:media.get(row.Institution)?.photo,photo_caption:media.get(row.Institution)?.photo_caption}));
     document.documentElement.dataset.contentSource='sheet';

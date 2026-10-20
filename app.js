@@ -4,8 +4,8 @@ const app=$('#app');app.dataset.direction=direction;
 const state={data:null,topology:null};
 const globeDefaults={longitude:-0.059843750000003776,latitude:28.265625000000096,roll:8,zoom:2.15,perspective:1.42,x:-257,y:275,lineWeight:.7,labelScale:1.15};
 const globe={...globeDefaults};
-const sheetBase='https://docs.google.com/spreadsheets/d/e/2PACX-1vS8qY-gHmx2pseRmx18-8U2ET5Fs8KW8CTeFDP9xV5v3aAF1fWQoRAudwxSaaGXJzm6t8TQ05dbLHOG/pub';
-const sheetTabs={text:'1338367530',cities:'0',courses:'753875659'};
+const sheetBase='https://docs.google.com/spreadsheets/d/e/2PACX-1vTllMNLudWj3eU7xuLZN-1wg7t4gphrYIiZpBYrJ3KQOm9IgCXvshIIUaFjT59GD1vvCsNeW-0aSHEj/pub';
+const sheetTabs={text:'1445390567',cities:'96966171',courses:'821289567'};
 
 async function loadJson(path){const response=await fetch(path);if(!response.ok)throw new Error(`${path}: ${response.status}`);return response.json()}
 function parseCsv(source){
@@ -39,7 +39,8 @@ async function loadPublishedSheet(fallback){
   const knownCities=new Map((fallback.cities||[]).map(city=>[city.city.toLowerCase(),city]));
   const cities=cityRows.map(row=>{
     const city=row.City||'',known=knownCities.get(city.toLowerCase())||{};
-    return{...known,city,country:row.Country||known.country||'',category:row.Category||known.category||'',featured:EUGACities.isFeatured(row.Featured)};
+    const latitude=Number.parseFloat(row.Latitude),longitude=Number.parseFloat(row.Longitude);
+    return{...known,city,country:row.Country||known.country||'',category:row.Category||known.category||'',featured:EUGACities.isFeatured(row.Featured),...(Number.isFinite(latitude)?{lat:latitude}:{}),...(Number.isFinite(longitude)?{lon:longitude}:{})};
   }).filter(city=>city.city);
   const courses=courseRows.map(row=>({code:row.Code||'',title:row.Course||''})).filter(course=>course.title);
   return{...fallback,text,cities:cities.length?cities:fallback.cities,courses:courses.length?courses:fallback.courses};

@@ -1,7 +1,7 @@
 // Shared live copy for the compact print pieces; local JSON remains the offline fallback.
 (() => {
-  const sheetBase='https://docs.google.com/spreadsheets/d/e/2PACX-1vS8qY-gHmx2pseRmx18-8U2ET5Fs8KW8CTeFDP9xV5v3aAF1fWQoRAudwxSaaGXJzm6t8TQ05dbLHOG/pub';
-  const tabs={text:'1338367530',cities:'0',courses:'753875659'};
+  const sheetBase='https://docs.google.com/spreadsheets/d/e/2PACX-1vTllMNLudWj3eU7xuLZN-1wg7t4gphrYIiZpBYrJ3KQOm9IgCXvshIIUaFjT59GD1vvCsNeW-0aSHEj/pub';
+  const tabs={text:'1445390567',cities:'96966171',courses:'821289567'};
   function parseCsv(source){
     const rows=[];let row=[],field='',quoted=false;
     for(let i=0;i<source.length;i++){
