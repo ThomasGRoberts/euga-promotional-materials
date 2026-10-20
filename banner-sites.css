@@ -46,6 +46,7 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
 .site-explore-link{display:inline-flex;align-items:center;gap:.4em;margin-top:2vh;padding:0;border:0;color:#fff;font-size:clamp(14px,1vw,18px);font-weight:700;text-decoration:none;transition:color .16s ease}.site-explore-link:hover{color:#fff5e3}.site-explore-arrow{display:inline-block;color:#fff5e3;transition:transform .16s ease}.site-explore-link:hover .site-explore-arrow{transform:translateX(3px)}.site-explore-link:focus-visible{outline:2px solid #fff5e3;outline-offset:3px}
 
 .faculty-card .faculty-link-cue{display:inline-flex;align-items:center;gap:.4em;width:max-content;margin-top:1.3vh;padding:0;border:0;color:var(--navy);font-size:clamp(13px,1vw,18px);font-weight:700}.faculty-card .faculty-link-arrow{display:inline-block;color:var(--gold);transition:transform .16s ease}
+.city-slide .city-explore-link{color:#fff}.city-slide .city-explore-link:hover{color:#fff5e3}.city-slide .city-explore-arrow{color:#f2dca7}
 @media(max-width:700px){
   .site-copy{width:86vw;max-width:86vw}
   .site-name{font-size:clamp(30px,8vw,48px)}
