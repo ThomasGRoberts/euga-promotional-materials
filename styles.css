@@ -9,4 +9,3 @@
 .brand-footer{height:.93in;display:flex;align-items:center;justify-content:flex-end;padding:0 .48in;background:#fff}.school-logo{display:block;width:2.55in;height:auto;transform:translateX(.356in)}.qr-filter-defs{position:absolute;pointer-events:none}.program-qr{position:absolute;left:.384in;bottom:.23in;display:block;width:1.2in;height:1.2in;filter:url(#warm-qr)}
 @page{size:8.5in 11in;margin:0}@media print{html,body{width:8.5in;height:11in;margin:0;overflow:hidden;background:#fff}#app{position:fixed;inset:0;width:8.5in;height:11in;margin:0;box-shadow:none}}
 .program-wordmark{display:block;width:4.54in;height:auto;flex:none}
-.flyer-sources{position:absolute;left:.48in;bottom:.08in;color:#625e56;font:400 6px/1.2 var(--sans);text-decoration:underline}
