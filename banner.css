@@ -145,3 +145,42 @@
   .site-copy{padding-top:17vh}
   .faculty-photo{width:min(45vw,220px);height:min(52vw,250px)}
 }
+
+@media(max-width:700px){
+  /* Simplify copy and give the photo grid a fixed, balanced 2x3 layout. */
+  .overview-description,.gallery-copy>p:not(.eyebrow),.application-instruction,.site-photo-caption,.city-index{display:none}
+  .overview.is-active{gap:12px}
+  .overview h1{font-size:clamp(36px,9vw,54px)}
+  .overview-stats{margin-top:16px}
+  .curriculum-courses span,.curriculum-credential span{display:none}
+  .curriculum-slide.is-active{gap:12px}
+  .curriculum-courses{gap:7px}
+  .curriculum-courses li{padding-top:7px}
+  .curriculum-courses strong{font-size:16px;line-height:1.2}
+  .curriculum-credentials{gap:10px;padding-top:12px}
+  .curriculum-credential strong{font-size:17px;line-height:1.25}
+  .faculty-copy h1{font-size:clamp(34px,8vw,50px)}
+  .faculty-role{font-size:15px}
+  .faculty-photo{width:min(64vw,260px);height:min(74vw,300px);margin:8px 0 0;align-self:flex-start}
+  .gallery-slide.is-active{gap:12px}
+  .gallery-copy h1{font-size:clamp(38px,9vw,54px)}
+  .gallery-grid{flex:0 0 min(48vh,390px);height:min(48vh,390px);min-height:250px;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:7px}
+  .gallery-grid img{width:100%;height:100%;min-height:0;object-fit:cover}
+  .city-slide.is-active{gap:0}
+  .city-photo,.city-photo-shade{height:56vh;min-height:260px;max-height:480px}
+  .city-copy{padding:16px 20px 18px}
+  .city-slide h1{font-size:clamp(38px,9vw,54px)}
+  .country{font-size:15px}
+  .site-copy{padding:20vh 20px 18px}
+  .site-index{font-size:11px}
+  .site-name{font-size:clamp(28px,7vw,42px)}
+  .site-location{font-size:15px}
+  .application-copy h1{font-size:clamp(42px,10vw,58px)}
+  .deck-nav>div{border:1px solid rgba(5,30,57,.28);background:#fff;box-shadow:0 2px 12px rgba(5,30,57,.25)}
+  .progress-dot{background:#596775;box-shadow:0 0 0 1px #fff}
+  .progress-dot.is-active{width:23px;background:var(--gold);box-shadow:0 0 0 1px #051e39}
+}
+@media(max-width:700px) and (max-height:650px){
+  .city-photo,.city-photo-shade{height:50vh;min-height:220px}
+  .gallery-grid{flex-basis:42vh;height:42vh;min-height:210px}
+}
