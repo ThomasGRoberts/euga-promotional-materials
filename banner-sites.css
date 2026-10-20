@@ -59,3 +59,11 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
   .faculty-card .faculty-link-cue{min-height:40px;font-size:14px}
 }
 @media(prefers-reduced-motion:reduce){.site-explore-arrow,.faculty-card .faculty-link-arrow{transition:none!important}}
+@media(max-width:700px){
+  .faculty-group-slide.is-active{min-height:100%;overflow-y:auto}
+  .faculty-group-grid{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:20px}
+  .faculty-card img{width:min(100%,360px);height:34vh;min-height:190px;max-height:300px}
+  .faculty-card strong{font-size:23px;margin-top:12px}
+  .faculty-card span{font-size:14px}
+  .faculty-card .faculty-link-cue{min-height:44px}
+}
