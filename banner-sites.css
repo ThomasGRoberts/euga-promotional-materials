@@ -46,3 +46,15 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
 .site-explore-link{display:inline-flex;align-items:center;gap:.4em;margin-top:2vh;padding:0;border:0;color:#fff;font-size:clamp(14px,1vw,18px);font-weight:700;text-decoration:none;transition:color .16s ease}.site-explore-link:hover{color:#fff5e3}.site-explore-arrow{display:inline-block;color:#fff5e3;transition:transform .16s ease}.site-explore-link:hover .site-explore-arrow{transform:translateX(3px)}.site-explore-link:focus-visible{outline:2px solid #fff5e3;outline-offset:3px}
 
 .faculty-card .faculty-link-cue{display:inline-flex;align-items:center;gap:.4em;width:max-content;margin-top:1.3vh;padding:0;border:0;color:var(--navy);font-size:clamp(13px,1vw,18px);font-weight:700}.faculty-card .faculty-link-arrow{display:inline-block;color:var(--gold);transition:transform .16s ease}
+@media(max-width:700px){
+  .site-copy{width:86vw;max-width:86vw}
+  .site-name{font-size:clamp(30px,8vw,48px)}
+  .faculty-group-slide{overflow:auto;padding:5vh 6vw 8vh}
+  .faculty-group-heading h1{font-size:clamp(38px,9vw,62px)}
+  .faculty-group-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:3vh 5vw;margin-top:3vh}
+  .faculty-card img{height:24vh;min-height:140px}
+  .faculty-card strong{font-size:clamp(18px,4.8vw,25px);margin-top:1.5vh}
+  .faculty-card span{font-size:13px}
+  .faculty-card .faculty-link-cue{min-height:40px;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.site-explore-arrow,.faculty-card .faculty-link-arrow{transition:none!important}}

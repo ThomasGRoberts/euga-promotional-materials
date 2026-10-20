@@ -26,3 +26,57 @@
 .deck-nav{left:auto;right:2vw;top:50%;bottom:auto;transform:translateY(-50%)}.deck-nav>button{display:none}.deck-nav>div{flex-direction:column;gap:7px;padding:10px 8px}.progress-dot{width:5px;height:5px;box-shadow:0 0 0 1px rgba(247,246,242,.72)}.progress-dot.is-active{width:5px;height:24px}html[data-slide-focus="city"] .progress-dot{background:rgba(5,30,57,.28)}html[data-slide-focus="city"] .progress-dot.is-active{background:var(--gold)}
 
 .overview-link,.curriculum-link,.city-explore-link,.faculty-link,.gallery-link{display:inline-flex;align-items:center;gap:.4em;margin-top:2.5vh;padding:0;border:0;color:var(--navy);font-size:clamp(14px,1vw,18px);font-weight:700;letter-spacing:normal;text-decoration:none;text-transform:none;transition:color .16s ease}.overview-link:hover,.curriculum-link:hover,.city-explore-link:hover,.faculty-link:hover,.gallery-link:hover{color:#7d5c27}.overview-link-arrow,.curriculum-link-arrow,.city-explore-arrow,.faculty-link-arrow,.gallery-link-arrow{display:inline-block;color:var(--gold);transition:transform .16s ease}.overview-link:hover .overview-link-arrow,.curriculum-link:hover .curriculum-link-arrow,.city-explore-link:hover .city-explore-arrow,.faculty-link:hover .faculty-link-arrow,.gallery-link:hover .gallery-link-arrow,.faculty-card:hover .faculty-link-arrow,.faculty-card:focus-visible .faculty-link-arrow{transform:translateX(3px)}.overview.has-city-hover{cursor:pointer}.overview-link:focus-visible,.curriculum-link:focus-visible,.city-explore-link:focus-visible,.faculty-link:focus-visible,.gallery-link:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* Mobile carousel layout and touch targets */
+@media(max-width:700px){
+  .opening,.overview,.faculty-slide,.gallery-slide,.curriculum-slide,.faculty-group-slide{padding:6vh 6vw}
+  .opening-copy,.overview-copy{width:88vw}
+  .opening h1{font-size:clamp(42px,12vw,72px)}
+  .overview h1{font-size:clamp(42px,11vw,76px)}
+  .overview h1 span{white-space:normal}
+  .overview-description{max-width:38ch;margin-top:2.5vh;font-size:clamp(16px,4.2vw,19px)}
+  .overview-copy{max-height:76vh;overflow:auto;padding-right:2px}
+  .overview-stats{left:6vw;bottom:4vh;width:88vw;gap:8px;padding-top:1.5vh}
+  .overview-stats div{gap:5px;flex-wrap:wrap}
+  .overview-stats strong{font-size:clamp(30px,8vw,48px)}
+  .overview-stats span{font-size:10px}
+  .overview-link,.curriculum-link,.city-explore-link,.faculty-link,.gallery-link{min-height:44px;align-items:center;font-size:16px}
+  .curriculum-slide.is-active{display:flex;flex-direction:column;gap:3vh;padding:5vh 6vw 7vh;overflow:auto}
+  .curriculum-heading{align-self:stretch}
+  .curriculum-heading h1{font-size:clamp(43px,11vw,70px)}
+  .curriculum-courses{grid-template-columns:minmax(0,1fr);gap:1.5vh;width:100%}
+  .curriculum-courses li{padding-top:1vh}
+  .curriculum-credentials{grid-template-columns:minmax(0,1fr);gap:2vh;width:100%;padding-top:2vh}
+  .faculty-copy{left:6vw;top:7vh;width:88vw}
+  .faculty-copy h1{max-width:12ch;font-size:clamp(39px,10vw,66px)}
+  .faculty-role{max-width:25ch;font-size:17px}
+  .faculty-photo{right:6vw;top:auto;bottom:8vh;width:38vw;height:45vw;max-width:210px;max-height:250px;transform:none;opacity:.92}
+  .gallery-slide.is-active{display:flex;flex-direction:column;gap:3vh;overflow:auto;padding:6vh 6vw 8vh}
+  .gallery-copy{flex:0 0 auto}
+  .gallery-copy h1{font-size:clamp(42px,10vw,68px)}
+  .gallery-copy p{max-width:42ch;margin-top:2vh;font-size:16px}
+  .gallery-grid{flex:1 0 30vh;min-height:30vh;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px}
+  .gallery-grid img{min-height:0}
+  .city-slide{background:linear-gradient(180deg,transparent 0 34%,var(--navy) 34% 100%)}
+  .city-photo,.city-photo-shade{width:100%;height:42%;}
+  .city-photo{opacity:.85}
+  .city-photo-shade{background:linear-gradient(180deg,rgba(5,30,57,.15),rgba(5,30,57,.72))}
+  .city-copy{left:6vw;bottom:9vh;width:88vw}
+  .city-slide h1{font-size:clamp(46px,12vw,76px)}
+  .country{margin-top:1vh;font-size:18px}
+  .site-photo{inset:0;width:100%;height:100%}
+  .site-gold-panel{width:100%;background:linear-gradient(145deg,rgba(190,160,99,.97),rgba(156,117,54,.95));clip-path:none;opacity:.94}
+  .site-copy{left:7vw;top:19vh;width:86vw;max-width:86vw}
+  .site-name{font-size:clamp(30px,8vw,48px);line-height:1.04}
+  .site-index{font-size:12px}
+  .site-rule{margin:2vh 0}
+  .site-location{margin-top:2vh;font-size:18px}
+  .site-photo-caption{left:auto;right:4vw;bottom:2vh;max-width:55vw;font-size:10px}
+  .deck-nav{right:2vw;top:auto;bottom:1vh;transform:none}
+  .deck-nav>div{flex-direction:row;gap:6px;padding:8px;background:rgba(247,246,242,.82);border-radius:20px}
+  .progress-dot{width:7px;height:7px}
+  .progress-dot.is-active{width:18px;height:7px}
+  .program-brand{right:6vw;top:2vh;width:clamp(170px,48vw,250px);padding:5px 7px}
+}
+@media(max-width:380px){.overview-copy{max-height:72vh}.overview-stats strong{font-size:28px}.overview-stats span{font-size:9px}.faculty-photo{width:34vw;height:42vw}.city-copy{bottom:8vh}}
+@media(prefers-reduced-motion:reduce){.overview-link-arrow,.curriculum-link-arrow,.city-explore-arrow,.faculty-link-arrow,.gallery-link-arrow,.site-explore-arrow{transition:none!important}.overview-link:hover .overview-link-arrow,.curriculum-link:hover .curriculum-link-arrow,.city-explore-link:hover .city-explore-arrow,.faculty-link:hover .faculty-link-arrow,.gallery-link:hover .gallery-link-arrow,.site-explore-link:hover .site-explore-arrow{transform:none!important}}
