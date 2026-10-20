@@ -42,3 +42,7 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo{position:
 html[data-material-mode="presentation"] .city-slide .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}
 
 .site-slide{cursor:pointer}.site-slide:focus-visible,.overview:focus-visible,.curriculum-slide:focus-visible{outline:3px solid var(--gold);outline-offset:-5px}.site-name{white-space:nowrap;overflow-wrap:normal}
+
+.site-explore-link{display:inline-flex;align-items:center;gap:.55em;margin-top:2vh;padding:.4em 0;border-bottom:2px solid rgba(255,255,255,.8);color:#fff;font-size:clamp(15px,1.1vw,22px);font-weight:800;text-decoration:none;transition:gap .18s ease}.site-explore-link:hover,.site-explore-link:focus-visible{gap:.9em;color:#fff5e3}.site-explore-arrow{display:inline-block;transition:transform .18s ease}.site-explore-link:hover .site-explore-arrow{transform:translateX(4px)}.site-explore-link:focus-visible{outline:3px solid #fff5e3;outline-offset:4px}
+
+.faculty-card .faculty-link-cue{display:inline-flex;align-items:center;gap:.45em;width:max-content;margin-top:1.3vh;padding-bottom:.25em;border-bottom:1px solid var(--gold);color:var(--navy);font-size:clamp(13px,1vw,18px);font-weight:800;transition:gap .18s ease}.faculty-card:hover .faculty-link-cue,.faculty-card:focus-visible .faculty-link-cue{gap:.8em}
