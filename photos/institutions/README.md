@@ -1,6 +1,6 @@
 # Featured-site photograph library
 
-The published **Website Language** spreadsheet's **Institutions** tab (gid `301199586`) is the source of institution names, cities, and countries. `data/institutions.json` is a local media manifest keyed by exact institution name; it supplies photo paths and optional captions for the promotional carousel, not editable institution content.
+The published **Study Abroad Promotional Materials** spreadsheet's **Institutions** tab (gid `1659852286`) is the source of institution names, cities, and countries. `data/institutions.json` is a local media manifest keyed by exact institution name; it supplies photo paths and optional captions for the promotional carousel, not editable institution content.
 
 New photographs in this directory have creator, license, source page, and original size recorded in `sources.json`. Seven already-downloaded institution photographs remain in their city folders; their attribution records are in `photos/sources.json` and the matching city `sources.json` files.
 

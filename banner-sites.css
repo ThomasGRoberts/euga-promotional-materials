@@ -40,6 +40,7 @@ html[data-material-mode="presentation"] .overview .presentation-logo .program-br
 html[data-material-mode="presentation"] .overview-copy{margin-top:18vh}
 html[data-material-mode="presentation"] .city-slide .presentation-logo{position:absolute;z-index:8;left:4.5vw;top:5vh;width:min(25vw,400px);filter:brightness(0) invert(1)}
 html[data-material-mode="presentation"] .city-slide .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}
+.cover-city-list{display:none}
 
 .site-slide{cursor:pointer}.site-slide:focus-visible,.overview:focus-visible,.curriculum-slide:focus-visible{outline:3px solid var(--gold);outline-offset:-5px}.site-name{white-space:normal;overflow-wrap:normal;word-break:normal;hyphens:none}
 
@@ -73,6 +74,25 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
   .faculty-card strong{font-size:20px}
   .faculty-card span{font-size:12px}
 }
+@media(max-width:700px){
+  html[data-material-mode="presentation"] .overview .presentation-logo{left:5vw;top:20px;width:90vw;height:auto}
+  html[data-material-mode="presentation"] .overview-copy{margin-top:82px}
+  html[data-material-mode="presentation"] .overview .cover-city-list{display:block;margin:13px 0 0;color:var(--navy);font-size:13px;font-weight:700;line-height:1.5}
+  html[data-material-mode="presentation"] .faculty-group-slide.is-active{padding:24px 20px 70px}
+  html[data-material-mode="presentation"] .faculty-group-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 13px;margin-top:12px}
+  html[data-material-mode="presentation"] .faculty-card img{width:100%;height:20vh;min-height:145px;max-height:185px}
+  html[data-material-mode="presentation"] .faculty-card strong{font-size:16px;line-height:1.1;margin-top:9px}
+  html[data-material-mode="presentation"] .faculty-card span{font-size:11px;margin-top:4px}
+  html[data-material-mode="presentation"] .faculty-card .faculty-link-cue{font-size:11px;min-height:28px;margin-top:4px}
+  html[data-material-mode="presentation"] .application-slide.is-active{justify-content:flex-start;align-items:stretch;gap:22px;padding:10vh 20px 70px}
+  html[data-material-mode="presentation"] .application-copy{position:relative;inset:auto;width:100%;max-width:none}
+  html[data-material-mode="presentation"] .application-copy h1{font-size:clamp(44px,12vw,58px)}
+  html[data-material-mode="presentation"] .application-instruction{display:block;margin-top:12px;font-size:15px}
+  html[data-material-mode="presentation"] .application-link{max-width:100%;margin-top:14px;font-size:clamp(17px,5vw,23px);overflow-wrap:anywhere}
+  html[data-material-mode="presentation"] .application-qr-frame{position:relative;inset:auto;width:min(64vw,250px);margin:0 auto;padding:0}
+  html[data-material-mode="presentation"] .application-qr-caption{font-size:14px}
+}
+@media(max-width:360px){html[data-material-mode="presentation"] .faculty-group-grid{grid-template-columns:1fr}}
 @media(max-width:700px){
   /* Keep the site visit photo separate from a solid gold information block. */
   .site-slide.is-active{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:0;min-height:100%;overflow-x:hidden;overflow-y:auto;padding:0 0 74px;background:#a98243;touch-action:pan-y}
