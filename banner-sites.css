@@ -19,7 +19,7 @@ html[data-slide-focus="site"] .progress-dot.is-active{background:var(--navy)}
 .faculty-group-slide{background:var(--paper);padding:7vh 6vw}
 .faculty-group-heading h1{margin:1vh 0 0;font:750 clamp(42px,4.8vw,85px)/1 var(--display);letter-spacing:-.05em}
 .faculty-group-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2.1vw;margin-top:5vh}
-.faculty-card{display:block;min-width:0;color:var(--navy);text-decoration:none}
+.faculty-card{display:block;min-width:0;color:var(--navy)}
 .faculty-card img{display:block;width:100%;height:43vh;object-fit:cover;filter:grayscale(100%);box-shadow:.55vw .55vw 0 var(--gold)}
 .faculty-card strong{display:block;margin-top:2.5vh;font:700 clamp(20px,1.65vw,31px)/1.12 var(--display)}
 .faculty-card span{display:block;margin-top:1vh;color:#746f65;font-size:clamp(13px,1vw,18px);font-weight:700}
@@ -46,7 +46,6 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
 
 .site-explore-link{display:inline-flex;align-items:center;gap:.4em;margin-top:2vh;padding:0;border:0;color:#fff;font-size:clamp(14px,1vw,18px);font-weight:700;text-decoration:none;transition:color .16s ease}.site-explore-link:hover{color:#fff5e3}.site-explore-arrow{display:inline-block;color:#fff5e3;transition:transform .16s ease}.site-explore-link:hover .site-explore-arrow{transform:translateX(3px)}.site-explore-link:focus-visible{outline:2px solid #fff5e3;outline-offset:3px}
 
-.faculty-card .faculty-link-cue{display:inline-flex;align-items:center;gap:.4em;width:max-content;margin-top:1.3vh;padding:0;border:0;color:var(--navy);font-size:clamp(13px,1vw,18px);font-weight:700}.faculty-card .faculty-link-arrow{display:inline-block;color:var(--gold);transition:transform .16s ease}
 .city-slide .city-explore-link{color:#fff}.city-slide .city-explore-link:hover{color:#fff5e3}.city-slide .city-explore-arrow{color:#f2dca7}
 @media(max-width:700px){
   .site-copy{width:86vw;max-width:86vw}
@@ -57,16 +56,14 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
   .faculty-card img{height:24vh;min-height:140px}
   .faculty-card strong{font-size:clamp(18px,4.8vw,25px);margin-top:1.5vh}
   .faculty-card span{font-size:13px}
-  .faculty-card .faculty-link-cue{min-height:40px;font-size:14px}
 }
-@media(prefers-reduced-motion:reduce){.site-explore-arrow,.faculty-card .faculty-link-arrow{transition:none!important}}
+@media(prefers-reduced-motion:reduce){.site-explore-arrow{transition:none!important}}
 @media(max-width:700px){
   .faculty-group-slide.is-active{min-height:100%;overflow-y:auto}
   .faculty-group-grid{grid-template-columns:minmax(0,1fr);gap:24px;margin-top:20px}
   .faculty-card img{width:min(100%,360px);height:34vh;min-height:190px;max-height:300px}
   .faculty-card strong{font-size:23px;margin-top:12px}
   .faculty-card span{font-size:14px}
-  .faculty-card .faculty-link-cue{min-height:44px}
 }
 @media(max-width:700px){
   .faculty-group-heading h1{font-size:clamp(34px,8vw,50px)}
@@ -83,7 +80,6 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
   html[data-material-mode="presentation"] .faculty-card img{width:100%;height:20vh;min-height:145px;max-height:185px}
   html[data-material-mode="presentation"] .faculty-card strong{font-size:16px;line-height:1.1;margin-top:9px}
   html[data-material-mode="presentation"] .faculty-card span{font-size:11px;margin-top:4px}
-  html[data-material-mode="presentation"] .faculty-card .faculty-link-cue{font-size:11px;min-height:28px;margin-top:4px}
   html[data-material-mode="presentation"] .application-slide.is-active{justify-content:flex-start;align-items:stretch;gap:22px;padding:10vh 20px 70px}
   html[data-material-mode="presentation"] .application-copy{position:relative;inset:auto;width:100%;max-width:none}
   html[data-material-mode="presentation"] .application-copy h1{font-size:clamp(44px,12vw,58px)}

@@ -27,7 +27,7 @@ The approved keys are:
 
 The faculty presentation also supports these optional keys in the **same promotional Text tab**. The current slide wording is used until a row is added. See `faculty-presentation-text-rows.tsv` for paste-ready rows.
 
-- `faculty_honorific`, `faculty_eyebrow`, `faculty_heading`, `faculty_default_role`, `faculty_link_label`
+- `faculty_honorific`, `faculty_eyebrow`, `faculty_heading`, `faculty_default_role`
 - `application_heading`, `application_instruction`, `application_qr_caption`
 
 `credentials_heading` controls the Make the Summer Count title. `website_url` controls both the Apply Now link and its locally generated QR code; `website_display` controls visible link text. Keep those two website fields consistent.
