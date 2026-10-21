@@ -100,7 +100,52 @@ function featuredFacultySelection(people,count=2){
 function rotateSiteSlots(){if(presentationMode||!siteSlots.length||!sitePool.length)return;const shown=new Set(siteSlots.map(slide=>slide.dataset.institution)),unused=sitePool.filter(site=>!shown.has(site.institution)),next=shuffled(unused.length>=siteSlots.length?unused:sitePool).slice(0,siteSlots.length);siteSlots.forEach((slide,index)=>updateSiteSlide(slide,next[index]))}
 function setGlobeTarget(slide){const city=globeState.cities.find(item=>item.city===slide.dataset.city);if(city){globeState.targetLon=city.lon;globeState.targetLat=city.lat;globeState.activeCity=city.city}else{globeState.targetLon=presentationMode?16:10;globeState.targetLat=49;globeState.activeCity=null}scheduleGlobeDraw()}
 function renderProgress(){const progress=document.querySelector('#progress-dots');progress.replaceChildren(...slides.map((slide,index)=>{const dot=el('button','progress-dot');dot.type='button';dot.setAttribute('aria-label',`Go to slide ${index+1}`);dot.addEventListener('click',event=>{event.stopPropagation();show(index);restartAutoplay()});return dot}))}
-function show(index){if(current===slides.length-1&&index===0)rotateSiteSlots();const previous=current;current=Math.max(0,Math.min(index,slides.length-1));slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===current));document.querySelectorAll('.progress-dot').forEach((dot,i)=>dot.classList.toggle('is-active',i===current));document.documentElement.dataset.slideFocus=slides[current].dataset.focus||'';setGlobeTarget(slides[current]);if(presentationMode&&current===0&&previous!==0)slides[0].querySelector('.presentation-title-motion')?.contentWindow?.replayAnimation?.();const nextParams=new URLSearchParams(location.search);nextParams.set('slide',current+1);history.replaceState(null,'',`${location.pathname}?${nextParams}`)}
+let pendingCoverExit=null;
+function commitSlide(index){
+  if(current===slides.length-1&&index===0)rotateSiteSlots();
+  const previous=current;
+  current=index;
+  slides.forEach((slide,i)=>slide.classList.toggle('is-active',i===current));
+  document.querySelectorAll('.progress-dot').forEach((dot,i)=>dot.classList.toggle('is-active',i===current));
+  document.documentElement.dataset.slideFocus=slides[current].dataset.focus||'';
+  setGlobeTarget(slides[current]);
+  if(presentationMode&&current===0&&previous!==0)slides[0].querySelector('.presentation-title-motion')?.contentWindow?.replayAnimation?.();
+  const nextParams=new URLSearchParams(location.search);
+  nextParams.set('slide',current+1);
+  history.replaceState(null,'',`${location.pathname}?${nextParams}`);
+}
+function show(index){
+  const destination=Math.max(0,Math.min(index,slides.length-1));
+  if(pendingCoverExit){
+    if(destination!==0){pendingCoverExit.destination=destination;return}
+    clearTimeout(pendingCoverExit.timer);
+    pendingCoverExit=null;
+    slides[0].classList.remove('is-exiting');
+  }
+  if(presentationMode&&current===0&&destination!==0&&slides[0].classList.contains('is-active')&&!reducedMotion.matches){
+    globeState.targetLon=23;
+    globeState.targetLat=49;
+    globeState.activeCity=null;
+    slides[0].classList.add('is-exiting');
+    scheduleGlobeDraw();
+    pendingCoverExit={destination,timer:setTimeout(()=>{
+      const next=pendingCoverExit.destination;
+      pendingCoverExit=null;
+      slides[0].classList.remove('is-exiting');
+      commitSlide(next);
+    },650)};
+    return;
+  }
+  commitSlide(destination);
+}
+reducedMotion.addEventListener('change',()=>{
+  if(!pendingCoverExit||!reducedMotion.matches)return;
+  clearTimeout(pendingCoverExit.timer);
+  const destination=pendingCoverExit.destination;
+  pendingCoverExit=null;
+  slides[0].classList.remove('is-exiting');
+  commitSlide(destination);
+});
 function advance(amount=1){show((current+amount+slides.length)%slides.length);restartAutoplay()}
 function restartAutoplay(){if(!autoplayMode)return;clearInterval(autoplayTimer);autoplayTimer=setInterval(()=>{if(!document.hidden)show((current+1)%slides.length)},8000)}
 async function init(){
