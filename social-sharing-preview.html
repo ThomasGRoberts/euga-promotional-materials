@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Social sharing image · Program materials</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f4f3ef;color:#102541;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+    main{width:min(1240px,calc(100% - 40px));margin:0 auto;padding:28px 0 60px}
+    .back{color:#102541;font-size:15px;text-decoration:none}.back:hover{text-decoration:underline}
+    header{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin:28px 0 18px}
+    h1{margin:0;font-size:clamp(28px,4vw,44px);letter-spacing:-.04em;line-height:1.1}
+    header p{max-width:55ch;margin:8px 0 0;color:#586778;font-size:15px;line-height:1.45}
+    button{min-height:44px;padding:10px 16px;border:0;border-radius:5px;background:#051e39;color:#fff;font:700 15px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;cursor:pointer}
+    button:hover{background:#143a5d}button:disabled{opacity:.55;cursor:wait}
+    .preview{position:relative;width:100%;height:0;overflow:hidden;background:#051e39;box-shadow:0 12px 35px rgba(5,30,57,.13)}
+    iframe{position:absolute;left:0;top:0;width:1200px;height:630px;border:0;transform-origin:top left;pointer-events:none}
+    .status{margin:16px 0 0;color:#586778;font-size:14px}
+    @media(max-width:650px){main{width:calc(100% - 24px);padding-top:18px}header{margin-top:20px}button{width:100%}}
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="index.html">← Back to materials</a>
+    <header>
+      <div><h1>Social sharing image</h1><p>A 1200 × 630 image for the program website. The globe dots refresh from the current city list each time you open this page.</p></div>
+      <button id="download" type="button" disabled>Download current PNG</button>
+    </header>
+    <div class="preview" id="preview"><iframe id="art-frame" title="Let Europe be your laboratory social sharing image" src="social-sharing.html" tabindex="-1"></iframe></div>
+    <p class="status" id="status" role="status">Loading current city dots…</p>
+  </main>
+  <script>
+    const preview=document.querySelector('#preview'),frame=document.querySelector('#art-frame'),button=document.querySelector('#download'),status=document.querySelector('#status');
+    function fit(){const scale=preview.clientWidth/1200;preview.style.height=`${630*scale}px`;frame.style.transform=`scale(${scale})`}
+    new ResizeObserver(fit).observe(preview);fit();
+    const started=Date.now(),timer=setInterval(()=>{try{const art=frame.contentWindow.EUGASocialArt;if(!art){if(Date.now()-started>15000){clearInterval(timer);status.textContent='Unable to load the image preview.'}return}clearInterval(timer);button.disabled=false;const source=art.source==='sheet'?'current city list':'saved city list';status.textContent=`${art.cityCount} destination dots from the ${source}.`+(art.missingCities.length?` Missing coordinates for: ${art.missingCities.join(', ')}.`:'')}catch(error){clearInterval(timer);status.textContent='Unable to load the image preview.'}},100);
+    button.addEventListener('click',async()=>{button.disabled=true;try{const blob=await frame.contentWindow.EUGASocialArt.pngBlob();if(!blob)throw Error('PNG export failed');const url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='eu-global-affairs-social-1200x630.png';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}catch(error){status.textContent='Unable to download the image. Please reload the page and try again.';console.error(error)}finally{button.disabled=false}});
+  </script>
+</body>
+</html>
