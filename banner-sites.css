@@ -35,14 +35,9 @@ html[data-slide-focus="site"] .progress-dot.is-active{background:var(--navy)}
 /* The presentation is navigated by keyboard; viewer chrome belongs outside this document. */
 html[data-material-mode="presentation"] .overview .presentation-title-motion,
 html[data-material-mode="presentation"] .overview .presentation-logo{position:absolute;z-index:5;left:6vw;top:6vh;display:block;width:min(38vw,730px);height:16vh;border:0;background:transparent;pointer-events:none}
+html[data-material-mode="presentation"] .overview .presentation-title-motion{width:min(48vw,920px);height:21vh}
 html[data-material-mode="presentation"] .overview .presentation-logo{height:auto}
 html[data-material-mode="presentation"] .overview .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}
-@media(prefers-reduced-motion:no-preference){
-  html[data-material-mode="presentation"] .overview.is-active .presentation-logo .program-brand{transform-origin:25% 50%;animation:cover-logo-arrive .9s cubic-bezier(.2,.75,.25,1) both}
-  html[data-material-mode="presentation"] .overview.is-active .presentation-logo::after{content:"";position:absolute;left:25%;bottom:-8px;width:58%;height:2px;background:var(--gold);transform-origin:left;animation:cover-logo-flourish 1.15s ease-out both}
-}
-@keyframes cover-logo-arrive{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-@keyframes cover-logo-flourish{0%{opacity:0;transform:scaleX(0)}25%{opacity:1}75%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
 html[data-material-mode="presentation"] .overview-copy{margin-top:18vh}
 html[data-material-mode="presentation"] .city-slide .presentation-logo{position:absolute;z-index:8;left:4.5vw;top:5vh;width:min(25vw,400px);filter:brightness(0) invert(1)}
 html[data-material-mode="presentation"] .city-slide .presentation-logo .program-brand{position:static;display:block;width:100%;height:auto;padding:0;background:none}
@@ -79,6 +74,7 @@ html[data-material-mode="presentation"] .city-slide .presentation-logo .program-
 }
 @media(max-width:700px){
   html[data-material-mode="presentation"] .overview .presentation-logo{left:5vw;top:20px;width:90vw;height:auto}
+  html[data-material-mode="presentation"] .overview .presentation-title-motion{left:5vw;top:20px;width:90vw;height:27vw;max-height:160px}
   html[data-material-mode="presentation"] .overview-copy{margin-top:82px}
   html[data-material-mode="presentation"] .overview .cover-city-list{display:block;margin:13px 0 0;color:var(--navy);font-size:13px;font-weight:700;line-height:1.5}
   html[data-material-mode="presentation"] .faculty-group-slide.is-active{padding:24px 20px 70px}
